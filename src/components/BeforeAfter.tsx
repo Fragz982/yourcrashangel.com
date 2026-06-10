@@ -84,7 +84,8 @@ export default function BeforeAfter() {
                 src="https://images.unsplash.com/photo-1708805282706-f44730b7e527?w=1200&q=80&auto=format&fit=crop"
                 alt="Car after professional repair — clean, polished finish"
                 className="h-full w-full object-cover"
-                loading="eager"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
@@ -99,7 +100,8 @@ export default function BeforeAfter() {
                 src="https://images.unsplash.com/photo-1673187139612-6bf684a74815?w=1200&q=80&auto=format&fit=crop"
                 alt="Car with collision damage before repair"
                 className="h-full w-full object-cover"
-                loading="eager"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>

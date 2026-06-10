@@ -15,6 +15,8 @@ export default function About() {
                 src="https://images.unsplash.com/photo-1559366682-b24d010f6d65?w=800&q=80&auto=format&fit=crop"
                 alt="Angel — yourcrashangel"
                 className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </ScrollReveal>
