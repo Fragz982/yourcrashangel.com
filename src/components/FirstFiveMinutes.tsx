@@ -1,7 +1,7 @@
 "use client";
 
 import ScrollReveal from "./ScrollReveal";
-import { CameraIcon, MessageIcon } from "./Icons";
+import { MessageIcon } from "./Icons";
 
 const STEPS = [
   {

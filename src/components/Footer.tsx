@@ -93,6 +93,22 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
+                    href="/playbook"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    The Insurance Playbook
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/decoder"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Jargon Decoder
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="#faq"
                     className="transition-colors hover:text-accent-orange"
                   >

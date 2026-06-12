@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import FirstFiveMinutes from "../components/FirstFiveMinutes";
+import Scenarios from "../components/Scenarios";
 import BeforeAfter from "../components/BeforeAfter";
 import ContentCards from "../components/ContentCards";
 import Reviews from "../components/Reviews";
@@ -54,6 +55,7 @@ export default function Home() {
       <main>
         <Hero />
         <FirstFiveMinutes />
+        <Scenarios />
         <BeforeAfter />
         <ContentCards />
         <Reviews />

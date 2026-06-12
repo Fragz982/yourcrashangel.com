@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   authors: [{ name: "yourcrashangel" }],
   creator: "yourcrashangel",
   metadataBase: new URL("https://yourcrashangel.com"),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -68,7 +69,6 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#0a0a0a" />
-        <link rel="canonical" href="https://yourcrashangel.com" />
       </head>
       <body>{children}</body>
     </html>

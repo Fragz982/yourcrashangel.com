@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CheckIcon } from "../../components/Icons";
 
 export const metadata: Metadata = {
   title: "What To Do After A Crash — Free Checklist | yourcrashangel",
   description:
     "Free step-by-step checklist: exactly what to do after a car accident. From a real collision estimator in LA.",
+  alternates: { canonical: "/checklist" },
 };
 
 const CHECKLIST_ITEMS = [
@@ -78,12 +80,12 @@ export default function ChecklistPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
-        <a
+        <Link
           href="/"
           className="inline-block font-display text-sm font-semibold uppercase tracking-widest text-accent-orange transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
-        </a>
+        </Link>
 
         <h1 className="mt-8 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
           What To Do
@@ -141,6 +143,37 @@ export default function ChecklistPage() {
           </div>
         </div>
 
+        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/playbook"
+            className="group rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent-orange/30"
+          >
+            <p className="font-display text-xs font-semibold uppercase tracking-widest text-accent-orange">
+              Next up
+            </p>
+            <p className="mt-2 font-display text-lg font-bold text-foreground">
+              The Insurance Playbook
+            </p>
+            <p className="mt-1 font-body text-sm text-muted">
+              The 8 moves they&apos;ll run on you — and the counter for each.
+            </p>
+          </Link>
+          <Link
+            href="/decoder"
+            className="group rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent-orange/30"
+          >
+            <p className="font-display text-xs font-semibold uppercase tracking-widest text-accent-lime">
+              Also useful
+            </p>
+            <p className="mt-2 font-display text-lg font-bold text-foreground">
+              The Jargon Decoder
+            </p>
+            <p className="mt-1 font-body text-sm text-muted">
+              24 adjuster words translated into plain English.
+            </p>
+          </Link>
+        </div>
+
         <div className="mt-12 rounded-xl bg-background p-6">
           <p className="font-body text-xs leading-relaxed text-muted/70">
             <strong className="text-muted">Disclaimer:</strong> This checklist
@@ -153,12 +186,12 @@ export default function ChecklistPage() {
 
         <p className="mt-8 text-center font-display text-sm text-muted">
           Made by{" "}
-          <a
+          <Link
             href="/"
             className="font-semibold text-accent-orange transition-colors hover:text-accent-lime"
           >
             @yourcrashangel
-          </a>{" "}
+          </Link>{" "}
           — The Accident Translator
         </p>
       </div>

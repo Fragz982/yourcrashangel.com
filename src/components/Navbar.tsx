@@ -6,8 +6,8 @@ import { MessageIcon, MenuIcon, XIcon } from "./Icons";
 
 const NAV_LINKS = [
   { label: "What To Do", href: "#first-5" },
-  { label: "Before & After", href: "#before-after" },
-  { label: "Videos", href: "#content" },
+  { label: "Playbook", href: "/playbook" },
+  { label: "Decoder", href: "/decoder" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -18,6 +18,9 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Intentional mount flag: first client render must match SSR, then the
+    // navbar slides in. The one-time cascading render is the point.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
