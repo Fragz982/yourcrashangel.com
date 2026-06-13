@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0a0a0a;
-  --color-foreground: #fafafa;
-  --color-accent-orange: #ff4d2e;
-  --color-accent-lime: #c7ff3c;
-  --color-muted: #71717a;
-  --color-surface: #141414;
-  --color-surface-light: #1a1a1a;
-  --color-border: #262626;
+  /* Guardian-angel palette: warm, light, calm — relief, not drama. */
+  --color-background: #f7f2e9;
+  --color-foreground: #211a14;
+  --color-accent-orange: #e8431f;
+  --color-accent-lime: #5b8a2e;
+  --color-muted: #87796a;
+  --color-surface: #efe7d7;
+  --color-surface-light: #f2ebde;
+  --color-border: #e3d9c8;
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
   --font-heading: var(--font-anton);
@@ -79,8 +80,8 @@ body {
 }
 
 ::selection {
-  background: #ff4d2e;
-  color: #0a0a0a;
+  background: #e8431f;
+  color: #f7f2e9;
 }
 
 @keyframes marquee {
