@@ -3,10 +3,8 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-background px-5 text-center">
-      <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-        Error 404
-      </p>
-      <h1 className="mt-4 font-display text-6xl font-bold tracking-tight text-foreground sm:text-7xl md:text-8xl">
+      <p className="eyebrow text-accent-orange">Error 404</p>
+      <h1 className="mt-4 display text-6xl text-foreground sm:text-7xl md:text-8xl">
         This page
         <br />
         <span className="text-accent-lime">took a detour.</span>

@@ -183,10 +183,8 @@ export default function Scenarios() {
     <section id="scenarios" className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <ScrollReveal>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-            Pick your situation
-          </p>
-          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          <p className="eyebrow text-accent-orange">Pick your situation</p>
+          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
             What happened
             <br />
             <span className="text-accent-lime">to you?</span>

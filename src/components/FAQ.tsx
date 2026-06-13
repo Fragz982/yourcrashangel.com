@@ -181,10 +181,8 @@ export default function FAQ() {
     <section id="faq" className="bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <ScrollReveal>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-            Frequently asked
-          </p>
-          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          <p className="eyebrow text-accent-orange">Frequently asked</p>
+          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
             Real questions.
             <br />
             <span className="text-accent-lime">Straight answers.</span>
@@ -194,7 +192,7 @@ export default function FAQ() {
         {CATEGORIES.map((category, ci) => (
           <div key={category.name} className="mt-12">
             <ScrollReveal>
-              <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent-lime">
+              <p className="eyebrow text-[0.7rem] text-accent-lime">
                 {category.name}
               </p>
             </ScrollReveal>

@@ -11,6 +11,44 @@
   --color-border: #262626;
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
+  --font-heading: var(--font-anton);
+  --font-mono: var(--font-jetbrains);
+}
+
+/* ---- Revamp design-system helpers (Gunther-inspired) ---- */
+
+/* Eyebrow: technical/mono kicker above every section headline. */
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Spec chip: mono pill for credentials / trust facts. */
+.spec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+}
+
+/* Big condensed display headline (Anton). Pair with size utilities. */
+.display {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
 }
 
 html {

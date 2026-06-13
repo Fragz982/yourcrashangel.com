@@ -16,10 +16,8 @@ export default function FinalCTA() {
 
       <div className="relative mx-auto max-w-4xl px-5 text-center md:px-8">
         <ScrollReveal>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-            Let&apos;s talk
-          </p>
-          <h2 className="mt-4 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          <p className="eyebrow text-accent-orange">Let&apos;s talk</p>
+          <h2 className="mt-5 display text-5xl text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
             Got hit?
             <br />
             Got questions?

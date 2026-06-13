@@ -186,15 +186,13 @@ export default function DecoderPage() {
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Link
           href="/"
-          className="inline-block font-display text-sm font-semibold uppercase tracking-widest text-accent-orange transition-colors hover:text-accent-lime"
+          className="inline-block eyebrow text-accent-orange transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
         </Link>
 
-        <p className="mt-10 font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-          Their language, translated
-        </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <p className="mt-10 eyebrow text-accent-orange">Their language, translated</p>
+        <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
           Speak adjuster.
           <br />
           <span className="text-accent-lime">Fluently.</span>
@@ -211,7 +209,7 @@ export default function DecoderPage() {
             <article key={entry.term} className="py-8">
               <div className="flex items-baseline gap-4">
                 <span
-                  className="font-display text-sm font-bold text-border"
+                  className="font-mono text-sm text-border"
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -224,7 +222,7 @@ export default function DecoderPage() {
                 {entry.plainEnglish}
               </p>
               <p className="mt-3 font-body text-sm leading-relaxed text-foreground/85">
-                <strong className="font-display text-xs font-semibold uppercase tracking-widest text-accent-lime">
+                <strong className="eyebrow text-[0.7rem] text-accent-lime">
                   Why it matters:{" "}
                 </strong>
                 {entry.whyItMatters}

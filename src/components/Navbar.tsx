@@ -57,7 +57,7 @@ export default function Navbar() {
         >
           <a
             href="#"
-            className="font-display text-sm font-bold tracking-widest uppercase text-foreground md:text-base"
+            className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-foreground md:text-sm"
           >
             The Accident
             <br className="md:hidden" />{" "}
@@ -69,7 +69,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-sm text-muted transition-colors hover:text-foreground"
+                className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -113,7 +113,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-display text-2xl font-semibold text-foreground"
+                  className="display text-4xl text-foreground transition-colors hover:text-accent-lime"
                 >
                   {link.label}
                 </a>

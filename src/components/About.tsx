@@ -22,10 +22,8 @@ export default function About() {
           </ScrollReveal>
 
           <ScrollReveal direction="right">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-              Why trust me?
-            </p>
-            <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <p className="eyebrow text-accent-orange">Why trust me?</p>
+            <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl">
               I&apos;m Angel.
             </h2>
             <div className="mt-6 space-y-4 font-body text-base leading-relaxed text-muted md:text-lg">

@@ -82,12 +82,12 @@ export default function ChecklistPage() {
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Link
           href="/"
-          className="inline-block font-display text-sm font-semibold uppercase tracking-widest text-accent-orange transition-colors hover:text-accent-lime"
+          className="inline-block eyebrow text-accent-orange transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
         </Link>
 
-        <h1 className="mt-8 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <h1 className="mt-8 display text-5xl text-foreground sm:text-6xl md:text-7xl">
           What To Do
           <br />
           <span className="text-accent-lime">After A Crash</span>
@@ -100,7 +100,7 @@ export default function ChecklistPage() {
         <div className="mt-12 space-y-10">
           {CHECKLIST_ITEMS.map((section) => (
             <div key={section.category}>
-              <h2 className="font-display text-xl font-bold uppercase tracking-wider text-accent-orange">
+              <h2 className="display text-2xl text-accent-orange md:text-3xl">
                 {section.category}
               </h2>
               <ul className="mt-4 space-y-3">

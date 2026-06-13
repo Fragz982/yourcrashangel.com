@@ -149,15 +149,13 @@ export default function PlaybookPage() {
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Link
           href="/"
-          className="inline-block font-display text-sm font-semibold uppercase tracking-widest text-accent-orange transition-colors hover:text-accent-lime"
+          className="inline-block eyebrow text-accent-orange transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
         </Link>
 
-        <p className="mt-10 font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-          Know their moves
-        </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <p className="mt-10 eyebrow text-accent-orange">Know their moves</p>
+        <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
           They have a playbook.
           <br />
           <span className="text-accent-lime">Now you have theirs.</span>
@@ -177,7 +175,7 @@ export default function PlaybookPage() {
               className="rounded-2xl border border-border bg-surface p-7 md:p-9"
             >
               <div className="flex items-baseline gap-4">
-                <span className="font-display text-3xl font-bold text-border">
+                <span className="display text-4xl text-border">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">
@@ -189,14 +187,14 @@ export default function PlaybookPage() {
                 &ldquo;{tactic.whatTheySay}&rdquo;
               </blockquote>
 
-              <p className="mt-6 font-display text-xs font-semibold uppercase tracking-widest text-muted">
+              <p className="mt-6 eyebrow text-[0.7rem] text-muted">
                 What&apos;s really happening
               </p>
               <p className="mt-2 font-body text-base leading-relaxed text-muted">
                 {tactic.whatsReallyHappening}
               </p>
 
-              <p className="mt-6 font-display text-xs font-semibold uppercase tracking-widest text-accent-lime">
+              <p className="mt-6 eyebrow text-[0.7rem] text-accent-lime">
                 Your move
               </p>
               <p className="mt-2 font-body text-base leading-relaxed text-foreground/90">
@@ -207,7 +205,7 @@ export default function PlaybookPage() {
         </div>
 
         {/* Timeline */}
-        <h2 className="mt-24 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-24 display text-4xl text-foreground sm:text-5xl md:text-6xl">
           What a claim is{" "}
           <span className="text-accent-lime">supposed to look like.</span>
         </h2>
@@ -231,15 +229,13 @@ export default function PlaybookPage() {
                   <h3 className="font-display text-xl font-bold text-foreground">
                     {step.phase}
                   </h3>
-                  <span className="rounded-full border border-border bg-surface px-3 py-1 font-display text-xs font-semibold uppercase tracking-wider text-muted">
-                    {step.window}
-                  </span>
+                  <span className="spec-chip">{step.window}</span>
                 </div>
                 <p className="mt-3 font-body text-base leading-relaxed text-muted">
                   {step.whatsNormal}
                 </p>
                 <p className="mt-3 font-body text-sm leading-relaxed text-foreground/80">
-                  <strong className="font-display text-xs font-semibold uppercase tracking-widest text-accent-orange">
+                  <strong className="eyebrow text-[0.7rem] text-accent-orange">
                     🚩 Red flag:{" "}
                   </strong>
                   {step.redFlag}

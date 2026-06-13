@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-12 md:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
-            <p className="font-display text-sm font-bold uppercase tracking-widest text-foreground">
+            <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-foreground">
               The Accident{" "}
               <span className="text-accent-orange">Translator</span>
             </p>
@@ -20,7 +20,7 @@ export default function Footer() {
 
           <div className="flex flex-col gap-6 sm:flex-row sm:gap-12">
             <div>
-              <p className="font-display text-xs font-semibold uppercase tracking-widest text-foreground">
+              <p className="eyebrow text-[0.7rem] text-foreground">
                 Contact
               </p>
               <ul className="mt-3 space-y-2 font-body text-sm text-muted">
@@ -44,7 +44,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="font-display text-xs font-semibold uppercase tracking-widest text-foreground">
+              <p className="eyebrow text-[0.7rem] text-foreground">
                 Follow
               </p>
               <div className="mt-3 flex items-center gap-3">
@@ -79,7 +79,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="font-display text-xs font-semibold uppercase tracking-widest text-foreground">
+              <p className="eyebrow text-[0.7rem] text-foreground">
                 Resources
               </p>
               <ul className="mt-3 space-y-2 font-body text-sm text-muted">

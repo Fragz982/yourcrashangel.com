@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import FirstFiveMinutes from "../components/FirstFiveMinutes";
 import Scenarios from "../components/Scenarios";
 import BeforeAfter from "../components/BeforeAfter";
+import RepairJourney from "../components/RepairJourney";
 import ContentCards from "../components/ContentCards";
 import Reviews from "../components/Reviews";
 import About from "../components/About";
@@ -57,6 +58,7 @@ export default function Home() {
         <FirstFiveMinutes />
         <Scenarios />
         <BeforeAfter />
+        <RepairJourney />
         <ContentCards />
         <Reviews />
         <About />

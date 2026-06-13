@@ -39,10 +39,8 @@ export default function FirstFiveMinutes() {
     <section id="first-5" className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <ScrollReveal>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-            Right after the crash
-          </p>
-          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          <p className="eyebrow text-accent-orange">Right after the crash</p>
+          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
             First 5 minutes.
             <br />
             <span className="text-accent-lime">Do this.</span>
@@ -54,7 +52,7 @@ export default function FirstFiveMinutes() {
             <ScrollReveal key={step.number} delay={i * 0.1}>
               <div className="group relative h-full rounded-2xl border border-border bg-surface p-8 transition-colors hover:border-accent-orange/30 md:p-10">
                 <div className="mb-6 flex items-center gap-4">
-                  <span className="font-display text-4xl font-bold text-border transition-colors group-hover:text-accent-orange/40">
+                  <span className="display text-4xl text-border transition-colors group-hover:text-accent-orange/40">
                     {step.number}
                   </span>
                   <span className="text-3xl" role="img" aria-label={step.title}>

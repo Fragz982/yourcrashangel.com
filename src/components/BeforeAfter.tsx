@@ -43,11 +43,9 @@ export default function BeforeAfter() {
     <section id="before-after" className="bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <ScrollReveal>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent-orange">
-            The difference
-          </p>
-          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Before & After.
+          <p className="eyebrow text-accent-orange">The difference</p>
+          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+            Before &amp; After.
           </h2>
           <p className="mt-4 max-w-xl font-body text-lg text-muted">
             Drag the slider to see what a proper repair looks like. These are
@@ -126,10 +124,10 @@ export default function BeforeAfter() {
             </div>
 
             {/* Labels */}
-            <span className="absolute bottom-4 left-4 rounded-full bg-background/80 px-3 py-1 font-display text-xs font-bold uppercase tracking-widest text-foreground backdrop-blur-sm">
+            <span className="spec-chip absolute bottom-4 left-4 bg-background/80 text-foreground backdrop-blur-sm">
               Before
             </span>
-            <span className="absolute bottom-4 right-4 rounded-full bg-background/80 px-3 py-1 font-display text-xs font-bold uppercase tracking-widest text-foreground backdrop-blur-sm">
+            <span className="spec-chip absolute bottom-4 right-4 bg-background/80 text-foreground backdrop-blur-sm">
               After
             </span>
           </div>
