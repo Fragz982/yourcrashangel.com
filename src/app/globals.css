@@ -116,6 +116,25 @@ body {
   animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 12s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slow-zoom {
+    animation: none;
+  }
+}
+
 @keyframes hero-fade-in {
   from {
     opacity: 0;

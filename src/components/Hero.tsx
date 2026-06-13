@@ -12,21 +12,33 @@ const STATS = [
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-background pt-20">
-      {/* Cinematic ghost numeral — layered depth behind the headline */}
-      <span
-        aria-hidden="true"
-        className="display pointer-events-none absolute -top-4 right-0 select-none text-[28vw] leading-none text-foreground/[0.03] md:right-4 md:text-[20vw]"
-      >
-        911
-      </span>
+      {/* Full-bleed cinematic backdrop — a dark car emerging from black,
+          blended into the page with layered overlays so type stays legible. */}
+      <div className="absolute inset-0 z-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/work/hero.jpg"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className="animate-slow-zoom h-full w-full object-cover object-center opacity-80"
+        />
+        {/* darken + left-weighted gradient for headline contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+      </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 py-16 md:px-8 md:py-24">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div className="hero-fade mb-7 flex flex-wrap gap-2">
-          <span className="spec-chip">Est. Los Angeles</span>
-          <span className="spec-chip border-accent-lime/30 text-accent-lime">
+          <span className="spec-chip bg-background/40 backdrop-blur-sm">
+            Est. Los Angeles
+          </span>
+          <span className="spec-chip border-accent-lime/30 bg-background/40 text-accent-lime backdrop-blur-sm">
             Free — no sales pitch
           </span>
-          <span className="spec-chip">I-CAR logic</span>
+          <span className="spec-chip bg-background/40 backdrop-blur-sm">
+            I-CAR logic
+          </span>
         </div>
 
         <h1
@@ -39,7 +51,7 @@ export default function Hero() {
         </h1>
 
         <p
-          className="hero-fade mt-8 max-w-xl font-body text-lg leading-relaxed text-muted md:text-xl"
+          className="hero-fade mt-8 max-w-xl font-body text-lg leading-relaxed text-foreground/80 md:text-xl"
           style={{ animationDelay: "0.3s" }}
         >
           I&apos;m Angel — a real collision estimator in Los Angeles. I read
@@ -61,15 +73,14 @@ export default function Hero() {
           </a>
           <a
             href="#first-5"
-            className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-border bg-transparent px-7 py-4 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/40 md:text-lg"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-foreground/25 bg-background/30 px-7 py-4 font-display text-base font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-foreground/50 md:text-lg"
           >
             What do I do right now?
           </a>
         </div>
 
-        {/* Stat row — Anton numbers + mono labels */}
         <div
-          className="hero-fade mt-12 flex flex-wrap gap-8 border-t border-border pt-7 sm:gap-12"
+          className="hero-fade mt-12 flex flex-wrap gap-8 border-t border-border/60 pt-7 sm:gap-12"
           style={{ animationDelay: "0.6s" }}
         >
           {STATS.map((stat) => (
@@ -85,11 +96,9 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-fade" style={{ animationDelay: "0.75s" }}>
+      <div className="relative z-10 hero-fade" style={{ animationDelay: "0.75s" }}>
         <Marquee />
       </div>
-
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }
