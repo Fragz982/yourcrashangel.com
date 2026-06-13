@@ -48,8 +48,8 @@ export default function BeforeAfter() {
             Before &amp; After.
           </h2>
           <p className="mt-4 max-w-xl font-body text-lg text-muted">
-            Drag the slider to see what a proper repair looks like. These are
-            real results.
+            Drag the slider to see the difference a proper repair makes — clean
+            panel gaps, real paint blend, like the hit never happened.
           </p>
         </ScrollReveal>
 
