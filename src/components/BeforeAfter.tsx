@@ -79,8 +79,8 @@ export default function BeforeAfter() {
             <div className="absolute inset-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1708805282706-f44730b7e527?w=1200&q=80&auto=format&fit=crop"
-                alt="Car after professional repair — clean, polished finish"
+                src="/work/after.jpg"
+                alt="Black car restored to a flawless, glossy finish after repair"
                 className="h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -95,8 +95,8 @@ export default function BeforeAfter() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1673187139612-6bf684a74815?w=1200&q=80&auto=format&fit=crop"
-                alt="Car with collision damage before repair"
+                src="/work/before.jpg"
+                alt="Black coupe with heavy front-end collision damage before repair"
                 className="h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
