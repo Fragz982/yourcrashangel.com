@@ -14,7 +14,7 @@ import MobileBottomBar from "../components/MobileBottomBar";
 
 // LocalBusiness structured data so Google understands who Angel is, where he
 // serves, and what he does. Reviews are intentionally NOT marked up here —
-// they belong to United Collision Specialists, not the yourcrashangel brand,
+// they belong to the shop Angel works at, not the yourcrashangel brand,
 // and fabricating aggregateRating on the brand risks a review-spam penalty.
 const jsonLd = {
   "@context": "https://schema.org",
