@@ -25,8 +25,8 @@ const SCENARIOS = [
         why: "In California you don't owe the other driver's insurer a recorded statement. It's a tool for paying you less, not for helping you.",
       },
       {
-        do: "Pick your own body shop, not theirs",
-        why: "In California, you have the right to choose your repair shop. Their \"preferred\" shop answers to them, not you.",
+        do: "Choose a shop you trust",
+        why: "In California the choice is yours — and that can absolutely be the shop your insurer recommends (those are vetted and usually guaranteed). Pick on reputation, not on who suggested it.",
       },
     ],
     textPrompt:

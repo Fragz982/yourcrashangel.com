@@ -37,9 +37,9 @@ const CHECKLIST_ITEMS = [
   {
     category: "Choosing a shop",
     items: [
-      "YOU choose the body shop — not the insurer",
+      "You can use any licensed shop — including the one your insurer recommends (DRP shops are vetted and usually guarantee the work). Pick the shop you trust",
       "Avoid shops that offer to \"waive your deductible\" (that's a red flag)",
-      "Ask the shop if they use OEM parts (especially for newer cars)",
+      "Ask what parts the estimate uses — OEM or aftermarket. Both are usually fine; guaranteed OEM is a policy choice (an OEM endorsement), not automatic",
       "Ask if the shop does a full teardown before writing the final estimate",
       "Get a written estimate before authorizing work",
     ],
@@ -48,7 +48,7 @@ const CHECKLIST_ITEMS = [
     category: "During the repair",
     items: [
       "Expect supplements — hidden damage is found during teardown, and that's normal",
-      "Don't let the insurer pressure your shop into using cheap aftermarket parts",
+      "Aftermarket parts are usually fine — they're held to an equal-quality standard. If you specifically want OEM, that comes from an OEM endorsement on your policy",
       "Ask for photos of the repair in progress if the shop offers them",
       "Know your rental coverage limits and timeline",
       "Review the final invoice against the estimate before picking up your car",
@@ -155,7 +155,7 @@ export default function ChecklistPage() {
               The Insurance Playbook
             </p>
             <p className="mt-1 font-body text-sm text-muted">
-              The 8 moves they&apos;ll run on you — and the counter for each.
+              The 6 moves they&apos;ll run on you — and the counter for each.
             </p>
           </Link>
           <Link

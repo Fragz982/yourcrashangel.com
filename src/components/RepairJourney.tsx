@@ -21,7 +21,7 @@ const STAGES = [
   {
     n: "04",
     title: "Repair",
-    line: "OEM parts, real paint blend, no shortcuts. You'll know exactly what to watch for at every step.",
+    line: "Quality parts, real paint blend, no shortcuts — and you'll know exactly what to watch for at every step.",
   },
   {
     n: "05",

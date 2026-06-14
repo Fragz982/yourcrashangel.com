@@ -5,7 +5,7 @@ import { MessageIcon } from "../../components/Icons";
 export const metadata: Metadata = {
   title: "The Insurance Playbook | yourcrashangel",
   description:
-    "The 8 moves insurance companies run on accident victims — quick lowball checks, recorded statement traps, steering, delay games — and the exact counter for each. From a real LA collision estimator.",
+    "The most common moves insurance companies run on accident victims — quick lowball checks, recorded-statement traps, delay games, betterment surprises — and the exact counter for each. From a real LA collision estimator.",
   alternates: { canonical: "/playbook" },
 };
 
@@ -27,24 +27,6 @@ const TACTICS = [
       "If that's the OTHER driver's insurance company, that recording exists for one reason: to find words they can use to put fault on you. California is a pure comparative negligence state — every percent of blame they pin on you comes straight out of your payout. \"I guess I didn't see him\" becomes Exhibit A.",
     yourMove:
       "You are not required to give a recorded statement to the other driver's insurer. Say: \"I'm not giving a recorded statement. You can send questions in writing.\" Your OWN insurer is different — you do have a duty to cooperate with them — but stick to facts, don't guess, and never say \"I'm fine\" before a doctor says so.",
-  },
-  {
-    name: "The Steer Job",
-    whatTheySay:
-      "You're free to use any shop, but we can't guarantee the repairs if you go outside our network. Our preferred shop can get you in tomorrow.",
-    whatsReallyHappening:
-      "Decode that line. The warranty that actually matters comes from the shop doing the work — and any shop worth your keys stands behind its own repairs, network or not. Network shops agree to the insurer's pricing and parts rules, which is exactly why the insurer wants you there. That sentence is a script written to scare you toward their cheaper option.",
-    yourMove:
-      "In California you have the right to choose your own repair shop — it's in the state's Fair Claims Settlement Practices rules. Say: \"I've chosen my shop. Please send the assignment there.\" Pick a shop that answers to you, not to the carrier paying the bill.",
-  },
-  {
-    name: "The Aftermarket Parts Swap",
-    whatTheySay:
-      "The estimate has been written to industry standards using quality replacement parts.",
-    whatsReallyHappening:
-      "\"Quality replacement parts\" is the polite phrase for aftermarket or used. The estimate gets quietly written with non-OEM parts because they cost the insurer less — copies of your fender, your headlight, your bumper reinforcement. Some fit fine. Plenty don't, and you find out at the paint booth or worse.",
-    yourMove:
-      "Read the parts column line by line — look for \"A/M,\" \"LKQ,\" or \"Opt OEM.\" In California, non-OEM crash parts are supposed to be identified right on the estimate. Ask in writing what's being used and whether your policy lets you insist on OEM. Or skip the homework: text me the estimate and I'll spot the swap in about two minutes. I read these all day.",
   },
   {
     name: "The Garbage-Comps Total Loss Offer",
@@ -163,8 +145,8 @@ export default function PlaybookPage() {
         <p className="mt-4 font-body text-lg leading-relaxed text-muted">
           Insurance companies handle thousands of claims a day. You&apos;ll handle
           maybe a few in your life. That gap is where the money moves. These are
-          the eight plays I watch them run on people every single week — what
-          they say, what it actually means, and what to do about it.
+          the plays I watch them run on people every single week — what they say,
+          what it actually means, and what to do about it.
         </p>
 
         {/* Tactics */}

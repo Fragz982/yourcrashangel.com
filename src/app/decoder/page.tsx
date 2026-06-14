@@ -48,16 +48,16 @@ const TERMS = [
   {
     term: "Steering",
     plainEnglish:
-      "When the insurance company pressures you to use THEIR preferred body shop. \"We can't guarantee the work anywhere else\" is the classic line.",
+      "When an insurer points you to one of their network shops — \"we can get you right in at our place.\" Recommending is normal and legal; flat-out telling you that you have no other choice is not.",
     whyItMatters:
-      "In California you have the legal right to pick your own shop. Their shop works under their pricing and their rules — pick a shop that answers to you. Anyone who says you have no choice? Run. Seriously.",
+      "Take the recommendation seriously — network shops are vetted and usually guarantee the work, so it's often a good option. Just know the final call is yours: in California you can use any licensed shop you trust. Recommended or your own pick, both are valid.",
   },
   {
     term: "DRP (direct repair program)",
     plainEnglish:
-      "A deal between a body shop and an insurance company. The insurer sends the shop steady work, and the shop agrees to the insurer's prices and procedures.",
+      "A partnership between a body shop and an insurer: the shop meets the insurer's standards and pricing, and in return gets steady referrals.",
     whyItMatters:
-      "Some DRP shops are great. But the shop's biggest customer is the insurance company, not you — ask any shop who they answer to when there's a fight over a part.",
+      "For you, a DRP shop usually means a faster start, less paperwork to chase, and a repair warranty. Plenty of DRP shops do excellent work — it's a convenient, legitimate option. Just pick one with a solid reputation, same as you would any shop.",
   },
   {
     term: "Tear-down",
@@ -78,14 +78,14 @@ const TERMS = [
     plainEnglish:
       "Parts made by your car's manufacturer — the same stuff the factory bolted on. OEM stands for \"original equipment manufacturer.\"",
     whyItMatters:
-      "Insurers push cheaper parts to save money. On newer cars, or anything near a safety sensor, ask for OEM in writing. Whether they have to pay for it depends on your policy — but you'll never get it if you don't ask.",
+      "Nice to have, but not something a standard policy owes you for free. If you want guaranteed OEM, add an OEM endorsement to your policy — or pay the difference at repair time. Otherwise, quality aftermarket is the norm and usually performs the same.",
   },
   {
     term: "Aftermarket parts",
     plainEnglish:
-      "Copy parts made by some other company, not your car's maker. Cheaper, sometimes fine, sometimes fits like a glove two sizes off.",
+      "Parts made by a company other than your car's maker. In California they must be at least equal in kind and quality to the original, and many are certified to match.",
     whyItMatters:
-      "In California the insurer has to tell you when the estimate uses aftermarket parts. Read your estimate — \"A/M\" next to a part is money the insurer saved at your car's expense.",
+      "Don't panic when you see \"A/M\" on your estimate — on most repairs these look, fit, and work just like OEM, and they help keep your premium down. If you specifically want OEM, that's a policy choice (the OEM endorsement), not a knock on the part.",
   },
   {
     term: "LKQ / used parts",

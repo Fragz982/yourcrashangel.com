@@ -88,7 +88,7 @@ const CATEGORIES: { name: string; faqs: Faq[] }[] = [
       {
         question: "Do I have to use my insurer's recommended shop?",
         answer:
-          "No. In California you have the legal right to choose any licensed body shop you want — it's part of the state's fair claims rules. Insurers will steer you toward their \"Direct Repair Program\" (DRP) shops because those shops agree to the insurer's pricing and processes to keep costs down. That's great for the insurer. Not always great for your car. Some DRP shops are fine; some cut corners to hit the insurer's numbers. Either way, the choice is yours — they can't force you, and they can't refuse to pay a covered claim just because you picked your own shop.",
+          "You can use any licensed shop in California — but don't write off the one your insurer recommends. Those \"Direct Repair Program\" (DRP) shops are vetted by the insurer, they handle the back-and-forth paperwork for you, and they usually guarantee the repair for as long as you own the car. A lot of them do excellent work — I'd know, I'm in this world every day. The insurer recommending a shop isn't a trap; it's often the fastest, smoothest path. So pick a shop you trust. If that's their recommendation, great. If you'd rather bring your own, that's your right too — just choose on the shop's reputation and the people, not on who suggested it.",
       },
       {
         question: "What's a supplement?",
@@ -98,7 +98,7 @@ const CATEGORIES: { name: string; faqs: Faq[] }[] = [
       {
         question: "OEM vs aftermarket parts — does it matter?",
         answer:
-          "Yes, it matters. OEM (Original Equipment Manufacturer) parts are made by the same company that built your car. They fit right, they're tested to the maker's specs, and they help hold your car's value. Aftermarket parts are cheaper copies — some are decent, but plenty don't fit quite right or haven't been through the same testing. Insurers like aftermarket because it saves them money, and in California a non-OEM crash part is supposed to be at least equal to the original — you can push back when it isn't. Request OEM, especially on a newer car. You definitely won't get it if you don't ask.",
+          "Honestly? Less than people think — and here's the truth most won't tell you. Aftermarket (A/M) parts are made by other manufacturers, and in the vast majority of cases they look, fit, and function just like the factory (OEM) part. In California a non-OEM crash part is legally required to be at least equal in kind and quality, and many A/M parts are certified to match — on most repairs you genuinely won't see or feel a difference. Here's the part that actually matters: if you want guaranteed OEM, that comes from an OEM (original-equipment) endorsement on your policy — something you add when you buy or renew it. No endorsement? You can still get OEM by paying the difference. What you can't really do is demand free OEM on a standard policy and be upset when the estimate comes back aftermarket — that's just how coverage works. Bottom line: A/M is usually perfectly fine. If OEM matters to you, get the endorsement before you ever need it.",
       },
       {
         question: "How long do repairs actually take?",
