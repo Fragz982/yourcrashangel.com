@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { MessageIcon } from "./Icons";
 
@@ -9,7 +8,7 @@ const SCENARIOS = [
   {
     id: "rear-ended",
     title: "I got rear-ended",
-    hook: "I was just sitting there and someone slammed into me — now I'm scared their insurance will stall me or lowball me.",
+    hook: "Someone rear-ended you. Take a breath — this is one of the most clear-cut claims there is, and the upper hand is yours.",
     icon: "💥",
     steps: [
       {
@@ -35,7 +34,7 @@ const SCENARIOS = [
   {
     id: "hit-and-run",
     title: "Hit and run — they drove off",
-    hook: "They hit me and took off, and now I'm afraid I'm the one stuck paying for someone else's crime.",
+    hook: "They hit you and drove off. Infuriating — but not hopeless. Let's work on finding them, or getting you covered anyway.",
     icon: "🏃",
     steps: [
       {
@@ -61,7 +60,7 @@ const SCENARIOS = [
   {
     id: "fault-dispute",
     title: "They say it's MY fault",
-    hook: "They're blaming the whole thing on me and I'm terrified I'll get stuck with a bill for a crash I didn't cause.",
+    hook: "They're trying to pin it on you. Stay calm — fault isn't decided at the scene, and the evidence does the talking.",
     icon: "⚖️",
     steps: [
       {
@@ -87,7 +86,7 @@ const SCENARIOS = [
   {
     id: "uninsured-driver",
     title: "They have no insurance",
-    hook: "The person who hit me has nothing, and I'm panicking that the whole bill is about to land on me.",
+    hook: "The other driver has no insurance. Breathe — this is exactly what your own coverage is built for. Here's the play.",
     icon: "🚫",
     steps: [
       {
@@ -113,7 +112,7 @@ const SCENARIOS = [
   {
     id: "towed-to-yard",
     title: "My car's at a tow yard",
-    hook: "My car is locked in some tow yard and I can feel the bill growing every day while I figure out what to do.",
+    hook: "Your car's at a tow yard and the fees are climbing. Let's move quick and steady — here's how to stop the meter.",
     icon: "⏳",
     steps: [
       {
@@ -139,7 +138,7 @@ const SCENARIOS = [
   {
     id: "total-loss",
     title: "They want to total my car",
-    hook: "They want to cut a check for my car and I'm scared it won't cover what I still owe, let alone replace it.",
+    hook: "They want to total your car. Before you stress about the number — it's negotiable, and I'll help you get a fair one.",
     icon: "💸",
     steps: [
       {
@@ -227,14 +226,7 @@ export default function Scenarios() {
 
               {/* Detail panel */}
               <div className="p-6 md:p-10" aria-live="polite">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active.id}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                <div key={active.id} className="animate-fade-rise">
                     <p className="font-body text-base italic leading-relaxed text-muted">
                       &ldquo;{active.hook}&rdquo;
                     </p>
@@ -280,8 +272,7 @@ export default function Scenarios() {
                         </button>
                       </div>
                     </div>
-                  </motion.div>
-                </AnimatePresence>
+                </div>
               </div>
             </div>
           </div>

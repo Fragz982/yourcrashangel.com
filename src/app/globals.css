@@ -137,3 +137,19 @@ body {
     animation: none;
   }
 }
+
+/* Keyed panel swap (replaces framer-motion in Scenarios). */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-rise {
+  animation: fade-rise 0.25s ease-out both;
+}

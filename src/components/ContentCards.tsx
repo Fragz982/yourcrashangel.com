@@ -49,7 +49,7 @@ export default function ContentCards() {
                 href={video.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex aspect-[9/16] flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:border-accent-orange/30 hover:shadow-[0_0_40px_-12px_rgba(255,77,46,0.15)]"
+                className="group relative flex aspect-[16/11] flex-col items-center justify-center overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:border-accent-orange/30 hover:shadow-[0_0_40px_-12px_rgba(192,53,15,0.18)] sm:aspect-[9/16]"
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-b ${video.color} opacity-0 transition-opacity group-hover:opacity-100`}

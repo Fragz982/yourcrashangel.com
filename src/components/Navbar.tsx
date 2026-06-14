@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { MessageIcon, MenuIcon, XIcon } from "./Icons";
 
 const NAV_LINKS = [
@@ -98,37 +97,35 @@ export default function Navbar() {
         </nav>
       </header>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl pt-20 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+      <div
+        className={`fixed inset-0 z-40 flex flex-col overflow-y-auto bg-background/98 px-6 pt-24 backdrop-blur-xl transition-opacity duration-200 md:hidden ${
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom))" }}
+        inert={!mobileOpen}
+        aria-hidden={!mobileOpen}
+      >
+        <div className="flex flex-col items-center gap-6">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="display text-3xl text-foreground transition-colors hover:text-accent-lime sm:text-4xl"
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="sms:+12132792992"
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent-orange px-8 py-3.5 font-display text-lg font-semibold text-background"
           >
-            <div className="flex flex-col items-center gap-6 px-6 pt-8">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="display text-4xl text-foreground transition-colors hover:text-accent-lime"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="sms:+12132792992"
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent-orange px-8 py-3.5 font-display text-lg font-semibold text-background"
-              >
-                <MessageIcon className="h-5 w-5" />
-                Text Me
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <MessageIcon className="h-5 w-5" />
+            Text Me
+          </a>
+        </div>
+      </div>
     </>
   );
 }
