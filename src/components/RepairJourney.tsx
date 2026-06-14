@@ -55,7 +55,7 @@ export default function RepairJourney() {
               <div className="group grid grid-cols-[auto_1fr] items-baseline gap-5 border-t border-border py-7 transition-colors last:border-b hover:bg-surface/40 md:grid-cols-[5rem_1fr_auto] md:gap-8 md:px-2">
                 <span
                   className={`font-mono text-sm ${
-                    stage.accent ? "text-accent-orange" : "text-border"
+                    stage.accent ? "text-accent-orange" : "text-muted"
                   } transition-colors group-hover:text-accent-orange`}
                 >
                   {stage.n}

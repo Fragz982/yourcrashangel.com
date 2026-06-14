@@ -145,7 +145,7 @@ const TIMELINE = [
 
 export default function PlaybookPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div id="main" className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Link
           href="/"
@@ -175,7 +175,7 @@ export default function PlaybookPage() {
               className="rounded-2xl border border-border bg-surface p-7 md:p-9"
             >
               <div className="flex items-baseline gap-4">
-                <span className="display text-4xl text-border">
+                <span className="display text-4xl text-muted">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">
@@ -273,7 +273,7 @@ export default function PlaybookPage() {
         </div>
 
         <div className="mt-12 rounded-xl bg-surface p-6">
-          <p className="font-body text-xs leading-relaxed text-muted/70">
+          <p className="font-body text-xs leading-relaxed text-muted">
             <strong className="text-muted">Disclaimer:</strong> This page is for
             educational and informational purposes only. It is not legal,
             insurance, financial, or professional advice, and it doesn&apos;t

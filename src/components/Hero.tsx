@@ -31,7 +31,7 @@ export default function Hero() {
         </div>
 
         <h1
-          className="hero-fade display text-6xl text-foreground sm:text-7xl md:text-8xl lg:text-9xl"
+          className="hero-fade display text-5xl text-foreground sm:text-7xl md:text-8xl lg:text-9xl"
           style={{ animationDelay: "0.1s" }}
         >
           Just got hit?

@@ -78,7 +78,7 @@ const CHECKLIST_ITEMS = [
 
 export default function ChecklistPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div id="main" className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Link
           href="/"
@@ -175,7 +175,7 @@ export default function ChecklistPage() {
         </div>
 
         <div className="mt-12 rounded-xl bg-background p-6">
-          <p className="font-body text-xs leading-relaxed text-muted/70">
+          <p className="font-body text-xs leading-relaxed text-muted">
             <strong className="text-muted">Disclaimer:</strong> This checklist
             is for educational and informational purposes only. It is not legal,
             insurance, financial, or professional advice. Every accident and

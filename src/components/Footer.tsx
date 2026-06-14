@@ -121,7 +121,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-border pt-8">
-          <p className="font-body text-xs leading-relaxed text-muted/70">
+          <p className="font-body text-xs leading-relaxed text-muted">
             <strong className="text-muted">Disclaimer:</strong> All content on
             this site is for educational and informational purposes only. Nothing
             here constitutes legal, insurance, financial, or professional advice.
@@ -131,7 +131,7 @@ export default function Footer() {
             and is not affiliated with any insurance company, body shop, or legal
             firm.
           </p>
-          <p className="mt-4 font-body text-xs text-muted/50">
+          <p className="mt-4 font-body text-xs text-muted">
             &copy; {year} yourcrashangel. All rights reserved. Los Angeles, CA.
           </p>
         </div>

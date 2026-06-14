@@ -1,28 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, Anton, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "../components/SmoothScroll";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600"],
 });
 
-// Anton — the heavy condensed display face that drives the cinematic
-// headline treatment (single weight, designed for uppercase).
+// Anton — the heavy condensed display face behind the headlines. It's the
+// hero LCP text, so preload it. Single weight, designed for uppercase.
 const anton = Anton({
   variable: "--font-anton",
   subsets: ["latin"],
   display: "swap",
   weight: "400",
+  preload: true,
 });
 
 // JetBrains Mono — technical/spec voice: eyebrows, chips, stats, claim data.
@@ -75,6 +76,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#f7f2e9",
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,11 +91,10 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${anton.variable} ${jetbrainsMono.variable}`}
     >
-      <head>
-        <meta name="theme-color" content="#0a0a0a" />
-      </head>
       <body>
-        <SmoothScroll />
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

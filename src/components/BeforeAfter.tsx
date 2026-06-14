@@ -56,7 +56,7 @@ export default function BeforeAfter() {
         <ScrollReveal delay={0.2} className="mt-12">
           <div
             ref={containerRef}
-            className="relative aspect-[16/10] w-full max-w-4xl cursor-col-resize overflow-hidden rounded-2xl border border-border sm:aspect-[16/9]"
+            className="relative aspect-[16/10] w-full max-w-4xl cursor-col-resize touch-pan-y overflow-hidden rounded-2xl border border-border sm:aspect-[16/9]"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -67,12 +67,15 @@ export default function BeforeAfter() {
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(position)}
+            aria-valuetext={`${Math.round(position)}% — showing the repaired result`}
             tabIndex={0}
             onKeyDown={(e) => {
-              if (e.key === "ArrowLeft")
+              if (e.key === "ArrowLeft" || e.key === "ArrowDown")
                 setPosition((p) => Math.max(0, p - 2));
-              if (e.key === "ArrowRight")
+              if (e.key === "ArrowRight" || e.key === "ArrowUp")
                 setPosition((p) => Math.min(100, p + 2));
+              if (e.key === "Home") setPosition(0);
+              if (e.key === "End") setPosition(100);
             }}
           >
             {/* AFTER (right/full) */}
@@ -85,7 +88,6 @@ export default function BeforeAfter() {
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
 
             {/* BEFORE (left/clipped) */}
@@ -101,7 +103,6 @@ export default function BeforeAfter() {
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
 
             {/* Slider handle */}
@@ -109,7 +110,7 @@ export default function BeforeAfter() {
               className="absolute top-0 bottom-0 z-10 w-0.5 bg-foreground"
               style={{ left: `${position}%` }}
             >
-              <div className="absolute top-1/2 left-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-foreground bg-background shadow-lg">
+              <div className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-foreground bg-background shadow-lg">
                 <svg
                   className="h-4 w-4 text-foreground"
                   viewBox="0 0 24 24"

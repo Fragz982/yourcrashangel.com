@@ -53,7 +53,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
         <FirstFiveMinutes />
         <Scenarios />
@@ -67,8 +67,12 @@ export default function Home() {
       </main>
       <Footer />
       <MobileBottomBar />
-      {/* Bottom padding on mobile so content isn't hidden behind the sticky bar */}
-      <div className="h-14 md:hidden" aria-hidden="true" />
+      {/* Spacer so the sticky bar (plus iOS home-indicator inset) never covers content */}
+      <div
+        className="md:hidden"
+        style={{ height: "calc(3.5rem + env(safe-area-inset-bottom))" }}
+        aria-hidden="true"
+      />
     </>
   );
 }

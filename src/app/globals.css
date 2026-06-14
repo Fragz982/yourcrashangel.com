@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Guardian-angel palette: warm, light, calm — relief, not drama. */
+  /* Guardian-angel palette: warm, light, calm — relief, not drama.
+     Accent + muted tuned to clear WCAG AA (4.5:1) on both bg and surface. */
   --color-background: #f7f2e9;
   --color-foreground: #211a14;
-  --color-accent-orange: #e8431f;
-  --color-accent-lime: #5b8a2e;
-  --color-muted: #87796a;
-  --color-surface: #efe7d7;
-  --color-surface-light: #f2ebde;
-  --color-border: #e3d9c8;
+  --color-accent-orange: #c0350f;
+  --color-accent-lime: #436e22;
+  --color-muted: #6e6253;
+  --color-surface: #ece1cd;
+  --color-surface-light: #f1e8d8;
+  --color-border: #ddd0bb;
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
   --font-heading: var(--font-anton);
@@ -56,6 +57,36 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Anchor targets clear the fixed navbar (replaces Lenis offset scrolling). */
+:where(section[id], [id]) {
+  scroll-margin-top: 5rem;
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7). */
+:focus-visible {
+  outline: 2px solid var(--color-accent-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip link — first focusable element, hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-foreground);
+  color: var(--color-background);
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -80,60 +111,8 @@ body {
 }
 
 ::selection {
-  background: #e8431f;
+  background: #c0350f;
   color: #f7f2e9;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 25s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 77, 46, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 20px 4px rgba(255, 77, 46, 0.2);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2.5s ease-in-out infinite;
-}
-
-@keyframes slow-zoom {
-  from {
-    transform: scale(1.08);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-.animate-slow-zoom {
-  animation: slow-zoom 12s ease-out forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-slow-zoom {
-    animation: none;
-  }
 }
 
 @keyframes hero-fade-in {

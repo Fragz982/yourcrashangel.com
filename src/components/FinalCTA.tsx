@@ -33,7 +33,7 @@ export default function FinalCTA() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href="sms:+12132792992"
-              className="animate-pulse-glow inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-accent-orange px-8 py-4 font-display text-lg font-semibold text-background transition-transform hover:scale-105 active:scale-95 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-accent-orange px-8 py-4 font-display text-lg font-semibold text-background transition-transform hover:scale-105 active:scale-95 sm:w-auto"
             >
               <MessageIcon className="h-5 w-5" />
               Text Me

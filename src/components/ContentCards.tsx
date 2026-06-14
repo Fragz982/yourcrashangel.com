@@ -23,7 +23,7 @@ const VIDEOS = [
     platform: "YouTube Shorts",
     icon: YouTubeIcon,
     href: "https://youtube.com/@yourcrashangel",
-    color: "from-purple-500/20 to-purple-500/5",
+    color: "from-accent-orange/20 to-accent-orange/5",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function ContentCards() {
                 />
 
                 <div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground/10 transition-colors group-hover:bg-accent-orange">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-light transition-colors group-hover:bg-accent-orange">
                     <PlayIcon className="h-6 w-6 translate-x-0.5 text-foreground group-hover:text-background" />
                   </div>
                   <p className="font-display text-base font-semibold text-foreground md:text-lg">

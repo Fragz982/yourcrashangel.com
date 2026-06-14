@@ -182,7 +182,7 @@ const TERMS = [
 
 export default function DecoderPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div id="main" className="min-h-screen bg-background">
       <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Link
           href="/"
@@ -209,7 +209,7 @@ export default function DecoderPage() {
             <article key={entry.term} className="py-8">
               <div className="flex items-baseline gap-4">
                 <span
-                  className="font-mono text-sm text-border"
+                  className="font-mono text-sm text-muted"
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -259,7 +259,7 @@ export default function DecoderPage() {
         </div>
 
         <div className="mt-12 rounded-xl bg-surface p-6">
-          <p className="font-body text-xs leading-relaxed text-muted/70">
+          <p className="font-body text-xs leading-relaxed text-muted">
             <strong className="text-muted">Disclaimer:</strong> This page is for
             educational and informational purposes only. It is not legal,
             insurance, financial, or professional advice. Every accident and

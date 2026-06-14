@@ -52,7 +52,7 @@ export default function FirstFiveMinutes() {
             <ScrollReveal key={step.number} delay={i * 0.1}>
               <div className="group relative h-full rounded-2xl border border-border bg-surface p-8 transition-colors hover:border-accent-orange/30 md:p-10">
                 <div className="mb-6 flex items-center gap-4">
-                  <span className="display text-4xl text-border transition-colors group-hover:text-accent-orange/40">
+                  <span className="display text-4xl text-muted transition-colors group-hover:text-accent-orange/40">
                     {step.number}
                   </span>
                   <span className="text-3xl" role="img" aria-label={step.title}>
@@ -70,10 +70,10 @@ export default function FirstFiveMinutes() {
           ))}
         </div>
 
-        <ScrollReveal delay={0.4} className="mt-12 flex justify-center">
+        <ScrollReveal delay={0.4} className="mt-10 flex justify-center">
           <a
             href="sms:+12132792992"
-            className="inline-flex items-center gap-2 rounded-full bg-accent-orange px-6 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+            className="inline-flex items-center gap-2 font-display text-base font-semibold text-accent-orange transition-colors hover:text-accent-lime"
           >
             <MessageIcon className="h-4 w-4" />
             Text me — it&apos;s free
