@@ -76,6 +76,20 @@ const round = {
 };
 const money = (n: number) => "$" + n.toLocaleString("en-US");
 
+// Downscale a photo to a compact JPEG data URL before sending it to the
+// estimate function (keeps payloads small and within function limits).
+async function fileToDataUrl(file: File, max = 1024): Promise<string> {
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, max / Math.max(bitmap.width, bitmap.height));
+  const w = Math.round(bitmap.width * scale);
+  const h = Math.round(bitmap.height * scale);
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  canvas.getContext("2d")?.drawImage(bitmap, 0, 0, w, h);
+  return canvas.toDataURL("image/jpeg", 0.7);
+}
+
 interface Vehicle {
   year: string;
   make: string;
@@ -100,6 +114,14 @@ export default function EstimateTool() {
   const [drivable, setDrivable] = useState<boolean | null>(null);
   const [photoCount, setPhotoCount] = useState(0);
   const [photoUrls, setPhotoUrls] = useState<string[]>([]);
+  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+
+  // AI estimate (when a provider key is configured server-side); otherwise null
+  // and the guided ballpark is used.
+  const [aiResult, setAiResult] = useState<{ lo: number; hi: number } | null>(
+    null
+  );
+  const [aiLoading, setAiLoading] = useState(false);
 
   const decodeVin = async (raw?: string) => {
     const clean = (raw ?? vin).trim().toUpperCase();
@@ -142,11 +164,42 @@ export default function EstimateTool() {
 
   const onPhotos = (files: FileList | null) => {
     if (!files) return;
-    const urls = Array.from(files)
-      .slice(0, 8)
-      .map((f) => URL.createObjectURL(f));
-    setPhotoUrls(urls);
+    const list = Array.from(files).slice(0, 8);
+    setPhotoFiles(list);
+    setPhotoUrls(list.map((f) => URL.createObjectURL(f)));
     setPhotoCount(files.length);
+  };
+
+  // Try a real AI estimate from the photos via the serverless function. If no
+  // provider key is configured (today) or anything fails, leave aiResult null
+  // and the guided ballpark is shown instead — never blocks the user.
+  const runAiEstimate = async () => {
+    if (!photoFiles.length) return;
+    setAiLoading(true);
+    try {
+      const images = await Promise.all(
+        photoFiles.slice(0, 2).map((f) => fileToDataUrl(f))
+      );
+      const res = await fetch("/.netlify/functions/estimate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ areas, severity, drivable, images }),
+      });
+      const data = await res.json();
+      if (
+        data?.configured &&
+        !data.failed &&
+        typeof data.lo === "number" &&
+        typeof data.hi === "number"
+      ) {
+        setAiResult({ lo: data.lo, hi: data.hi });
+      } else {
+        setAiResult(null);
+      }
+    } catch {
+      setAiResult(null);
+    }
+    setAiLoading(false);
   };
 
   const ballpark = useMemo(() => {
@@ -181,9 +234,12 @@ export default function EstimateTool() {
     const sevLabel = SEVERITIES.find((s) => s.id === severity)?.label ?? "";
     const drive =
       drivable === true ? "still drivable" : drivable === false ? "not drivable" : "";
-    const bp = ballpark ? `Your tool ballparked ${money(ballpark.lo)}–${money(ballpark.hi)}. ` : "";
+    const shown = aiResult ?? ballpark;
+    const bp = shown
+      ? `Your tool ballparked ${money(shown.lo)}–${money(shown.hi)}. `
+      : "";
     return `Hey Angel — ${v}. Damage: ${areaLabels} (${sevLabel})${drive ? ", " + drive : ""}. ${bp}Sending photos now — what's the real read?`;
-  }, [vehicle, areas, severity, drivable, ballpark]);
+  }, [vehicle, areas, severity, drivable, ballpark, aiResult]);
 
   const cat = classifyBody(vehicle?.body);
 
@@ -395,7 +451,11 @@ export default function EstimateTool() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <button
-              onClick={() => setStep(3)}
+              onClick={() => {
+                setAiResult(null);
+                setStep(3);
+                runAiEstimate();
+              }}
               disabled={!areas.length || !severity}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-7 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
             >
@@ -418,11 +478,18 @@ export default function EstimateTool() {
 
           <div className="mt-4 rounded-3xl border border-border bg-surface p-7 text-center">
             <p className="font-display text-sm font-semibold uppercase tracking-wider text-muted">
-              Rough visual range{vehicle ? ` · ${vehicle.year} ${vehicle.make} ${vehicle.model}` : ""}
+              {aiResult ? "AI read from your photos" : "Rough visual range"}
+              {vehicle ? ` · ${vehicle.year} ${vehicle.make} ${vehicle.model}` : ""}
             </p>
-            <p className="mt-2 display text-5xl text-foreground sm:text-6xl">
-              {money(ballpark.lo)}–{money(ballpark.hi)}
-            </p>
+            {aiLoading ? (
+              <p className="mt-3 font-body text-lg text-muted">
+                Reading your photos…
+              </p>
+            ) : (
+              <p className="mt-2 display text-5xl text-foreground sm:text-6xl">
+                {money((aiResult ?? ballpark).lo)}–{money((aiResult ?? ballpark).hi)}
+              </p>
+            )}
           </div>
 
           {/* The non-negotiable framing */}

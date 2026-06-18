@@ -5,6 +5,13 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Serverless function that proxies the AI photo-to-estimate provider, keeping
+# the API key server-side. Dormant (returns configured:false) until the
+# ESTIMATE_API_KEY env var is set — the client falls back to the guided ballpark.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Security headers applied to every response. CSP intentionally allows
 # 'unsafe-inline' for scripts/styles because the static export ships inline
 # hydration scripts and framer-motion injects inline styles; this still blocks
