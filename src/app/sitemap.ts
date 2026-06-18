@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 // Fixed lastModified so the sitemap is deterministic across builds (no churn
 // on every deploy). Bump this date when page content meaningfully changes.
-const LAST_MODIFIED = "2026-06-11";
+const LAST_MODIFIED = "2026-06-17";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: "https://yourcrashangel.com/estimate",
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
       url: "https://yourcrashangel.com/playbook",

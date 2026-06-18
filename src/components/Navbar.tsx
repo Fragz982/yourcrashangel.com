@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { MessageIcon, MenuIcon, XIcon } from "./Icons";
 
 const NAV_LINKS = [
+  { label: "Estimate", href: "/estimate" },
   { label: "What To Do", href: "#first-5" },
   { label: "Playbook", href: "/playbook" },
   { label: "Decoder", href: "/decoder" },
-  { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
 ];
 
