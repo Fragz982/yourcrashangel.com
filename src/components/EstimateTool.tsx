@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { CameraIcon, MessageIcon, CheckIcon } from "./Icons";
+import VinScanner from "./VinScanner";
 
 // ----- Damage model -----
 // SEED RANGES — conservative, industry-typical placeholders. Angel replaces
@@ -91,6 +92,7 @@ export default function EstimateTool() {
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [decoding, setDecoding] = useState(false);
   const [vinError, setVinError] = useState("");
+  const [scanning, setScanning] = useState(false);
 
   // Step 2
   const [areas, setAreas] = useState<string[]>([]);
@@ -99,8 +101,9 @@ export default function EstimateTool() {
   const [photoCount, setPhotoCount] = useState(0);
   const [photoUrls, setPhotoUrls] = useState<string[]>([]);
 
-  const decodeVin = async () => {
-    const clean = vin.trim().toUpperCase();
+  const decodeVin = async (raw?: string) => {
+    const clean = (raw ?? vin).trim().toUpperCase();
+    setVin(clean);
     if (clean.length < 11) {
       setVinError("That doesn't look like a full VIN (it's 17 characters).");
       return;
@@ -229,22 +232,29 @@ export default function EstimateTool() {
           )}
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <button
-              onClick={decodeVin}
+              onClick={() => setScanning(true)}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-7 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+            >
+              <CameraIcon className="h-5 w-5" />
+              Scan my VIN
+            </button>
+            <button
+              onClick={() => decodeVin()}
               disabled={decoding}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-7 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95 disabled:opacity-60"
+              className="inline-flex items-center justify-center rounded-full border-2 border-border px-7 py-3.5 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/30 disabled:opacity-60"
             >
               {decoding ? "Looking it up…" : "Pull up my car"}
             </button>
-            <button
-              onClick={() => {
-                setVehicle(null);
-                setStep(2);
-              }}
-              className="inline-flex items-center justify-center rounded-full border-2 border-border px-7 py-3.5 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/30"
-            >
-              Skip — I don&apos;t have it
-            </button>
           </div>
+          <button
+            onClick={() => {
+              setVehicle(null);
+              setStep(2);
+            }}
+            className="mt-3 font-display text-sm font-semibold text-muted transition-colors hover:text-foreground"
+          >
+            Skip — I don&apos;t have it
+          </button>
         </div>
       )}
 
@@ -508,6 +518,16 @@ export default function EstimateTool() {
             stored or sent anywhere unless you choose to text it.
           </p>
         </div>
+      )}
+
+      {scanning && (
+        <VinScanner
+          onDetected={(v) => {
+            setScanning(false);
+            decodeVin(v);
+          }}
+          onClose={() => setScanning(false)}
+        />
       )}
     </div>
   );
