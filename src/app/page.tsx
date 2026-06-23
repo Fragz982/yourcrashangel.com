@@ -4,6 +4,7 @@ import FirstFiveMinutes from "../components/FirstFiveMinutes";
 import Scenarios from "../components/Scenarios";
 import EstimateCTA from "../components/EstimateCTA";
 import BeforeAfter from "../components/BeforeAfter";
+import RealRepairs from "../components/RealRepairs";
 import RepairJourney from "../components/RepairJourney";
 import ContentCards from "../components/ContentCards";
 import Reviews from "../components/Reviews";
@@ -60,6 +61,7 @@ export default function Home() {
         <Scenarios />
         <EstimateCTA />
         <BeforeAfter />
+        <RealRepairs />
         <RepairJourney />
         <ContentCards />
         <Reviews />
