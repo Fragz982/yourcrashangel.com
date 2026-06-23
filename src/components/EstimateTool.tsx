@@ -15,7 +15,7 @@ const AREAS: { id: string; label: string; base: [number, number] }[] = [
   { id: "fender", label: "Fender", base: [400, 1600] },
   { id: "door", label: "Door(s)", base: [500, 2000] },
   { id: "quarter-panel", label: "Quarter panel", base: [800, 3400] },
-  { id: "headlight", label: "Headlight / grille", base: [300, 1500] },
+  { id: "headlight", label: "Headlight / grille", base: [350, 1800] },
   { id: "roof-pillar", label: "Roof / pillar", base: [900, 4000] },
 ];
 
@@ -488,6 +488,12 @@ export default function EstimateTool() {
             ) : (
               <p className="mt-2 display text-5xl text-foreground sm:text-6xl">
                 {money((aiResult ?? ballpark).lo)}–{money((aiResult ?? ballpark).hi)}
+              </p>
+            )}
+            {!aiLoading && (
+              <p className="mt-3 font-body text-xs text-muted">
+                In line with typical 2025 collision repair costs. Your real
+                number depends on an in-person teardown.
               </p>
             )}
           </div>
