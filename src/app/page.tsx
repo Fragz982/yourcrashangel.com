@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import FirstFiveMinutes from "../components/FirstFiveMinutes";
 import Scenarios from "../components/Scenarios";
+import EstimateCTA from "../components/EstimateCTA";
 import BeforeAfter from "../components/BeforeAfter";
 import RepairJourney from "../components/RepairJourney";
 import ContentCards from "../components/ContentCards";
@@ -57,6 +58,7 @@ export default function Home() {
         <Hero />
         <FirstFiveMinutes />
         <Scenarios />
+        <EstimateCTA />
         <BeforeAfter />
         <RepairJourney />
         <ContentCards />
