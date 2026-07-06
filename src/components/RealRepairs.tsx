@@ -30,11 +30,71 @@ const JOBS: Job[] = [
   {
     id: "job1",
     vehicle: "Volkswagen Jetta",
-    note: "Came in with the whole front end caved in — hood, grille, headlamp, and bumper crushed. Torn all the way down, rebuilt, and driven off looking factory-fresh.",
+    note: "Whole front end caved in — hood, grille, headlamp, and bumper crushed. Torn all the way down, rebuilt, and driven off looking factory-fresh.",
     images: {
       checkin: "/work/real-repairs/job1-checkin.jpg",
       during: "/work/real-repairs/job1-during.jpg",
       after: "/work/real-repairs/job1-after.jpg",
+    },
+  },
+  {
+    id: "job3",
+    vehicle: "Audi A5 Sportback",
+    note: "Cracked headlight and a crumpled right-front corner came in — rolled back out gleaming like the day it left the showroom.",
+    images: {
+      checkin: "/work/real-repairs/job3-checkin.jpg",
+      during: "/work/real-repairs/job3-during.jpg",
+      after: "/work/real-repairs/job3-after.jpg",
+    },
+  },
+  {
+    id: "job2",
+    vehicle: "Honda Accord Hybrid",
+    note: "Rear end crunched in a collision. Rebuilt panel by panel until it drove off factory-fresh.",
+    images: {
+      checkin: "/work/real-repairs/job2-checkin.jpg",
+      during: "/work/real-repairs/job2-during.jpg",
+      after: "/work/real-repairs/job2-after.jpg",
+    },
+  },
+  {
+    id: "job4",
+    vehicle: "Toyota Camry",
+    note: "Right front crushed — fender folded into the door, hood shoved back. Straightened and rebuilt to flawless paint and panel gaps.",
+    images: {
+      checkin: "/work/real-repairs/job4-checkin.jpg",
+      during: "/work/real-repairs/job4-during.jpg",
+      after: "/work/real-repairs/job4-after.jpg",
+    },
+  },
+  {
+    id: "job5",
+    vehicle: "Kia Forte",
+    note: "Whole driver side and rear caved in. Every panel rebuilt until it looked factory-fresh.",
+    images: {
+      checkin: "/work/real-repairs/job5-checkin.jpg",
+      during: "/work/real-repairs/job5-during.jpg",
+      after: "/work/real-repairs/job5-after.jpg",
+    },
+  },
+  {
+    id: "job7",
+    vehicle: "Toyota RAV4 Hybrid",
+    note: "Passenger side and front end scraped and crunched. Torn down, repaired, and sent back out good as new.",
+    images: {
+      checkin: "/work/real-repairs/job7-checkin.jpg",
+      during: "/work/real-repairs/job7-during.jpg",
+      after: "/work/real-repairs/job7-after.jpg",
+    },
+  },
+  {
+    id: "job6",
+    vehicle: "Hyundai Elantra",
+    note: "Badly creased driver-side fender and door. Sent back out straight, clean, and driving like new.",
+    images: {
+      checkin: "/work/real-repairs/job6-checkin.jpg",
+      during: "/work/real-repairs/job6-during.jpg",
+      after: "/work/real-repairs/job6-after.jpg",
     },
   },
 ];
