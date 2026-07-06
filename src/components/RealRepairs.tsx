@@ -26,7 +26,18 @@ type Job = {
   images: { checkin: string; during: string; after: string };
 };
 
-const JOBS: Job[] = [];
+const JOBS: Job[] = [
+  {
+    id: "job1",
+    vehicle: "Volkswagen Jetta",
+    note: "Came in with the whole front end caved in — hood, grille, headlamp, and bumper crushed. Torn all the way down, rebuilt, and driven off looking factory-fresh.",
+    images: {
+      checkin: "/work/real-repairs/job1-checkin.jpg",
+      during: "/work/real-repairs/job1-during.jpg",
+      after: "/work/real-repairs/job1-after.jpg",
+    },
+  },
+];
 
 const STAGES: { key: keyof Job["images"]; label: string }[] = [
   { key: "checkin", label: "Came in" },
