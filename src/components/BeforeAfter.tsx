@@ -48,8 +48,8 @@ export default function BeforeAfter() {
             Before &amp; After.
           </h2>
           <p className="mt-4 max-w-xl font-body text-lg text-muted">
-            Drag the slider to see the difference a proper repair makes — clean
-            panel gaps, real paint blend, like the hit never happened.
+            A real car, from a real job — same corner, before and after. Clean
+            panel gaps, proper paint blend, like the hit never happened.
           </p>
         </ScrollReveal>
 
@@ -83,7 +83,7 @@ export default function BeforeAfter() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/work/after.jpg"
-                alt="Black car restored to a flawless, glossy finish after repair"
+                alt="Gray Kia Forte fully repaired — straight panels and factory-fresh paint"
                 className="h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -98,7 +98,7 @@ export default function BeforeAfter() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/work/before.jpg"
-                alt="Black coupe with heavy front-end collision damage before repair"
+                alt="Gray Kia Forte with driver-side and rear collision damage, as it arrived"
                 className="h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
