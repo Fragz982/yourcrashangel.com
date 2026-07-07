@@ -11,6 +11,7 @@ import Reviews from "../components/Reviews";
 import About from "../components/About";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
+import LeadForm from "../components/LeadForm";
 import Footer from "../components/Footer";
 import MobileBottomBar from "../components/MobileBottomBar";
 
@@ -67,6 +68,7 @@ export default function Home() {
         <Reviews />
         <About />
         <FAQ />
+        <LeadForm />
         <FinalCTA />
       </main>
       <Footer />
