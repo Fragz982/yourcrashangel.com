@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://yourcrashangel.com/totaled",
+      lastModified: "2026-07-07",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://yourcrashangel.com/playbook",
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
