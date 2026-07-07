@@ -27,9 +27,16 @@ type Job = {
 };
 
 const JOBS: Job[] = [
-  // job1 (VW Jetta) and job2 (Accord) temporarily pulled: their "after" shots
-  // showed the wrong side of the car vs the damage. Correct-angle shots exist
-  // only in the USB RO folders — re-added the moment the drive is available.
+  {
+    id: "job1",
+    vehicle: "Volkswagen Jetta",
+    note: "Right front corner took the hit — hood buckled, headlamp smashed, bumper torn. Same corner rebuilt, refinished, and rolled out factory-fresh.",
+    images: {
+      checkin: "/work/real-repairs/job1-checkin.jpg",
+      during: "/work/real-repairs/job1-during.jpg",
+      after: "/work/real-repairs/job1-after.jpg",
+    },
+  },
   {
     id: "job3",
     vehicle: "Audi A5 Sportback",
@@ -38,6 +45,16 @@ const JOBS: Job[] = [
       checkin: "/work/real-repairs/job3-checkin.jpg",
       during: "/work/real-repairs/job3-during.jpg",
       after: "/work/real-repairs/job3-after.jpg",
+    },
+  },
+  {
+    id: "job2",
+    vehicle: "Honda Accord Hybrid",
+    note: "Rear end crunched in a collision. Rebuilt panel by panel — same rear view going out clean as it came in wrecked.",
+    images: {
+      checkin: "/work/real-repairs/job2-checkin.jpg",
+      during: "/work/real-repairs/job2-during.jpg",
+      after: "/work/real-repairs/job2-after.jpg",
     },
   },
   {
