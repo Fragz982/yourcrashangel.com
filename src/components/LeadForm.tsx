@@ -61,10 +61,9 @@ export default function LeadForm() {
 
             <label className="flex flex-col gap-1.5">
               <span className="font-mono text-xs uppercase tracking-wider text-muted">
-                What happened?
+                What happened? (optional — a sentence is plenty)
               </span>
               <textarea
-                required
                 name="message"
                 rows={4}
                 placeholder="Rear-ended on the 405. Bumper's hanging, insurance wants me at their shop tomorrow…"
@@ -79,7 +78,12 @@ export default function LeadForm() {
               Send it — I&apos;ll take a look
             </button>
             <p className="font-body text-xs text-muted">
-              Goes straight to me. No spam, no selling your info — ever.
+              Goes straight to me — replies within a few hours, 7am&ndash;9pm,
+              7 days a week. No spam, no selling your info (
+              <a href="/privacy" className="underline underline-offset-2">
+                privacy
+              </a>
+              ) — ever.
             </p>
           </form>
         </div>

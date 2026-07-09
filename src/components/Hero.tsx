@@ -68,6 +68,26 @@ export default function Hero() {
           </a>
         </div>
 
+        <p
+          className="hero-fade mt-5 font-body text-sm text-muted"
+          style={{ animationDelay: "0.5s" }}
+        >
+          Call or text{" "}
+          <a
+            href="tel:+12132792992"
+            className="font-semibold text-foreground underline decoration-accent-orange underline-offset-4"
+          >
+            (213) 279-2992
+          </a>{" "}
+          — answered 7am&ndash;9pm, usually within minutes. Rather type it out?{" "}
+          <a
+            href="#get-help"
+            className="font-semibold text-accent-orange transition-colors hover:text-accent-lime"
+          >
+            Tell me what happened →
+          </a>
+        </p>
+
         <div
           className="hero-fade mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-7"
           style={{ animationDelay: "0.6s" }}
@@ -78,6 +98,9 @@ export default function Hero() {
           </span>
           <span className="eyebrow text-[0.7rem] text-muted">
             A real human, same day
+          </span>
+          <span className="eyebrow text-[0.7rem] text-muted">
+            Why free? Estimating is my day job
           </span>
         </div>
       </div>

@@ -6,14 +6,13 @@ import EstimateCTA from "../components/EstimateCTA";
 import BeforeAfter from "../components/BeforeAfter";
 import RealRepairs from "../components/RealRepairs";
 import RepairJourney from "../components/RepairJourney";
-import ContentCards from "../components/ContentCards";
 import Reviews from "../components/Reviews";
 import About from "../components/About";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
 import LeadForm from "../components/LeadForm";
 import Footer from "../components/Footer";
-import MobileBottomBar from "../components/MobileBottomBar";
+import { CATEGORIES } from "../components/faqData";
 
 // LocalBusiness structured data so Google understands who Angel is, where he
 // serves, and what he does. Reviews are intentionally NOT marked up here —
@@ -41,11 +40,17 @@ const jsonLd = {
     "OEM vs aftermarket parts",
     "Total loss vehicle valuation",
   ],
-  sameAs: [
-    "https://tiktok.com/@yourcrashangel",
-    "https://instagram.com/yourcrashangel",
-    "https://youtube.com/@yourcrashangel",
-  ],
+};
+
+// FAQPage rich-result markup mirroring the visible FAQ answers exactly.
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: CATEGORIES.flatMap((c) => c.faqs).map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
 };
 
 export default function Home() {
@@ -54,6 +59,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
       <Navbar />
       <main id="main">
@@ -64,21 +73,13 @@ export default function Home() {
         <BeforeAfter />
         <RealRepairs />
         <RepairJourney />
-        <ContentCards />
         <Reviews />
         <About />
-        <FAQ />
         <LeadForm />
+        <FAQ />
         <FinalCTA />
       </main>
       <Footer />
-      <MobileBottomBar />
-      {/* Spacer so the sticky bar (plus iOS home-indicator inset) never covers content */}
-      <div
-        className="md:hidden"
-        style={{ height: "calc(3.5rem + env(safe-area-inset-bottom))" }}
-        aria-hidden="true"
-      />
     </>
   );
 }

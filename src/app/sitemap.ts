@@ -10,9 +10,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://yourcrashangel.com",
-      lastModified: LAST_MODIFIED,
+      lastModified: "2026-07-08",
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: "https://yourcrashangel.com/privacy",
+      lastModified: "2026-07-08",
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     {
       url: "https://yourcrashangel.com/estimate",

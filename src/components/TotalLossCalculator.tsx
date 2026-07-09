@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 // California uses the Total Loss Formula (no fixed percentage):
 // repair cost + salvage value >= vehicle's actual cash value  ->  total loss.
@@ -111,9 +112,36 @@ export default function TotalLossCalculator() {
                 ? `The formula beats your car's value by ${money(margin)}. Expect total-loss talk — which is a negotiation about your car's VALUE, not about the damage.`
                 : `The formula comes in ${money(margin)} under your car's value. If someone says "total" anyway, the value number deserves a hard look.`}
             </p>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <a
+                href={`sms:+12132792992?body=${encodeURIComponent(
+                  `Hey Angel — ran the total-loss math: repair ~${money(repairN)}, they say my car's worth ${money(acvN)}. Can you check their numbers?`
+                )}`}
+                className="inline-flex items-center rounded-full bg-accent-orange px-5 py-2.5 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+              >
+                Text me your valuation letter — free check
+              </a>
+              <Link
+                href="/#get-help"
+                className="font-body text-sm font-semibold text-accent-orange transition-colors hover:text-accent-lime"
+              >
+                or type it out →
+              </Link>
+            </div>
           </>
         )}
       </div>
+      {!hasInput && (
+        <p className="mt-3 font-body text-xs text-muted">
+          Don&apos;t have these numbers yet? The repair figure comes from the
+          shop&apos;s estimate (get a rough one in 30 seconds with the{" "}
+          <Link href="/estimate" className="text-accent-orange">
+            ballpark tool
+          </Link>
+          ); the value number comes from the insurer&apos;s valuation report —
+          they must give it to you in writing.
+        </p>
+      )}
 
       <p className="mt-4 font-body text-xs text-muted">
         Educational ballpark only — the insurer&apos;s appraisal and salvage

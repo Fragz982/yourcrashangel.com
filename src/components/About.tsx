@@ -1,7 +1,6 @@
 "use client";
 
 import ScrollReveal from "./ScrollReveal";
-import { TikTokIcon, InstagramIcon, YouTubeIcon } from "./Icons";
 
 export default function About() {
   return (
@@ -9,16 +8,23 @@ export default function About() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
           <ScrollReveal direction="left">
-            <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border border-border bg-surface">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://images.unsplash.com/photo-1559366682-b24d010f6d65?w=800&q=80&auto=format&fit=crop"
-                alt="Angel — yourcrashangel"
-                className="h-full w-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+            <figure className="mx-auto w-full max-w-md">
+              <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface">
+                {/* Real work, not a stock face — a front-end rebuild Angel
+                    estimated, mid-teardown. Swap for his headshot when ready. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/work/real-repairs/job1-during.jpg"
+                  alt="A front-end rebuild Angel estimated — mid-teardown at the shop"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
+                One of mine — the Jetta from the gallery, mid-rebuild
+              </figcaption>
+            </figure>
           </ScrollReveal>
 
           <ScrollReveal direction="right">
@@ -46,33 +52,12 @@ export default function About() {
               </p>
             </div>
 
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-8">
               <a
-                href="https://tiktok.com/@yourcrashangel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-                aria-label="TikTok"
+                href="#get-help"
+                className="inline-flex items-center rounded-full bg-accent-orange px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
               >
-                <TikTokIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com/yourcrashangel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://youtube.com/@yourcrashangel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-                aria-label="YouTube"
-              >
-                <YouTubeIcon className="h-5 w-5" />
+                Tell me what happened →
               </a>
             </div>
           </ScrollReveal>

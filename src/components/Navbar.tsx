@@ -1,15 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { MessageIcon, MenuIcon, XIcon } from "./Icons";
 
 const NAV_LINKS = [
   { label: "Estimate", href: "/estimate" },
   { label: "Totaled?", href: "/totaled" },
-  { label: "What To Do", href: "/#first-5" },
+  { label: "What To Do", href: "/checklist" },
   { label: "Playbook", href: "/playbook" },
-  { label: "Decoder", href: "/decoder" },
   { label: "FAQ", href: "/#faq" },
+  { label: "Get Help", href: "/#get-help" },
 ];
 
 export default function Navbar() {
@@ -55,14 +56,14 @@ export default function Navbar() {
           className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8"
           aria-label="Main navigation"
         >
-          <a
+          <Link
             href="/"
             className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-foreground md:text-sm"
           >
             The Accident
             <br className="md:hidden" />{" "}
             <span className="text-accent-orange">Translator</span>
-          </a>
+          </Link>
 
           <div className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((link) => (
@@ -88,6 +89,7 @@ export default function Navbar() {
             className="flex items-center justify-center rounded-lg p-2 text-foreground md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? (
               <XIcon className="h-6 w-6" />
@@ -99,6 +101,7 @@ export default function Navbar() {
       </header>
 
       <div
+        id="mobile-menu"
         className={`fixed inset-0 z-40 flex flex-col overflow-y-auto bg-background/98 px-6 pt-24 backdrop-blur-xl transition-opacity duration-200 md:hidden ${
           mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}

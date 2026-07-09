@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   description:
     "Free step-by-step checklist: exactly what to do after a car accident. From a real collision estimator in LA.",
   alternates: { canonical: "/checklist" },
+  openGraph: {
+    title: "What To Do After A Crash — the free checklist",
+    description:
+      "At the scene, the first 24 hours, choosing a shop, total loss — every step, from a working LA collision estimator.",
+    url: "https://yourcrashangel.com/checklist",
+  },
 };
 
 const CHECKLIST_ITEMS = [
@@ -61,7 +67,8 @@ const CHECKLIST_ITEMS = [
       "Research comparable vehicles in your area (same year, make, model, mileage, options)",
       "You CAN dispute the total loss offer — most people don't know this",
       "Check if you have gap insurance (especially if you're upside-down on a loan)",
-      "Ask about diminished value if you're keeping the car",
+      "Keeping the car? Get the salvage deduction in writing and understand the salvage-title process first",
+      "Run your numbers with the free California total-loss calculator at yourcrashangel.com/totaled",
     ],
   },
   {

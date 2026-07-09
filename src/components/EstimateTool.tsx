@@ -126,8 +126,10 @@ export default function EstimateTool() {
   const decodeVin = async (raw?: string) => {
     const clean = (raw ?? vin).trim().toUpperCase();
     setVin(clean);
-    if (clean.length < 11) {
-      setVinError("That doesn't look like a full VIN (it's 17 characters).");
+    if (clean.length !== 17) {
+      setVinError(
+        `A full VIN is 17 characters — this one is ${clean.length}. Check for missing characters, or skip below.`
+      );
       return;
     }
     setDecoding(true);
@@ -307,10 +309,14 @@ export default function EstimateTool() {
               setVehicle(null);
               setStep(2);
             }}
-            className="mt-3 font-display text-sm font-semibold text-muted transition-colors hover:text-foreground"
+            className="mt-4 inline-flex w-full items-center justify-center rounded-full border-2 border-border px-7 py-3.5 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/30 sm:w-auto"
           >
-            Skip — I don&apos;t have it
+            Skip the VIN — just show the damage →
           </button>
+          <p className="mt-2 font-body text-xs text-muted">
+            No VIN needed for a ballpark. It only makes the numbers a bit more
+            exact.
+          </p>
         </div>
       )}
 
@@ -426,11 +432,14 @@ export default function EstimateTool() {
           <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border bg-surface px-5 py-5 font-display text-sm font-semibold text-muted transition-colors hover:border-accent-orange/40 hover:text-foreground">
             <CameraIcon className="h-5 w-5" />
             {photoCount > 0 ? `${photoCount} photo${photoCount > 1 ? "s" : ""} added` : "Take or choose photos"}
+            {/* No `capture` attr: forcing the in-browser camera means photos
+                never land in the user's camera roll, so they can't re-attach
+                them in Messages later. The picker lets them use the Camera
+                app (which saves) or existing photos. */}
             <input
               type="file"
               accept="image/*"
               multiple
-              capture="environment"
               className="hidden"
               onChange={(e) => onPhotos(e.target.files)}
             />
@@ -459,7 +468,9 @@ export default function EstimateTool() {
               disabled={!areas.length || !severity}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-7 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
             >
-              See my ballpark
+              {!areas.length || !severity
+                ? "Pick the damage first ↑"
+                : "See my ballpark"}
             </button>
             <button
               onClick={() => setStep(1)}
@@ -519,7 +530,7 @@ export default function EstimateTool() {
             </p>
             <ul className="mt-4 space-y-3">
               {[
-                "They pay for the repair — you're only out your deductible (and if it's not your fault, the other driver's insurance pays, often with no deductible to you).",
+                "Not your fault? The other driver's insurance pays — usually no deductible to you at all. Filing on your own policy? You're only ever out your deductible.",
                 "Your shop and adjuster fight for the supplements. When teardown finds hidden damage, that's covered — you don't pay out of pocket for surprises.",
                 "Rental car while yours is in the shop (if you carry rental, or through the at-fault party).",
                 "Total loss or diminished value? They handle the valuation — and you can push back on a lowball.",
@@ -548,8 +559,8 @@ export default function EstimateTool() {
               I&apos;ll text you back what it actually looks like and what to say to
               your insurer. Free.{" "}
               {photoCount > 0
-                ? "Your text opens pre-filled — just attach the photos you added."
-                : "Attach your damage photos in the text."}
+                ? "Your text opens pre-filled. Heads-up: photos taken inside this tool may not save to your camera roll — snap them in your Camera app, then attach from your photos in Messages."
+                : "Snap the damage in your Camera app, then attach the photos in Messages."}
             </p>
             <a
               href={`sms:+12132792992?body=${encodeURIComponent(smsBody)}`}

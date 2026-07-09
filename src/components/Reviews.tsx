@@ -50,6 +50,10 @@ export default function Reviews() {
           <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
             Don&apos;t take my word for it.
           </h2>
+          <p className="mt-4 max-w-xl font-body text-base text-muted">
+            Straight from Google: reviews of the LA shop where I write
+            estimates every day — the same work you see in the gallery above.
+          </p>
         </ScrollReveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">

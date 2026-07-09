@@ -119,8 +119,8 @@ export default function RealRepairs() {
             <span className="text-accent-lime">Real repairs.</span>
           </h2>
           <p className="mt-4 max-w-xl font-body text-lg text-muted">
-            Actual jobs — from the moment they rolled in to the day they drove
-            off. No stock photos.
+            Jobs I personally estimated at the shop where I work — from the
+            moment they rolled in to the day they drove off. No stock photos.
           </p>
         </ScrollReveal>
 

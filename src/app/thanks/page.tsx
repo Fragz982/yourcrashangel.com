@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Got it — I'm on it | yourcrashangel",
+  description: "Your message is in. Here's what happens next.",
   robots: { index: false },
+  alternates: { canonical: "/thanks" },
 };
 
 export default function Thanks() {
@@ -16,8 +18,12 @@ export default function Thanks() {
         <span className="text-accent-lime">alone in this.</span>
       </h1>
       <p className="mt-6 max-w-md font-body text-lg leading-relaxed text-muted">
-        I read every message myself and usually get back fast. If it&apos;s
-        urgent — like the car&apos;s undrivable or insurance is pushing you to
+        I read every message myself — expect a reply{" "}
+        <strong className="text-foreground">
+          within a few hours, 7 days a week
+        </strong>{" "}
+        (7am&ndash;9pm; overnight messages get answered first thing). If
+        it&apos;s urgent — car&apos;s undrivable, insurance pushing you to
         decide right now — call or text me directly:
       </p>
       <a
@@ -26,9 +32,47 @@ export default function Thanks() {
       >
         (213) 279-2992
       </a>
+      <div className="mt-10 w-full max-w-2xl">
+        <p className="eyebrow text-muted">While you wait</p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          <Link
+            href="/checklist"
+            className="rounded-2xl border border-border bg-surface p-4 text-left transition-colors hover:border-accent-orange/40"
+          >
+            <p className="font-display text-sm font-semibold text-foreground">
+              The first 24 hours
+            </p>
+            <p className="mt-1 font-body text-xs text-muted">
+              Step-by-step checklist →
+            </p>
+          </Link>
+          <Link
+            href="/estimate"
+            className="rounded-2xl border border-border bg-surface p-4 text-left transition-colors hover:border-accent-orange/40"
+          >
+            <p className="font-display text-sm font-semibold text-foreground">
+              Ballpark your repair
+            </p>
+            <p className="mt-1 font-body text-xs text-muted">
+              30-second estimate →
+            </p>
+          </Link>
+          <Link
+            href="/totaled"
+            className="rounded-2xl border border-border bg-surface p-4 text-left transition-colors hover:border-accent-orange/40"
+          >
+            <p className="font-display text-sm font-semibold text-foreground">
+              Think it&apos;s totaled?
+            </p>
+            <p className="mt-1 font-body text-xs text-muted">
+              Run the math →
+            </p>
+          </Link>
+        </div>
+      </div>
       <Link
         href="/"
-        className="mt-6 font-body text-sm text-muted underline underline-offset-4"
+        className="mt-8 font-body text-sm text-muted underline underline-offset-4"
       >
         Back to yourcrashangel.com
       </Link>

@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Accident flyer — print me | yourcrashangel",
+  description:
+    "Printable take-home flyer: what to do after a crash, your California rights, and the three decisions coming your way.",
   robots: { index: false },
+  alternates: { canonical: "/card" },
 };
 
 // One-page take-home flyer. The paper IS the help: it answers the decisions a

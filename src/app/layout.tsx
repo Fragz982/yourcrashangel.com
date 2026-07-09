@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, Anton, JetBrains_Mono } from "next/font/google";
+import BottomBarGate from "../components/BottomBarGate";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -35,7 +36,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "yourcrashangel — The Accident Translator | Los Angeles",
+  title: "Car Accident Help & Free Collision Estimate Advice in LA | yourcrashangel",
   description:
     "Just got hit? Angel is a real collision estimator in LA who explains what's actually going on with your car and your insurance claim. Free, honest, no BS.",
   keywords: [
@@ -96,6 +97,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <BottomBarGate />
       </body>
     </html>
   );

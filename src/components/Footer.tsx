@@ -1,4 +1,4 @@
-import { TikTokIcon, InstagramIcon, YouTubeIcon } from "./Icons";
+import Link from "next/link";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -45,83 +45,72 @@ export default function Footer() {
 
             <div>
               <p className="eyebrow text-[0.7rem] text-foreground">
-                Follow
-              </p>
-              <div className="mt-3 flex items-center gap-3">
-                <a
-                  href="https://tiktok.com/@yourcrashangel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-                  aria-label="TikTok"
-                >
-                  <TikTokIcon className="h-4 w-4" />
-                </a>
-                <a
-                  href="https://instagram.com/yourcrashangel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-                  aria-label="Instagram"
-                >
-                  <InstagramIcon className="h-4 w-4" />
-                </a>
-                <a
-                  href="https://youtube.com/@yourcrashangel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-                  aria-label="YouTube"
-                >
-                  <YouTubeIcon className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <p className="eyebrow text-[0.7rem] text-foreground">
                 Resources
               </p>
               <ul className="mt-3 space-y-2 font-body text-sm text-muted">
                 <li>
-                  <a
+                  <Link
+                    href="/estimate"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Ballpark Estimate Tool
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/checklist"
                     className="transition-colors hover:text-accent-orange"
                   >
                     Crash Checklist
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/playbook"
                     className="transition-colors hover:text-accent-orange"
                   >
                     The Insurance Playbook
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/decoder"
                     className="transition-colors hover:text-accent-orange"
                   >
                     Jargon Decoder
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/totaled"
                     className="transition-colors hover:text-accent-orange"
                   >
                     Is My Car Totaled?
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/#faq"
                     className="transition-colors hover:text-accent-orange"
                   >
                     FAQ
-                  </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/card"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Print the Crash Flyer
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/privacy"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Privacy
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -135,9 +124,11 @@ export default function Footer() {
             here constitutes legal, insurance, financial, or professional advice.
             Every accident and claim is different. For advice specific to your
             situation, consult a licensed attorney, public adjuster, or insurance
-            professional. @yourcrashangel is an independent educational resource
-            and is not affiliated with any insurance company, body shop, or legal
-            firm.
+            professional. I work as a collision estimator at a Los Angeles body
+            shop — the repairs and reviews shown on this site come from that
+            work. This site is my personal educational project: it is not
+            sponsored by any insurance company or law firm, you never owe me
+            anything, and you never have to use any particular shop.
           </p>
           <p className="mt-4 font-body text-xs text-muted">
             &copy; {year} yourcrashangel. All rights reserved. Los Angeles, CA.

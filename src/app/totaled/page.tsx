@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "Is my car totaled? California total loss calculator | yourcrashangel",
   description:
     "California has no fixed total-loss percentage — it uses the Total Loss Formula. Run your numbers, understand ACV and salvage value, and learn how to keep your totaled car.",
+  alternates: { canonical: "/totaled" },
+  openGraph: {
+    title: "Is my car totaled? Run the California math",
+    description:
+      "Repair cost + salvage value vs. what your car's worth — the actual formula California insurers use, in a free calculator.",
+    url: "https://yourcrashangel.com/totaled",
+  },
 };
 
 const FACTS = [
