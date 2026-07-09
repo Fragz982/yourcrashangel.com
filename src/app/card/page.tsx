@@ -51,8 +51,8 @@ export default function Flyer() {
                 the other plate, their insurance card, the street.
               </li>
               <li className="font-body text-sm text-foreground">
-                <b>Don&apos;t discuss fault</b> — not to the other driver, not
-                on the phone. &ldquo;I&apos;m getting checked out and
+                <b>Don&apos;t discuss fault</b>{" "}— not to the other driver,
+                not on the phone. &ldquo;I&apos;m getting checked out and
                 I&apos;ll follow up&rdquo; is a complete sentence.
               </li>
               <li className="font-body text-sm text-foreground">
@@ -74,19 +74,19 @@ export default function Flyer() {
             </h2>
             <ul className="mt-2 flex flex-col gap-1.5">
               <li className="font-body text-sm text-foreground">
-                <b>You choose the body shop.</b> Your insurer can recommend one
-                — some recommended shops are excellent — but by law (Ins. Code
-                758.5) the choice is yours, and they can&apos;t punish you for
-                it.
+                <b>You choose the body shop.</b>{" "}Your insurer can recommend
+                one — some recommended shops are excellent — but by law (Ins.
+                Code 758.5) the choice is yours, and they can&apos;t punish you
+                for it.
               </li>
               <li className="font-body text-sm text-foreground">
                 <b>You can get your own estimate</b> before agreeing to
                 anything. A second set of eyes is normal, not rude.
               </li>
               <li className="font-body text-sm text-foreground">
-                <b>&ldquo;Total loss&rdquo; is math, not a verdict</b> — repair
-                cost + salvage value vs. what your car&apos;s worth. The number
-                worth checking is what they say your car is <i>worth</i>.
+                <b>&ldquo;Total loss&rdquo; is math, not a verdict</b>{" "}—
+                repair cost + salvage value vs. what your car&apos;s worth. The
+                number worth checking is what they say your car is <i>worth</i>.
               </li>
             </ul>
           </div>
@@ -103,7 +103,7 @@ export default function Flyer() {
                 — small damage is sometimes cheaper out of pocket than a claim.
               </li>
               <li className="font-body text-sm text-foreground">
-                <b>Repair or total?</b> Don&apos;t argue the damage — check
+                <b>Repair or total?</b>{" "}Don&apos;t argue the damage — check
                 their value number against real listings for your exact car.
               </li>
               <li className="font-body text-sm text-foreground">
