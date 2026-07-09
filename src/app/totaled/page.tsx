@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import TotalLossCalculator from "../../components/TotalLossCalculator";
+import ShareBlock from "../../components/ShareBlock";
 
 export const metadata: Metadata = {
   title: "Is my car totaled? California total loss calculator | yourcrashangel",
@@ -106,6 +107,9 @@ export default function Totaled() {
                   Ballpark my repair
                 </Link>
               </div>
+            </div>
+            <div className="mt-6">
+              <ShareBlock />
             </div>
           </div>
         </section>

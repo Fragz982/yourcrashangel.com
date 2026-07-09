@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import ShareBlock from "../../components/ShareBlock";
 
 export const metadata: Metadata = {
   title: "Got it — I'm on it | yourcrashangel",
@@ -69,6 +70,9 @@ export default function Thanks() {
             </p>
           </Link>
         </div>
+      </div>
+      <div className="mt-8 w-full max-w-2xl text-left">
+        <ShareBlock />
       </div>
       <Link
         href="/"
