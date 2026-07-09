@@ -1,13 +1,7 @@
 "use client";
 
 import ScrollReveal from "./ScrollReveal";
-import {
-  MessageIcon,
-  PhoneIcon,
-  TikTokIcon,
-  InstagramIcon,
-  YouTubeIcon,
-} from "./Icons";
+import { MessageIcon, PhoneIcon } from "./Icons";
 
 export default function FinalCTA() {
   return (
@@ -50,38 +44,9 @@ export default function FinalCTA() {
 
         <ScrollReveal delay={0.3}>
           <p className="mt-6 font-body text-sm text-muted">
-            (213) 279-2992 · Text-first, but calls work too
+            (213) 279-2992 · Text-first, but calls work too · answered
+            7am&ndash;9pm, 7 days
           </p>
-
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <a
-              href="https://tiktok.com/@yourcrashangel"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-              aria-label="TikTok"
-            >
-              <TikTokIcon className="h-5 w-5" />
-            </a>
-            <a
-              href="https://instagram.com/yourcrashangel"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-              aria-label="Instagram"
-            >
-              <InstagramIcon className="h-5 w-5" />
-            </a>
-            <a
-              href="https://youtube.com/@yourcrashangel"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface text-muted transition-colors hover:bg-accent-orange hover:text-background"
-              aria-label="YouTube"
-            >
-              <YouTubeIcon className="h-5 w-5" />
-            </a>
-          </div>
         </ScrollReveal>
       </div>
     </section>
