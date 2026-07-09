@@ -39,6 +39,19 @@ export default function Flyer() {
             </p>
           </div>
 
+          {/* Prominent contact bar — the number should catch the eye up top too */}
+          <a
+            href="tel:+12132792992"
+            className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-2xl border-2 border-accent-orange bg-accent-orange/5 px-5 py-3 print:rounded-lg"
+          >
+            <span className="font-display text-sm font-semibold text-foreground">
+              Free help, any hour — call or text:
+            </span>
+            <span className="font-mono text-xl font-bold whitespace-nowrap text-accent-orange">
+              (213) 279-2992
+            </span>
+          </a>
+
           {/* Right now */}
           <div className="mt-5">
             <h2 className="display text-xl text-foreground">
@@ -113,31 +126,43 @@ export default function Flyer() {
             </ul>
           </div>
 
-          {/* Footer strip */}
-          <div className="mt-6 flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface p-4 print:rounded-lg">
-            <div>
-              <p className="display text-lg leading-tight text-foreground">
-                Tonight, from the couch:
-              </p>
-              <p className="mt-1 font-body text-xs leading-relaxed text-muted">
-                30-second ballpark estimate · total-loss calculator ·
-                estimate decoder — or text me a photo of any paperwork and
-                I&apos;ll tell you what I see. Free, no pressure, no
-                spam.
-              </p>
-              <p className="mt-2 font-mono text-base font-semibold text-foreground">
-                yourcrashangel.com
-              </p>
-              <p className="font-mono text-sm text-accent-orange">
-                (213) 279-2992 · call or text anytime
-              </p>
+          {/* Footer CTA band — the "act now" zone, phone as the hero */}
+          <div className="mt-6 rounded-2xl border-2 border-foreground bg-surface p-5 print:rounded-lg">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <p className="eyebrow text-accent-orange">
+                  When the adrenaline wears off
+                </p>
+                <a
+                  href="tel:+12132792992"
+                  className="mt-1 block font-mono text-3xl font-bold leading-none text-foreground sm:text-4xl"
+                >
+                  (213) 279-2992
+                </a>
+                <p className="mt-2 font-body text-sm leading-relaxed text-muted">
+                  Call or text me a photo of your car — or any paperwork — and
+                  I&apos;ll tell you what I see. Free, no pressure, no spam.
+                </p>
+                <p className="mt-3 font-body text-xs leading-relaxed text-muted">
+                  Or from the couch tonight: 30-second ballpark estimate ·
+                  total-loss calculator · estimate decoder — all free at{" "}
+                  <span className="font-mono font-semibold text-foreground">
+                    yourcrashangel.com
+                  </span>
+                </p>
+              </div>
+              <div className="flex shrink-0 flex-col items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/qr.png"
+                  alt="QR code — opens yourcrashangel.com"
+                  className="h-28 w-28 rounded-lg border border-border bg-white p-1.5"
+                />
+                <span className="mt-1 font-mono text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                  Scan me
+                </span>
+              </div>
             </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/qr.png"
-              alt="QR code — opens yourcrashangel.com"
-              className="h-24 w-24 shrink-0 rounded-lg border border-border bg-white p-1"
-            />
           </div>
         </div>
       </div>
