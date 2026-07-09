@@ -5,10 +5,11 @@ import { MessageIcon, MenuIcon, XIcon } from "./Icons";
 
 const NAV_LINKS = [
   { label: "Estimate", href: "/estimate" },
-  { label: "What To Do", href: "#first-5" },
+  { label: "Totaled?", href: "/totaled" },
+  { label: "What To Do", href: "/#first-5" },
   { label: "Playbook", href: "/playbook" },
   { label: "Decoder", href: "/decoder" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export default function Navbar() {
@@ -55,7 +56,7 @@ export default function Navbar() {
           aria-label="Main navigation"
         >
           <a
-            href="#"
+            href="/"
             className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-foreground md:text-sm"
           >
             The Accident

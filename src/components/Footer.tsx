@@ -109,7 +109,15 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#faq"
+                    href="/totaled"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Is My Car Totaled?
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/#faq"
                     className="transition-colors hover:text-accent-orange"
                   >
                     FAQ
