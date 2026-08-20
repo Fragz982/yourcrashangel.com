@@ -50,6 +50,22 @@ export default function Footer() {
               <ul className="mt-3 space-y-2 font-body text-sm text-muted">
                 <li>
                   <Link
+                    href="/start"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Crash Was Yesterday? Start Here
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/lowball"
+                    className="transition-colors hover:text-accent-orange"
+                  >
+                    Offer Too Low?
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/estimate"
                     className="transition-colors hover:text-accent-orange"
                   >

@@ -149,6 +149,32 @@ export default function PlaybookPage() {
           what it actually means, and what to do about it.
         </p>
 
+        {/* Triage — meet the reader where they are tonight */}
+        <div className="mt-8 rounded-2xl border-2 border-accent-orange bg-surface p-5">
+          <p className="eyebrow text-accent-orange">In a hurry?</p>
+          <p className="mt-2 font-body text-base leading-relaxed text-foreground">
+            <strong>Insurer calling you tomorrow?</strong> Read Play #2 (the
+            recorded statement) — two minutes, and it&apos;s the one that
+            protects you on the phone.{" "}
+            <strong>Already got a low offer?</strong> Play #3, then the full
+            counter-punch guide at{" "}
+            <Link
+              href="/lowball"
+              className="font-semibold text-accent-orange underline underline-offset-4"
+            >
+              /lowball
+            </Link>
+            . <strong>Crash just happened and you&apos;re lost?</strong>{" "}
+            <Link
+              href="/start"
+              className="font-semibold text-accent-orange underline underline-offset-4"
+            >
+              Start here
+            </Link>{" "}
+            instead — come back to this page when the calls begin.
+          </p>
+        </div>
+
         {/* Tactics */}
         <div className="mt-16 space-y-10">
           {TACTICS.map((tactic, i) => (

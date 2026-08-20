@@ -33,6 +33,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://yourcrashangel.com/start",
+      lastModified: "2026-08-19",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "https://yourcrashangel.com/lowball",
+      lastModified: "2026-08-19",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://yourcrashangel.com/playbook",
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",

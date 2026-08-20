@@ -569,6 +569,45 @@ export default function EstimateTool() {
               <MessageIcon className="h-5 w-5" />
               Text Angel the details
             </a>
+
+            {/* Desktop / hesitant-texter fallback: capture the lead with the
+                ballpark context baked in. Posts to the registered crash-help
+                form (name/phone/message are its registered fields). */}
+            <form
+              name="crash-help"
+              method="POST"
+              action="/thanks"
+              className="mt-5 border-t border-border pt-4"
+            >
+              <input type="hidden" name="form-name" value="crash-help" />
+              <input type="hidden" name="message" value={`[From estimate tool] ${smsBody}`} />
+              <p className="font-body text-sm text-muted">
+                Can&apos;t text right now? Leave your number — your ballpark
+                details ride along automatically:
+              </p>
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                <input
+                  name="name"
+                  placeholder="First name"
+                  autoComplete="given-name"
+                  className="flex-1 rounded-xl border border-border bg-surface px-4 py-3 font-body text-sm text-foreground outline-none placeholder:text-muted/60 focus:border-accent-orange"
+                />
+                <input
+                  required
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone"
+                  autoComplete="tel"
+                  className="flex-1 rounded-xl border border-border bg-surface px-4 py-3 font-body text-sm text-foreground outline-none placeholder:text-muted/60 focus:border-accent-orange"
+                />
+                <button
+                  type="submit"
+                  className="rounded-xl bg-foreground px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+                >
+                  Have Angel text me
+                </button>
+              </div>
+            </form>
           </div>
 
           <div className="mt-6 flex items-center justify-between">

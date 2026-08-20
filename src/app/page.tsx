@@ -10,7 +10,7 @@ import Reviews from "../components/Reviews";
 import About from "../components/About";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
-import LeadForm from "../components/LeadForm";
+import QuizIntake from "../components/QuizIntake";
 import Footer from "../components/Footer";
 import { CATEGORIES } from "../components/faqData";
 
@@ -75,7 +75,7 @@ export default function Home() {
         <RepairJourney />
         <Reviews />
         <About />
-        <LeadForm />
+        <QuizIntake />
         <FAQ />
         <FinalCTA />
       </main>

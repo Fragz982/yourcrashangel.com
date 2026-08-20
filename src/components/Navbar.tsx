@@ -5,11 +5,11 @@ import Link from "next/link";
 import { MessageIcon, MenuIcon, XIcon } from "./Icons";
 
 const NAV_LINKS = [
+  { label: "Start Here", href: "/start" },
   { label: "Estimate", href: "/estimate" },
   { label: "Totaled?", href: "/totaled" },
-  { label: "What To Do", href: "/checklist" },
   { label: "Playbook", href: "/playbook" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "What To Do", href: "/checklist" },
   { label: "Get Help", href: "/#get-help" },
 ];
 
