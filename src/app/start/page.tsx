@@ -31,7 +31,7 @@ const RECOVER = [
   },
   {
     t: "Feeling sore? Urgent care today, not Friday.",
-    d: "Crash soreness famously shows up on day two or three. A same-day visit protects your health AND timestamps the injury — pain that isn't written down basically didn't happen, as far as a claim is concerned. (I'm an estimator, not a doctor — this is paperwork advice as much as anything.)",
+    d: "Crash soreness famously shows up on day two or three — get checked because it's real and worth taking seriously. A side benefit: the visit creates a medical record, and undocumented pain is much harder to establish later. (I'm an estimator, not a doctor. See one.)",
   },
 ];
 
@@ -184,9 +184,15 @@ export default function Start() {
                 </div>
                 <p className="mt-3 font-body text-sm leading-relaxed text-muted">
                   That&apos;s it. Repeat it as needed, stay friendly, hang up
-                  happy. Their recording exists to find words that shave your
-                  payout — don&apos;t feed it. If they need facts, they can get
-                  them from your insurer in writing.
+                  happy. You&apos;re not required to give them a recorded
+                  statement, and recorded words can be interpreted against you
+                  later — decline politely and keep everything in writing.
+                </p>
+                <p className="mt-3 font-body text-xs leading-relaxed text-muted">
+                  (Only carry liability and claiming directly against their
+                  insurer? You&apos;ll still need to share the basic facts — do
+                  it in writing, and you can still decline the recorded
+                  statement.)
                 </p>
               </div>
             </div>

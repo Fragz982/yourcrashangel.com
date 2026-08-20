@@ -20,15 +20,15 @@ export const metadata: Metadata = {
 const STEPS = [
   {
     t: "Get the valuation report — in writing.",
-    d: "Their number comes from a market-valuation report (usually built by a vendor like CCC or Mitchell). Ask for the complete report, not the summary page. California's fair-claims rules require insurers to share the basis of a total-loss valuation when you ask — so ask, politely, in writing: “Please send the full valuation report used to determine my vehicle's value.”",
+    d: "Their number comes from a market-valuation report (usually built by a vendor like CCC or Mitchell). California's fair-claims rules require insurers to itemize and explain the basis of a total-loss valuation in writing at the time they make the offer — you shouldn't even have to ask. Didn't get the full report? Request it, politely, in writing: “Please send the complete valuation report used to determine my vehicle's value.”",
   },
   {
     t: "Audit the comparables line by line.",
-    d: "The report lists “comparable” vehicles. Check each one against YOUR car: same year? Same trim (an EX-L is not an LX)? Similar mileage? Reasonable distance from you? Then look for vague “condition adjustments” that quietly shave hundreds off — and ask them to justify any adjustment in writing. Wrong trims and 60k-mile gaps are where value disappears.",
+    d: "The report lists “comparable” vehicles. Check each one against YOUR car: same year? Same trim (an EX-L is not an LX)? Similar mileage? Reasonable distance from you? Then look for “condition adjustments” that can knock hundreds off with little explanation — ask them to justify each one in writing. Wrong trims and 60k-mile gaps are where value disappears.",
   },
   {
     t: "Pull 3–5 real listings and counter in writing.",
-    d: "Find current listings for your actual car — year, trim, mileage band, your region — on the big marketplaces. Screenshot them with dates. Send them with a short, calm email (template below). Evidence moves adjusters; frustration doesn't. People regularly get meaningfully better numbers doing exactly this.",
+    d: "Find current listings for your actual car — year, trim, mileage band, your region — on the big marketplaces. Screenshot them with dates. Send them with a short, calm email (template below). Written evidence is what adjusters can actually act on — and often do. (No promises: some first offers are genuinely fair.)",
   },
   {
     t: "Make sure the check includes the California extras.",
@@ -40,7 +40,7 @@ const STEPS = [
   },
   {
     t: "Don't sign the release until the number is right.",
-    d: "The settlement release generally ends the property-damage claim. Sign it after the number includes the value you proved, the tax and fees, and any storage or rental you're owed — not before. There's no prize for settling fast; there's only a smaller check.",
+    d: "The settlement release generally ends the property-damage claim. Sign it after the number includes the value you proved, the tax and fees, and any storage or rental you're owed — not before. There's no prize for settling fast — take the time to verify the number first.",
   },
 ];
 
@@ -127,8 +127,9 @@ export default function Lowball() {
                 <p>Thanks,<br />[Name] · [Phone]</p>
               </div>
               <p className="mt-4 font-body text-sm text-muted">
-                Calm, factual, documented. That email gets taken seriously
-                because it reads like someone who isn&apos;t going away.
+                Calm, factual, documented. That email tends to get taken
+                seriously because it reads like someone who isn&apos;t going
+                away.
               </p>
             </div>
           </div>
@@ -142,9 +143,9 @@ export default function Lowball() {
                 Want a second set of eyes first?
               </h2>
               <p className="mx-auto mt-3 max-w-md font-body text-base text-muted">
-                Text me the offer letter or valuation report — I read these
-                for a living and I&apos;ll tell you, free, whether the math
-                looks fair and which comps to attack.
+                Text me the offer letter or valuation report — I see these
+                reports every week at the shop, and I&apos;ll tell you, free,
+                whether the math looks fair and which comps don&apos;t hold up.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
                 <a
