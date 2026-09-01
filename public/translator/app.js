@@ -122,21 +122,14 @@
   }
 
   /* ------------------------------------------------------- the wall schedule
-     Nine terms stamp in, then the small print crowds the gaps. The intervals
-     shrink: it arrives faster than you can read it, which is the point. The
-     first two windows are negative so the stage is never empty while it
-     slides into view (ground or greet). */
-  var WALL_BIG = [-0.05, 0.08, 0.16, 0.24, 0.31, 0.37, 0.43, 0.48, 0.53];
-  var WALL_SM = [0.58, 0.61, 0.64, 0.67, 0.70, 0.73, 0.76];
+     Nine rows land down the index, and the gaps between them shrink: the
+     overwhelm is pacing, not scatter. The first window is negative so the
+     stage is never empty while it slides into view (ground or greet). */
+  var WALL_ROWS = [-0.06, 0.10, 0.22, 0.32, 0.40, 0.47, 0.53, 0.58, 0.62];
   function setupWall() {
-    var wi = 0, si = 0;
-    var terms = document.querySelectorAll("#ch-words .wterm");
-    Array.prototype.forEach.call(terms, function (t) {
-      var w = t.classList.contains("wterm--sm")
-        ? WALL_SM[Math.min(si++, WALL_SM.length - 1)]
-        : WALL_BIG[Math.min(wi++, WALL_BIG.length - 1)];
-      t.style.setProperty("--w0", String(w));
-      t.style.setProperty("--iw", "22");
+    var rows = document.querySelectorAll("#ch-words .wl__row");
+    Array.prototype.forEach.call(rows, function (r, i) {
+      r.style.setProperty("--w0", String(WALL_ROWS[Math.min(i, WALL_ROWS.length - 1)]));
     });
   }
 
@@ -197,9 +190,8 @@
     ].filter(function (a) { return a.act; });
     acts.forEach(function (a) { a.stage = a.act.querySelector("[data-sc-stage]"); });
     // every window that actually paints something on the wall, in order:
-    // the note (greet at -0.05 via CSS), the nine terms, the seven fillers,
-    // and the closing line at 0.84
-    var wallWins = WALL_BIG.concat(WALL_SM, [0.84]);
+    // the nine index rows and the closing line
+    var wallWins = WALL_ROWS.concat([0.86]);
     var running = false;
     function tick() {
       var any = false;

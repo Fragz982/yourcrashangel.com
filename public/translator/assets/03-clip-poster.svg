@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
-  <rect width="1920" height="1080" fill="#E9E1D2"/>
-  <rect x="27" y="27" width="1866" height="1026" fill="none" stroke="#675E52" stroke-width="3" stroke-dasharray="14 10" opacity="0.55"/>
-  <text x="54" y="513" font-family="Arial" font-size="81" font-weight="bold" fill="#191714">SLOT 03</text>
-  <text x="54" y="569.7" font-family="Arial" font-size="32.4" fill="#C8501E" font-weight="bold">CLIP 16:9 · 5s + POSTER</text>
-  <text x="54" y="626.4" font-family="Arial" font-size="22.68" fill="#675E52">Slow steady push-in. Angel writing an estimate.</text>
-  <text x="54" y="659.88" font-family="Arial" font-size="22.68" fill="#675E52">Camera on a slider or very steady hands.</text>
-  <text x="54" y="693.36" font-family="Arial" font-size="22.68" fill="#675E52">Nothing and nobody enters or leaves frame.</text>
-  <text x="54" y="726.8399999999999" font-family="Arial" font-size="22.68" fill="#675E52">Also shoot a 9:16 vertical take, 5s.</text>
-  <text x="54" y="760.3199999999999" font-family="Arial" font-size="22.68" fill="#675E52">Poster = first frame (I extract it).</text>
+  <rect width="1920" height="1080" fill="#E6DDCB"/>
+  <line x1="41.53846153846154" y1="988.6153846153846" x2="1878.4615384615386" y2="988.6153846153846" stroke="#8C8272" stroke-width="2" opacity="0.5"/>
+  <text x="41.53846153846154" y="1038.4615384615386" font-family="Arial" font-size="29.907692307692308" letter-spacing="2.4923076923076923" fill="#8C8272">CLIP 03 · WRITING AN ESTIMATE</text>
 </svg>
