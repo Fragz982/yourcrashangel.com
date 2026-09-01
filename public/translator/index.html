@@ -10,9 +10,17 @@
 <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="styles.css">
-<noscript><style>.wl__row, .log__line, .wall__note, .wall__close { opacity: 1 !important; transform: none !important; }</style></noscript>
+<noscript><style>.wl__row, .log__line, .wall__note, .wall__close, .myth__struck { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body>
+<!--
+  SPANISH BUILD · every string lives in this file, once. When the Spanish
+  version drops in, also swap: <html lang>, <title>, the meta description,
+  the <ol class="log"> aria-label, every data-chapter-title, the two h2.sr
+  headings, the .foot text, and the share text in app.js (SHARE_TEXT).
+  The decoder splits on characters and whitespace, so accents and ñ need no
+  code change; the peak term sizes itself from its letter count (--n).
+-->
 
 <span data-sc-progress></span>
 <div class="sc-grain" aria-hidden="true"></div>
@@ -49,24 +57,25 @@
 
 <!-- ============================================================ ACT 2 · WALL
      Ch 01. The nine terms arrive as a dense index: flush left on the spine,
-     one row each, hairline between, gloss in a second column. Structured, and
-     still overwhelming, because nine rows land faster than anyone reads them
-     and not one is defined. Row windows assigned in app.js from --sc-p. -->
+     one row each, hairline between, and in the second column the fragment of
+     a sentence you actually hear it inside. Quoted text means "what you hear"
+     everywhere on this page. Structured, and still overwhelming, because nine
+     rows land faster than anyone reads them and not one is defined. -->
 <section class="is-dark" data-sc-act="pin" data-sc-span="2.2" id="ch-words" data-chapter="01" data-chapter-title="The words">
   <div data-sc-stage class="wall" data-sc-verify-state="">
     <div class="wall__grid">
-      <p class="wall__note">No definitions attached. This is how it actually arrives.</p>
+      <p class="wall__note">No definitions come with it. This is how it actually sounds.</p>
       <h2 class="sr">The words that get thrown at you</h2>
       <ul class="wl">
-        <li class="wl__row"><span class="wl__term">Betterment</span><span class="wl__gloss">betterment charge</span></li>
-        <li class="wl__row"><span class="wl__term">LKQ</span><span class="wl__gloss">like kind and quality</span></li>
-        <li class="wl__row"><span class="wl__term">Supplement</span><span class="wl__gloss">supplement approval</span></li>
-        <li class="wl__row"><span class="wl__term">Teardown</span><span class="wl__gloss">teardown authorization</span></li>
-        <li class="wl__row"><span class="wl__term">Total loss</span><span class="wl__gloss">total loss threshold</span></li>
-        <li class="wl__row"><span class="wl__term">ACV</span><span class="wl__gloss">actual cash value</span></li>
-        <li class="wl__row"><span class="wl__term">Diminished value</span><span class="wl__gloss">diminished value claim</span></li>
-        <li class="wl__row"><span class="wl__term">DRP</span><span class="wl__gloss">direct repair program</span></li>
-        <li class="wl__row"><span class="wl__term">OEM procedures</span><span class="wl__gloss">OEM position statement</span></li>
+        <li class="wl__row"><span class="wl__term">Betterment</span><span class="wl__gloss">“there's a betterment on the tires”</span></li>
+        <li class="wl__row"><span class="wl__term">LKQ</span><span class="wl__gloss">“we're going LKQ on the door”</span></li>
+        <li class="wl__row"><span class="wl__term">Supplement</span><span class="wl__gloss">“the supplement is still pending”</span></li>
+        <li class="wl__row"><span class="wl__term">Teardown</span><span class="wl__gloss">“we need a teardown authorization”</span></li>
+        <li class="wl__row"><span class="wl__term">Total loss</span><span class="wl__gloss">“it might be over the threshold”</span></li>
+        <li class="wl__row"><span class="wl__term">ACV</span><span class="wl__gloss">“it's based on the ACV”</span></li>
+        <li class="wl__row"><span class="wl__term">Diminished value</span><span class="wl__gloss">“that would be diminished value”</span></li>
+        <li class="wl__row"><span class="wl__term">DRP</span><span class="wl__gloss">“we're a DRP shop”</span></li>
+        <li class="wl__row"><span class="wl__term">OEM procedures</span><span class="wl__gloss">“per OEM procedures”</span></li>
       </ul>
       <p class="wall__close">Nobody hands you a dictionary.</p>
     </div>
@@ -80,14 +89,18 @@
 <section class="sc-section me" data-sc-act="flow" id="ch-me" data-chapter="02" data-chapter-title="The person">
   <div class="wrap me__grid">
     <figure class="fig me__media">
-      <img src="assets/02-angel-portrait.svg" width="1776" height="2352" loading="lazy" decoding="async" alt="Angel Navarro at the estimating desk">
-      <figcaption>United Collision, Los Angeles</figcaption>
+      <img src="assets/02-angel-portrait.svg" width="1776" height="2352" loading="lazy" decoding="async" alt="">
+      <figcaption>Photo slot 02 · Angel at the desk, United Collision, Los Angeles</figcaption>
     </figure>
     <div class="me__copy" data-sc-in data-sc-stagger="70">
       <h2 class="sc-display me__h">My name is Angel.</h2>
-      <p class="lede">I'm a collision estimator in Los Angeles. I write repair estimates all day, every day. The words you just scrolled through are the language of my desk.</p>
-      <p class="body">Nobody hands drivers a translator. So I made one.</p>
+      <p class="lede">I'm a collision estimator at a body shop in Los Angeles. That means I look at cars after a crash and write down what's broken and what it will cost to fix. The words you just scrolled through are the language of my desk.</p>
+      <p class="body">Every day, someone sits across from my desk and nods at words they don't know. This page is so you don't have to.</p>
       <p class="me__mark"><span class="me__markname">Your Crash Angel</span><span class="me__marknote">Angel is my actual name. This is my actual job.</span></p>
+      <dl class="me__scope">
+        <div><dt>What I do</dt><dd>Explain what the words mean and what is happening to your car. A call costs nothing.</dd></div>
+        <div><dt>What I don't do</dt><dd>Act as your adjuster, negotiate your claim, or tell you what to claim.</dd></div>
+      </dl>
     </div>
   </div>
 </section>
@@ -120,7 +133,7 @@
     <div class="wrap">
       <div class="dc dc--peak" data-decode data-profile="peak">
         <h3 class="dc__term sc-display">Betterment</h3>
-        <p class="dc__plain">If a new part leaves your car better than before the crash, you can be asked to pay the difference.</p>
+        <p class="dc__plain">When a worn part, like a tire, is replaced with a new one, you can be asked to pay for the wear the old one already had.</p>
       </div>
     </div>
   </div>
@@ -128,42 +141,44 @@
 
 <!-- ============================================================ ACT 5 · GLOSSARY
      Ch 03 continues. The other eight, same mechanic, index scale. Each row is
-     its own flow act so the engine feeds it --sc-p. -->
+     its own flow act so the engine feeds it --sc-p. What the letters stand
+     for sits under the term, outside the sentence, so the plain line stays
+     one sentence and a Spanish build keeps the English expansion intact. -->
 <section class="sc-section gloss" id="gloss">
   <div class="wrap">
     <h2 class="sr">The rest of the file, decoded</h2>
     <div class="gloss__rows">
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">Teardown</h3>
+        <div class="gl__k"><h3 class="dc__term sc-display">Teardown</h3></div>
         <p class="dc__plain">Taking the damaged area apart to find everything the crash actually broke.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">Supplement</h3>
-        <p class="dc__plain">Anything added to the estimate after the first write-up. Usually damage found at teardown.</p>
+        <div class="gl__k"><h3 class="dc__term sc-display">Supplement</h3></div>
+        <p class="dc__plain">Anything added to the estimate after it was first written, usually damage found at teardown.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">LKQ</h3>
-        <p class="dc__plain">A used part from a car like yours, in similar condition. Like Kind and Quality.</p>
+        <div class="gl__k"><h3 class="dc__term sc-display">LKQ</h3><p class="dc__expand">Like Kind and Quality</p></div>
+        <p class="dc__plain">A used part from a car like yours, in about the shape yours was in before the crash.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">OEM procedures</h3>
+        <div class="gl__k"><h3 class="dc__term sc-display">OEM procedures</h3><p class="dc__expand">Original Equipment Manufacturer</p></div>
         <p class="dc__plain">The repair steps written by the company that built your car.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">ACV</h3>
-        <p class="dc__plain">What your car was worth the moment before the crash. Actual Cash Value.</p>
+        <div class="gl__k"><h3 class="dc__term sc-display">ACV</h3><p class="dc__expand">Actual Cash Value</p></div>
+        <p class="dc__plain">What your car was worth the moment before the crash.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">Total loss</h3>
-        <p class="dc__plain">Fixing the car would cost too much of what the car is worth.</p>
+        <div class="gl__k"><h3 class="dc__term sc-display">Total loss</h3></div>
+        <p class="dc__plain">Fixing the car would cost too much compared with what it's worth, so it gets paid out instead of repaired.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">Diminished value</h3>
-        <p class="dc__plain">The value a car can lose just for having been hit.</p>
+        <div class="gl__k"><h3 class="dc__term sc-display">Diminished value</h3></div>
+        <p class="dc__plain">The value a car can lose because a crash is now on its record, even after a good repair.</p>
       </div>
       <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
-        <h3 class="dc__term sc-display">DRP</h3>
-        <p class="dc__plain">A shop that works directly with an insurance company on repairs and paperwork. Direct Repair Program.</p>
+        <div class="gl__k"><h3 class="dc__term sc-display">DRP</h3><p class="dc__expand">Direct Repair Program</p></div>
+        <p class="dc__plain">A shop that already works directly with an insurance company, so the estimate and the paperwork move straight between them.</p>
       </div>
     </div>
   </div>
@@ -177,41 +192,41 @@
     <div class="tl__rail" data-sc-pan="0.06">
       <div class="tl__lead">
         <h2 class="sc-display tl__h">What actually happens to your car</h2>
-        <p class="body">Five stages. Every claim walks this same road. The speed depends on the middle stages.</p>
+        <p class="body">Five stages. A repair walks them in this order. A total loss leaves the road early, once the numbers come back at teardown. Most of the waiting happens in the middle.</p>
       </div>
       <article class="tl__stage">
         <span class="tl__no">01</span>
-        <figure class="fig"><img src="assets/04-tow-intake.svg" width="1776" height="2220" loading="lazy" decoding="async" alt="Car arriving at the shop on a flatbed"></figure>
-        <h3 class="sc-display">Tow &amp; intake</h3>
+        <figure class="fig"><img src="assets/04-tow-intake.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 04 · tow and check-in</figcaption></figure>
+        <h3 class="sc-display">Tow &amp; check-in</h3>
         <p>The car arrives, gets photographed and logged, and a first estimate is written from what's visible.</p>
-        <p class="tl__stall">Stalls when: the car sits at a tow yard before it ever reaches a shop.</p>
+        <p class="tl__stall">Stalls when: the car sits at a tow yard before it reaches a shop.</p>
       </article>
       <article class="tl__stage">
         <span class="tl__no">02</span>
-        <figure class="fig"><img src="assets/05-teardown.svg" width="1776" height="2220" loading="lazy" decoding="async" alt="Panel removed, parts laid out and labeled"></figure>
+        <figure class="fig"><img src="assets/05-teardown.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 05 · teardown</figcaption></figure>
         <h3 class="sc-display">Teardown</h3>
         <p>The damaged area comes apart. This is where the real repair list gets written.</p>
         <p class="tl__stall">Stalls when: hidden damage means the plan has to change.</p>
       </article>
       <article class="tl__stage">
         <span class="tl__no">03</span>
-        <figure class="fig"><img src="assets/06-supplement.svg" width="1776" height="2220" loading="lazy" decoding="async" alt="Estimate paperwork on the fender"></figure>
+        <figure class="fig"><img src="assets/06-supplement.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 06 · supplement</figcaption></figure>
         <h3 class="sc-display">Supplement</h3>
         <p>The new findings are documented, priced, and sent for review.</p>
-        <p class="tl__stall">Stalls when: the paperwork is in review. The car waits, not the people.</p>
+        <p class="tl__stall">Stalls when: the new findings need a sign-off before work continues. Nothing moves until everyone agrees on the same plan.</p>
       </article>
       <article class="tl__stage">
         <span class="tl__no">04</span>
-        <figure class="fig"><img src="assets/07-paint.svg" width="1776" height="2220" loading="lazy" decoding="async" alt="Masked car in the paint booth"></figure>
+        <figure class="fig"><img src="assets/07-paint.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 07 · body and paint</figcaption></figure>
         <h3 class="sc-display">Body &amp; paint</h3>
         <p>Parts come in, metal gets straightened, panels get painted to match.</p>
-        <p class="tl__stall">Stalls when: a part is on backorder.</p>
+        <p class="tl__stall">Stalls when: a part is on backorder, which means nobody has one to ship yet.</p>
       </article>
       <article class="tl__stage">
         <span class="tl__no">05</span>
-        <figure class="fig"><img src="assets/08-delivery.svg" width="1776" height="2220" loading="lazy" decoding="async" alt="Finished car ready for pickup"></figure>
-        <h3 class="sc-display">Delivery</h3>
-        <p>Everything goes back together, systems get checked, the car gets cleaned and returned.</p>
+        <figure class="fig"><img src="assets/08-delivery.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 08 · pickup</figcaption></figure>
+        <h3 class="sc-display">Pickup</h3>
+        <p>Everything goes back together, the electronics get checked, the car gets cleaned and returned.</p>
         <p class="tl__stall">Stalls when: the final check finds something that needs another pass.</p>
       </article>
     </div>
@@ -219,22 +234,28 @@
 </section>
 
 <!-- ============================================================ ACT 7 · MYTHS
-     Ch 05. Heard versus true, on the same spine. Process only, no villains. -->
+     Ch 05. Heard versus true, on the same spine. Process only, no villains.
+     Each heard line is written ONCE; app.js copies it into the struck twin
+     so a translation can never drift between the two. -->
 <section class="sc-section myths" data-sc-act="flow" id="ch-myths" data-chapter="05" data-chapter-title="Heard and true">
   <div class="wrap">
     <hr class="rule">
     <h2 class="chaphead__label sc-display">Heard and true</h2>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“A supplement means something went wrong.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.22 0.34">“A supplement means something went wrong.”</span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.26 0.4"><p>It means the teardown did its job. Finding hidden damage is the point.</p></div>
+      <p class="myth__heard"><span class="myth__plain">“A supplement means something went wrong.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.16 0.28"></span></p>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.20 0.34"><p>It means the teardown did its job. Finding hidden damage is the point.</p></div>
     </div>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“More days in the shop means worse work.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.4 0.52">“More days in the shop means worse work.”</span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.44 0.58"><p>Most of the calendar is parts and paperwork, not repair time.</p></div>
+      <p class="myth__heard"><span class="myth__plain">“More days in the shop means worse work.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.32 0.44"></span></p>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.36 0.50"><p>Days in the shop are not days on the car. The calendar fills with waiting for parts and sign-offs.</p></div>
     </div>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“A totaled car was beyond fixing.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.58 0.7">“A totaled car was beyond fixing.”</span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.62 0.76"><p>Total loss is math. Repair cost against the car's value, nothing more.</p></div>
+      <p class="myth__heard"><span class="myth__plain">“A totaled car was beyond fixing.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.48 0.60"></span></p>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.52 0.66"><p>Total loss is math. The cost to fix, measured against what the car is worth. It is a number, not a verdict on the car.</p></div>
+    </div>
+    <div class="myth">
+      <p class="myth__heard"><span class="myth__plain">“Asking questions slows things down.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.64 0.76"></span></p>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.68 0.82"><p>Questions don't slow a repair. Parts and paperwork do. Ask.</p></div>
     </div>
   </div>
 </section>
@@ -245,14 +266,15 @@
   <div data-sc-stage class="close">
     <div class="wrap close__inner">
       <p class="close__pre">You don't have to remember any of this.</p>
-      <p class="close__line">When it happens, call someone who reads these files every day.</p>
+      <p class="close__line">Call me. I read these files every day.</p>
       <p class="close__who">Angel Navarro · collision estimator · Los Angeles</p>
       <a class="close__tel" href="tel:+12132792992">(213) 279-2992</a>
+      <p class="close__share"><button type="button" class="close__sharebtn" data-share>Know someone who just got hit? Send them this.</button></p>
     </div>
     <footer class="foot">
       <div class="wrap foot__grid">
         <span>Your Crash Angel</span>
-        <span>This page explains how the process works. It is not legal or claims advice.</span>
+        <p class="foot__note">This page explains how a repair moves through the system. It is not legal advice, and it is not advice about your specific claim. Ask your insurance company about your policy. Ask me about your car.</p>
       </div>
     </footer>
   </div>

@@ -224,7 +224,7 @@ body { background: var(--sc-canvas); }
 }
 .wl__gloss {
   font-size: var(--sc-t-sm); color: var(--yca-cream-soft);
-  text-align: right; text-wrap: balance;
+  text-align: right; text-wrap: balance; font-style: normal;
 }
 .wall__close {
   margin: 0; padding-top: var(--sc-3);
@@ -252,6 +252,18 @@ body { background: var(--sc-canvas); }
   font-size: var(--sc-t-xl); letter-spacing: 0.01em; color: var(--sc-accent);
 }
 .me__marknote { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+.me__scope {
+  margin: var(--sc-5) 0 0; padding-top: var(--sc-4);
+  border-top: 1px solid var(--hair);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sc-4);
+}
+.me__scope dt {
+  font-size: var(--label); letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase; color: var(--sc-ink-soft);
+  margin: 0 0 var(--sc-2);
+}
+.me__scope dd { margin: 0; font-size: var(--sc-t-sm); line-height: 1.5; color: var(--sc-ink); }
 
 /* ---------------------------------------------------------- chapter heads */
 .chaphead { padding-block: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem); }
@@ -291,7 +303,10 @@ body { background: var(--sc-canvas); }
 .peak { background: var(--sc-canvas); display: grid; align-items: center; }
 .dc--peak { display: grid; }
 .dc--peak .dc__term {
-  font-size: clamp(2.8rem, 9vw, 8rem); color: var(--sc-ink);
+  /* capped by letter count (--n from app.js): Anton caps average ~0.55em per
+     letter, so a 12-letter Spanish term still sits inside the measure */
+  font-size: min(clamp(2.8rem, 9vw, 8rem), calc((100vw - 2 * var(--sc-gutter)) / var(--n, 10) * 1.8));
+  color: var(--sc-ink);
   min-height: 1.1em;
 }
 /* the ghost label lands at the foot of the space the word left, so the
@@ -314,9 +329,14 @@ body { background: var(--sc-canvas); }
   padding-block: clamp(1.4rem, 4vh, 2.4rem);
   border-top: 1px solid var(--hair);
 }
+.gl__k { display: grid; gap: var(--sc-1); align-content: start; }
 .gl .dc__term {
   font-size: clamp(1.4rem, 2.6vw, 2.2rem); color: var(--sc-ink);
   min-height: 1.2em;
+}
+.dc__expand {
+  margin: 0; font-size: var(--label); letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase; color: var(--sc-ink-soft);
 }
 .gl .dc__plain {
   font-size: var(--sc-t-lg); line-height: 1.44; color: var(--sc-ink);
@@ -410,23 +430,35 @@ body { background: var(--sc-canvas); }
   text-underline-offset: 0.12em; width: fit-content;
 }
 .close__tel:hover { color: var(--yca-cream); }
+.close__share { margin: var(--sc-5) 0 0; }
+.close__sharebtn {
+  appearance: none; background: none; border: 0; padding: 0; cursor: pointer;
+  text-align: left;
+  font: inherit; font-size: var(--label); letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase; color: var(--yca-cream-soft);
+  border-bottom: 1px solid var(--hair-dark); padding-bottom: 0.3em;
+  transition: color var(--sc-d-fast) var(--sc-ease-out), border-color var(--sc-d-fast) var(--sc-ease-out);
+}
+.close__sharebtn:hover, .close__sharebtn:focus-visible { color: var(--yca-cream); border-color: var(--yca-cream); outline: none; }
+.close__sharebtn:focus-visible { outline: 2px solid var(--yca-orange-lift); outline-offset: 4px; }
 .close__tel:active { translate: 0 1px; }
 .foot {
   position: absolute; inset: auto 0 0 0;
   padding-bottom: clamp(1rem, 3vh, 2rem);
 }
 .foot__grid {
-  display: flex; justify-content: space-between; gap: var(--sc-4); flex-wrap: wrap;
+  display: flex; justify-content: space-between; align-items: start; gap: var(--sc-4); flex-wrap: wrap;
   padding-top: var(--sc-3); border-top: 1px solid var(--hair-dark);
   font-size: var(--label); color: var(--yca-cream-soft);
 }
+.foot__note { margin: 0; max-width: 46ch; line-height: 1.5; text-transform: none; letter-spacing: 0; }
 
 /* --------------------------------------------------------- reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .hazard { animation: none; opacity: 0.6; }
   .log__line { animation: none; opacity: 1; transform: none; }
   .wl__row, .wall__note, .wall__close { opacity: 1 !important; transform: none !important; }
-  .dc .ch, .dc .wd { opacity: 1 !important; transform: none !important; }
+  .is-split .ch, .is-split .wd { opacity: 1 !important; transform: none !important; }
   .dc__label { opacity: 0 !important; }
   .tl__stage { opacity: 1 !important; transform: none !important; }
 }
@@ -447,14 +479,16 @@ body { background: var(--sc-canvas); }
   .gl { grid-template-columns: minmax(0, 1fr); gap: var(--sc-2); }
   .gl .dc__plain { max-width: none; }
   .myth { grid-template-columns: minmax(0, 1fr); gap: var(--sc-3); }
-  .dc--peak .dc__term { font-size: clamp(2.2rem, 13vw, 3.2rem); }
+  .dc--peak .dc__term { font-size: min(clamp(2.2rem, 13vw, 3.2rem), calc((100vw - 2 * var(--sc-gutter)) / var(--n, 10) * 1.8)); }
   .dc--peak .dc__plain { font-size: var(--sc-t-lg); max-width: none; }
   .tl__lead { width: min(80vw, 20rem); }
   .tl__stage { width: min(72vw, 17rem); }
-  /* the gloss column is the first thing to go: nine display rows already
-     fill a phone screen, and two columns at this width sets 4-word lines */
-  .wl__row { grid-template-columns: minmax(0, 1fr); }
-  .wl__gloss { display: none; }
+  /* nine rows plus their heard-fragments still fit one 844px screen at
+     these sizes; the wall is meant to be the densest screen on the page */
+  .wl__row { grid-template-columns: minmax(0, 1fr); row-gap: 0.1rem; padding-block: 0.35rem; }
+  .wl__term { font-size: clamp(1.3rem, 3.6vh, 2.2rem); }
+  .wl__gloss { text-align: left; font-size: var(--label); }
+  .me__scope { grid-template-columns: minmax(0, 1fr); }
   .close__line { font-size: var(--sc-t-xl); max-width: none; }
   .close__tel { font-size: clamp(2rem, 11vw, 3.2rem); }
 }

@@ -104,6 +104,9 @@
       var plain = block.querySelector(".dc__plain");
       if (!term || !plain) return;
 
+      // letter count feeds the peak's size cap, so a longer word in another
+      // language shrinks to the measure instead of running off the spine
+      term.style.setProperty("--n", String(term.textContent.replace(/\s/g, "").length || 10));
       var termText = splitInto(term, "chars", "ch", bi * 101 + 7,
         prof.s0, prof.s1, prof.dist, prof.rise, prof.rot, false);
       splitInto(plain, "words", "wd", bi * 211 + 41,
@@ -141,6 +144,41 @@
     Array.prototype.forEach.call(stages, function (s, i) {
       // first card exempt: a pan act needs its opening content present
       s.style.setProperty("--s0", i === 0 ? "-0.2" : (0.04 + i * 0.09).toFixed(2));
+    });
+  }
+
+  /* ------------------------------------------------------------- myths
+     Each heard line is authored once in HTML; the struck twin that the wipe
+     reveals is filled here, so a translation can never drift between them. */
+  function setupMyths() {
+    var heard = document.querySelectorAll(".myth__heard");
+    Array.prototype.forEach.call(heard, function (h) {
+      var plain = h.querySelector(".myth__plain");
+      var struck = h.querySelector(".myth__struck");
+      if (plain && struck) struck.textContent = plain.textContent;
+    });
+  }
+
+  /* ------------------------------------------------------------- share
+     Native share sheet where there is one, clipboard where there is not.
+     No third-party code; the copy is one string for the Spanish build. */
+  var SHARE_TEXT = "Insurance words in plain English, from a collision estimator in LA.";
+  function setupShare() {
+    var btn = document.querySelector("[data-share]");
+    if (!btn) return;
+    var label = btn.textContent;
+    btn.addEventListener("click", function () {
+      var url = location.href.split("#")[0];
+      if (navigator.share) {
+        navigator.share({ title: document.title, text: SHARE_TEXT, url: url }).catch(function () {});
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          btn.textContent = "Link copied.";
+          setTimeout(function () { btn.textContent = label; }, 2000);
+        }).catch(function () {});
+      }
     });
   }
 
@@ -228,10 +266,14 @@
     var peakStage = document.querySelector("#ch-translation [data-sc-stage]");
     if (wallStage) wallStage.setAttribute("data-sc-verify-hold", "true");
     if (peakStage) peakStage.setAttribute("data-sc-verify-hold", "true");
+    setupMyths();
+    setupShare();
     setupFolio();
     return;
   }
 
+  setupMyths();
+  setupShare();
   setupDecoder();
   setupWall();
   setupTimeline();
