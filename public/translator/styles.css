@@ -260,18 +260,20 @@ body { background: var(--sc-canvas); }
 
 /* -------------------------------------------------- the decoder (signature)
    Term chars scatter as the plain sentence gathers, then the term settles
-   back as a small label. Driven entirely from --sc-p by CSS. */
+   back as a small label. Driven entirely from --sc-p by CSS. Scoped to
+   .is-split (set by app.js), never to a layout class: the peak and every
+   glossary row must run the same mechanic. */
 .dc__term { margin: 0; position: relative; }
 .dc__plain { margin: 0; }
 .chw { display: inline-block; white-space: nowrap; }
-.dc.is-split .dc__term .ch {
+.is-split .dc__term .ch {
   display: inline-block;
   --q: clamp(0, (var(--sc-p, 0) - var(--w0)) * var(--iw), 1);
   opacity: calc(1 - var(--q));
   transform: translate(calc(var(--q) * var(--dx)), calc(var(--q) * var(--dy)))
              rotate(calc(var(--q) * var(--dr)));
 }
-.dc.is-split .dc__plain .wd {
+.is-split .dc__plain .wd {
   display: inline-block; white-space: pre;
   --q: clamp(0, (var(--sc-p, 0) - var(--w0)) * var(--iw), 1);
   opacity: var(--q);

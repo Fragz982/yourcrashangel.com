@@ -32,11 +32,13 @@
      gather in through later windows; then the term settles back in quietly as
      a ghost label so a settled row still reads TERM: sentence. Profiles:
        peak  scatter [0.14..0.50], gather [0.36..0.72], big vectors
-       row   scatter [0.10..0.32], gather [0.24..0.44], small vectors
-     (flow acts hit p≈0.45 as the row reaches mid-screen). */
+       row   scatter [0.24..0.44], gather [0.36..0.56], small vectors
+     A flow act's p is (y + vh - top) / (height + vh), so a glossary row is
+     around p≈0.57 when its top reaches mid-screen: the row windows are set
+     so the sentence has just finished gathering as the eye arrives. */
   var PROFILES = {
     peak: { s0: 0.14, s1: 0.50, g0: 0.36, g1: 0.72, dist: Math.min(innerWidth * 0.16, 230), rise: 90, rot: 26 },
-    row:  { s0: 0.10, s1: 0.32, g0: 0.24, g1: 0.44, dist: 52, rise: 26, rot: 10 }
+    row:  { s0: 0.24, s1: 0.44, g0: 0.36, g1: 0.56, dist: 64, rise: 30, rot: 10 }
   };
 
   function makeUnit(u, cls, i, n, seedBase, from, to, dist, rise, rot, invert) {
