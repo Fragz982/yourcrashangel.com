@@ -1,4 +1,0 @@
-# The homepage is the scroll page built in scrollcraft/builds/yca-home and
-# copied to public/home by its deploy.py. Netlify serves it at / (200! forces
-# the rewrite even though Next.js also exports an index.html).
-/    /home/index.html    200!
