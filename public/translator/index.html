@@ -10,34 +10,38 @@
 <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="styles.css">
-<noscript><style>.wl__row, .log__line, .wall__note, .wall__close, .myth__struck { opacity: 1 !important; transform: none !important; }</style></noscript>
+<noscript><style>
+  .wl__row, .wl__gloss, .log__line, .open__head, .open__sub, .wall__note, .wall__close, .myth__struck,
+  [data-sc-in], [data-sc-stagger] > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+</style></noscript>
 </head>
 <body>
 <!--
   SPANISH BUILD · every string lives in this file, once. When the Spanish
   version drops in, also swap: <html lang>, <title>, the meta description,
   the <ol class="log"> aria-label, every data-chapter-title, the two h2.sr
-  headings, the .foot text, and the share text in app.js (SHARE_TEXT).
-  The decoder splits on characters and whitespace, so accents and ñ need no
-  code change; the peak term sizes itself from its letter count (--n).
+  headings, the .foot text, the two <span class="sr"> myth labels, and the
+  share text in app.js (SHARE_TEXT). The decoder splits on characters and
+  whitespace, so accents and ñ need no code change; the peak term sizes
+  itself from its letter count. If a Spanish sentence keeps a different
+  piece of its term, name it with data-carry="mejor" on that block; with no
+  match at all the letters simply fall, no code needed.
 -->
 
-<span data-sc-progress></span>
 <div class="sc-grain" aria-hidden="true"></div>
 
-<!-- Folio: the only chrome. Sits on the spine, same as every other element. -->
+<!-- Folio: the only chrome. A running head on the ground of the chapter under it. -->
 <aside class="folio" id="folio" aria-hidden="true"><span class="folio__no"></span><span class="folio__title"></span></aside>
 
 <main id="top">
 
 <!-- ============================================================ ACT 1 · OPEN
      The 60 seconds after. No logo, no menu. Two aligned columns: the headline
-     on the spine, the log of the first hour in its own column. Nothing is
-     rotated and nothing floats. The disorientation comes from the pacing of
-     the log, not from scattering type around the frame. -->
+     on the spine, the log of the first hour in its own column. Everything
+     lands as a cut on the hazard's clock. -->
 <section class="open is-dark" data-sc-act="flow" id="open">
   <div class="open__grid">
-    <img class="open__bg" src="assets/01-open-backdrop.svg" width="1920" height="1080" alt="">
+    <img class="open__bg" src="assets/01-open-backdrop.svg" width="1920" height="1080" alt="" fetchpriority="high">
     <p class="open__kicker">The first hour</p>
     <ol class="log" aria-label="The first hour after a crash">
       <li class="log__line" style="--i:0">Hazards on.</li>
@@ -59,8 +63,8 @@
      Ch 01. The nine terms arrive as a dense index: flush left on the spine,
      one row each, hairline between, and in the second column the fragment of
      a sentence you actually hear it inside. Quoted text means "what you hear"
-     everywhere on this page. Structured, and still overwhelming, because nine
-     rows land faster than anyone reads them and not one is defined. -->
+     everywhere on this page. Rows land as cuts, faster and faster; nothing
+     is defined. -->
 <section class="is-dark" data-sc-act="pin" data-sc-span="2.2" id="ch-words" data-chapter="01" data-chapter-title="The words">
   <div data-sc-stage class="wall" data-sc-verify-state="">
     <div class="wall__grid">
@@ -83,13 +87,14 @@
 </section>
 
 <!-- ============================================================ ACT 3 · ME
-     Ch 02. Hard cut to paper. Quiet on purpose: the breath before the peak.
-     Two columns on the same spine. The commented block below swaps the figure
-     for a scrubbing clip once SLOT 03 footage exists (see SHOTLIST.md). -->
+     Ch 02. Hard cut to paper: the wall drops to a whisper and the next frame
+     is one ink line on cream at the same spine. Quiet on purpose, the breath
+     before the peak. The commented block below swaps the figure for a
+     scrubbing clip once SLOT 03 footage exists (see SHOTLIST.md). -->
 <section class="sc-section me" data-sc-act="flow" id="ch-me" data-chapter="02" data-chapter-title="The person">
   <div class="wrap me__grid">
     <figure class="fig me__media">
-      <img src="assets/02-angel-portrait.svg" width="1776" height="2352" loading="lazy" decoding="async" alt="">
+      <img src="assets/02-angel-portrait.svg" width="1776" height="2352" decoding="async" alt="">
       <figcaption>Photo slot 02 · Angel at the desk, United Collision, Los Angeles</figcaption>
     </figure>
     <div class="me__copy" data-sc-in data-sc-stagger="70">
@@ -104,10 +109,11 @@
     </div>
   </div>
 </section>
-<!-- SCRUB UPGRADE (when SLOT 03 is shot + encoded):
+<!-- SCRUB UPGRADE (when SLOT 03 is shot + encoded; desktop only, the phone
+     keeps the still). Poster = frame 0 of the delivered clip, see SHOTLIST:
 <section class="me-clip" data-sc-act="scrub" data-sc-span="1.6" data-sc-dwell="0.3">
   <div data-sc-stage>
-    <img class="sc-stage__poster" src="assets/03-poster.webp" alt="">
+    <img class="sc-stage__poster" src="assets/03-clip-poster.webp" alt="">
     <video data-sc-scrub data-sc-src="assets/03.mp4" data-sc-src-mobile="assets/03-m.mp4" muted playsinline></video>
     <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
     <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.85 0">
@@ -117,23 +123,24 @@
 </section> -->
 
 <!-- ============================================================ ACT 4 · PEAK
-     Ch 03 opens. THE DECODER at full scale, anchored to the spine like
-     everything else. The term's characters come apart while the plain-English
-     sentence assembles; the term then settles back as a small label. -->
+     Ch 03 opens. THE DECODER at full scale, the largest type on the page.
+     BETTER walks out of BETTERMENT and lands inside "better" in the plain
+     sentence; M, E, N, T fall through the rule. The pin dwells at the
+     crossover so the moment gets its time. -->
 <section class="sc-section chaphead" data-sc-act="flow">
   <div class="wrap" data-sc-in data-sc-stagger="60">
     <hr class="rule">
     <h2 class="chaphead__label sc-display">The translation</h2>
-    <p class="body chaphead__note">Every word from the list. One plain sentence each. Scroll slowly.</p>
+    <p class="body chaphead__note">Every word from the list. One plain sentence each.</p>
   </div>
 </section>
 
-<section data-sc-act="pin" data-sc-span="2.5" id="ch-translation" data-chapter="03" data-chapter-title="The translation">
+<section data-sc-act="pin" data-sc-span="3" data-sc-dwell="0.45" id="ch-translation" data-chapter="03" data-chapter-title="The translation">
   <div data-sc-stage class="peak" data-sc-verify-state="">
     <div class="wrap">
-      <div class="dc dc--peak" data-decode data-profile="peak">
+      <div class="dc dc--peak" id="betterment" data-decode data-profile="peak">
         <h3 class="dc__term sc-display">Betterment</h3>
-        <p class="dc__plain">When a worn part, like a tire, is replaced with a new one, you can be asked to pay for the wear the old one already had.</p>
+        <p class="dc__plain">When a worn part, like a tire, is replaced with a new one, the car comes back better than it was, and you can be asked to pay that difference.</p>
       </div>
     </div>
   </div>
@@ -141,42 +148,43 @@
 
 <!-- ============================================================ ACT 5 · GLOSSARY
      Ch 03 continues. The other eight, same mechanic, index scale. Each row is
-     its own flow act so the engine feeds it --sc-p. What the letters stand
-     for sits under the term, outside the sentence, so the plain line stays
-     one sentence and a Spanish build keeps the English expansion intact. -->
+     its own flow act so the engine feeds it --sc-p. Acronyms drop their
+     letters onto the initials of the expansion line under the term; VALUE
+     travels into "value"; the rest fall. Every term re-prints once its
+     sentence is in, so the settled glossary is still an index. -->
 <section class="sc-section gloss" id="gloss">
   <div class="wrap">
     <h2 class="sr">The rest of the file, decoded</h2>
     <div class="gloss__rows">
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="teardown" data-sc-act="flow" data-decode data-profile="row">
         <div class="gl__k"><h3 class="dc__term sc-display">Teardown</h3></div>
         <p class="dc__plain">Taking the damaged area apart to find everything the crash actually broke.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="supplement" data-sc-act="flow" data-decode data-profile="row">
         <div class="gl__k"><h3 class="dc__term sc-display">Supplement</h3></div>
         <p class="dc__plain">Anything added to the estimate after it was first written, usually damage found at teardown.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="lkq" data-sc-act="flow" data-decode data-profile="row" data-carry-mode="initials">
         <div class="gl__k"><h3 class="dc__term sc-display">LKQ</h3><p class="dc__expand">Like Kind and Quality</p></div>
         <p class="dc__plain">A used part from a car like yours, in about the shape yours was in before the crash.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="oem-procedures" data-sc-act="flow" data-decode data-profile="row" data-carry-mode="initials">
         <div class="gl__k"><h3 class="dc__term sc-display">OEM procedures</h3><p class="dc__expand">Original Equipment Manufacturer</p></div>
         <p class="dc__plain">The repair steps written by the company that built your car.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="acv" data-sc-act="flow" data-decode data-profile="row" data-carry-mode="initials">
         <div class="gl__k"><h3 class="dc__term sc-display">ACV</h3><p class="dc__expand">Actual Cash Value</p></div>
         <p class="dc__plain">What your car was worth the moment before the crash.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="total-loss" data-sc-act="flow" data-decode data-profile="row">
         <div class="gl__k"><h3 class="dc__term sc-display">Total loss</h3></div>
         <p class="dc__plain">Fixing the car would cost too much compared with what it's worth, so it gets paid out instead of repaired.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="diminished-value" data-sc-act="flow" data-decode data-profile="row">
         <div class="gl__k"><h3 class="dc__term sc-display">Diminished value</h3></div>
         <p class="dc__plain">The value a car can lose because a crash is now on its record, even after a good repair.</p>
       </div>
-      <div class="gl dc" data-sc-act="flow" data-decode data-profile="row">
+      <div class="gl dc" id="drp" data-sc-act="flow" data-decode data-profile="row" data-carry-mode="initials">
         <div class="gl__k"><h3 class="dc__term sc-display">DRP</h3><p class="dc__expand">Direct Repair Program</p></div>
         <p class="dc__plain">A shop that already works directly with an insurance company, so the estimate and the paperwork move straight between them.</p>
       </div>
@@ -185,8 +193,9 @@
 </section>
 
 <!-- ============================================================ ACT 6 · TIMELINE
-     Ch 04. Lateral travel: five stages, each card on the same internal grid.
-     No day counts: those wait for Angel's real numbers. -->
+     Ch 04. One road. Desktop: lateral travel, a continuous hairline with the
+     hazard disc riding it. Phone: a column on the spine (switched pre-mount
+     below). No day counts: those wait for Angel's real numbers. -->
 <section data-sc-act="pan" data-sc-span="2.8" id="ch-process" data-chapter="04" data-chapter-title="The process">
   <div data-sc-stage class="tl">
     <div class="tl__rail" data-sc-pan="0.06">
@@ -194,82 +203,89 @@
         <h2 class="sc-display tl__h">What actually happens to your car</h2>
         <p class="body">Five stages. A repair walks them in this order. A total loss leaves the road early, once the numbers come back at teardown. Most of the waiting happens in the middle.</p>
       </div>
-      <article class="tl__stage">
+      <article class="tl__stage" data-sc-in>
         <span class="tl__no">01</span>
-        <figure class="fig"><img src="assets/04-tow-intake.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 04 · tow and check-in</figcaption></figure>
+        <figure class="fig"><img src="assets/04-tow-intake.svg" width="1776" height="2220" decoding="async" alt=""><figcaption>Photo slot 04 · tow and check-in</figcaption></figure>
         <h3 class="sc-display">Tow &amp; check-in</h3>
         <p>The car arrives, gets photographed and logged, and a first estimate is written from what's visible.</p>
-        <p class="tl__stall">Stalls when: the car sits at a tow yard before it reaches a shop.</p>
+        <p class="tl__stall"><span class="tl__stall-k">Stalls when</span>the car sits at a tow yard before it reaches a shop.</p>
       </article>
-      <article class="tl__stage">
+      <article class="tl__stage" data-sc-in>
         <span class="tl__no">02</span>
-        <figure class="fig"><img src="assets/05-teardown.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 05 · teardown</figcaption></figure>
+        <figure class="fig"><img src="assets/05-teardown.svg" width="1776" height="2220" decoding="async" alt=""><figcaption>Photo slot 05 · teardown</figcaption></figure>
         <h3 class="sc-display">Teardown</h3>
         <p>The damaged area comes apart. This is where the real repair list gets written.</p>
-        <p class="tl__stall">Stalls when: hidden damage means the plan has to change.</p>
+        <p class="tl__stall"><span class="tl__stall-k">Stalls when</span>hidden damage means the plan has to change.</p>
       </article>
-      <article class="tl__stage">
+      <article class="tl__stage" data-sc-in>
         <span class="tl__no">03</span>
-        <figure class="fig"><img src="assets/06-supplement.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 06 · supplement</figcaption></figure>
+        <figure class="fig"><img src="assets/06-supplement.svg" width="1776" height="2220" decoding="async" alt=""><figcaption>Photo slot 06 · supplement</figcaption></figure>
         <h3 class="sc-display">Supplement</h3>
         <p>The new findings are documented, priced, and sent for review.</p>
-        <p class="tl__stall">Stalls when: the new findings need a sign-off before work continues. Nothing moves until everyone agrees on the same plan.</p>
+        <p class="tl__stall"><span class="tl__stall-k">Stalls when</span>the new findings need a sign-off before work continues. Nothing moves until everyone agrees on the same plan.</p>
       </article>
-      <article class="tl__stage">
+      <article class="tl__stage" data-sc-in>
         <span class="tl__no">04</span>
-        <figure class="fig"><img src="assets/07-paint.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 07 · body and paint</figcaption></figure>
+        <figure class="fig"><img src="assets/07-paint.svg" width="1776" height="2220" decoding="async" alt=""><figcaption>Photo slot 07 · body and paint</figcaption></figure>
         <h3 class="sc-display">Body &amp; paint</h3>
         <p>Parts come in, metal gets straightened, panels get painted to match.</p>
-        <p class="tl__stall">Stalls when: a part is on backorder, which means nobody has one to ship yet.</p>
+        <p class="tl__stall"><span class="tl__stall-k">Stalls when</span>a part is on backorder, which means nobody has one to ship yet.</p>
       </article>
-      <article class="tl__stage">
+      <article class="tl__stage" data-sc-in>
         <span class="tl__no">05</span>
-        <figure class="fig"><img src="assets/08-delivery.svg" width="1776" height="2220" loading="lazy" decoding="async" alt=""><figcaption>Photo slot 08 · pickup</figcaption></figure>
+        <figure class="fig"><img src="assets/08-delivery.svg" width="1776" height="2220" decoding="async" alt=""><figcaption>Photo slot 08 · pickup</figcaption></figure>
         <h3 class="sc-display">Pickup</h3>
         <p>Everything goes back together, the electronics get checked, the car gets cleaned and returned.</p>
-        <p class="tl__stall">Stalls when: the final check finds something that needs another pass.</p>
+        <p class="tl__stall"><span class="tl__stall-k">Stalls when</span>the final check finds something that needs another pass.</p>
       </article>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ ACT 7 · MYTHS
-     Ch 05. Heard versus true, on the same spine. Process only, no villains.
+     Ch 05. Heard versus true, on the same spine, with a header row. Each
+     strike draws left to right; each truth cuts in as its strike finishes.
      Each heard line is written ONCE; app.js copies it into the struck twin
      so a translation can never drift between the two. -->
 <section class="sc-section myths" data-sc-act="flow" id="ch-myths" data-chapter="05" data-chapter-title="Heard and true">
   <div class="wrap">
     <hr class="rule">
     <h2 class="chaphead__label sc-display">Heard and true</h2>
+    <div class="myth myth--head" aria-hidden="true"><span>Heard</span><span>True</span></div>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“A supplement means something went wrong.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.16 0.28"></span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.20 0.34"><p>It means the teardown did its job. Finding hidden damage is the point.</p></div>
+      <div class="myth__h"><span class="myth__eyebrow" aria-hidden="true">Heard</span><p class="myth__heard"><span class="sr">Heard: </span><span class="myth__plain">“A supplement means something went wrong.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="left" data-sc-reveal-at="0.12 0.20"></span></p></div>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.20 0.22"><span class="myth__eyebrow" aria-hidden="true">True</span><p><span class="sr">True: </span>It means the teardown did its job. Finding hidden damage is the point.</p></div>
     </div>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“More days in the shop means worse work.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.32 0.44"></span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.36 0.50"><p>Days in the shop are not days on the car. The calendar fills with waiting for parts and sign-offs.</p></div>
+      <div class="myth__h"><span class="myth__eyebrow" aria-hidden="true">Heard</span><p class="myth__heard"><span class="sr">Heard: </span><span class="myth__plain">“More days in the shop means worse work.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="left" data-sc-reveal-at="0.24 0.32"></span></p></div>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.32 0.34"><span class="myth__eyebrow" aria-hidden="true">True</span><p><span class="sr">True: </span>Days in the shop are not days on the car. The calendar fills with waiting for parts and sign-offs.</p></div>
     </div>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“A totaled car was beyond fixing.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.48 0.60"></span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.52 0.66"><p>Total loss is math. The cost to fix, measured against what the car is worth. It is a number, not a verdict on the car.</p></div>
+      <div class="myth__h"><span class="myth__eyebrow" aria-hidden="true">Heard</span><p class="myth__heard"><span class="sr">Heard: </span><span class="myth__plain">“A totaled car was beyond fixing.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="left" data-sc-reveal-at="0.36 0.44"></span></p></div>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.44 0.46"><span class="myth__eyebrow" aria-hidden="true">True</span><p><span class="sr">True: </span>Total loss is math. The cost to fix, measured against what the car is worth. It is a number, not a verdict on the car.</p></div>
     </div>
     <div class="myth">
-      <p class="myth__heard"><span class="myth__plain">“Asking questions slows things down.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="right" data-sc-reveal-at="0.64 0.76"></span></p>
-      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.68 0.82"><p>Questions don't slow a repair. Parts and paperwork do. Ask.</p></div>
+      <div class="myth__h"><span class="myth__eyebrow" aria-hidden="true">Heard</span><p class="myth__heard"><span class="sr">Heard: </span><span class="myth__plain">“Asking questions slows things down.”</span><span class="myth__struck" aria-hidden="true" data-sc-reveal="left" data-sc-reveal-at="0.48 0.54"></span></p></div>
+      <div class="myth__true" data-sc-reveal="up" data-sc-reveal-at="0.54 0.56"><span class="myth__eyebrow" aria-hidden="true">True</span><p><span class="sr">True: </span>Questions don't slow a repair. Parts and paperwork do. Ask.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ ACT 8 · CLOSE
-     Colophon. One line, one name, one number. Holds. -->
+     Colophon. The hazard light that blinked on the first screen is steady on
+     the last. One line, one name, one number, two quiet ways to keep it. -->
 <section data-sc-act="pin" data-sc-span="1.15" id="close">
   <div data-sc-stage class="close">
+    <span class="hazard" aria-hidden="true"></span>
     <div class="wrap close__inner">
       <p class="close__pre">You don't have to remember any of this.</p>
       <p class="close__line">Call me. I read these files every day.</p>
       <p class="close__who">Angel Navarro · collision estimator · Los Angeles</p>
       <a class="close__tel" href="tel:+12132792992">(213) 279-2992</a>
-      <p class="close__share"><button type="button" class="close__sharebtn" data-share>Know someone who just got hit? Send them this.</button></p>
+      <p class="close__more">
+        <a class="close__link" href="assets/angel.vcf">Save my number.</a>
+        <button type="button" class="close__link" data-share>Send this to someone who just got hit.</button>
+      </p>
     </div>
     <footer class="foot">
       <div class="wrap foot__grid">
@@ -283,7 +299,23 @@
 </main>
 
 <script src="scrollcraft.js"></script>
-<script>ScrollCraft.mount(document.body);</script>
+<script>
+  // Pre-mount, phones only: the timeline is a column, not a pan, and the
+  // peak owns less scroll so the first flick already cracks the word.
+  (function () {
+    if (!matchMedia("(max-width: 860px)").matches) return;
+    var p = document.getElementById("ch-process");
+    if (p) {
+      p.setAttribute("data-sc-act", "flow");
+      p.removeAttribute("data-sc-span");
+      var r = p.querySelector("[data-sc-pan]");
+      if (r) r.removeAttribute("data-sc-pan");
+    }
+    var t = document.getElementById("ch-translation");
+    if (t) t.setAttribute("data-sc-span", "1.8");
+  })();
+  ScrollCraft.mount(document.body);
+</script>
 <script src="app.js"></script>
 </body>
 </html>

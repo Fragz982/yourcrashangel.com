@@ -3,17 +3,24 @@
 
    ONE GRID. Every act hangs off the same left spine and the same measure, so
    the page reads as a printed document rather than as a stack of unrelated
-   screens. Nothing is rotated and nothing is positioned by eye: density comes
-   from alignment, never from scatter.
+   screens. Nothing is rotated and nothing is positioned by eye: every move
+   is one axis or one measured straight line. Density comes from alignment
+   and pacing, never from scatter.
    ========================================================================== */
 
-/* Self-hosted faces (SIL OFL). No third-party font host in the critical path. */
+/* Self-hosted faces (SIL OFL). No third-party font host in the critical path.
+   Anton is 18 KB and preloaded, so it blocks rather than swaps: the cold
+   open must never paint wide in a system face and then snap condensed. */
 @font-face {
   font-family: "Anton";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   src: url("assets/fonts/anton-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Anton Fallback";
+  src: local("Arial Narrow"), local("Roboto Condensed"), local("Helvetica Neue");
 }
 @font-face {
   font-family: "Space Grotesk";
@@ -31,7 +38,7 @@
   --sc-ink-soft:    #675E52;
   --sc-accent:      #C8501E;
   --sc-accent-ink:  #F7F1E5;
-  --sc-font-display: "Anton", "Arial Narrow", system-ui, sans-serif;
+  --sc-font-display: "Anton", "Anton Fallback", "Arial Narrow", system-ui, sans-serif;
   --sc-font-text:    "Space Grotesk", system-ui, sans-serif;
   --sc-font-mono:    "Space Grotesk", system-ui, sans-serif;
   --sc-shadow-color: 35 25% 8%;
@@ -47,15 +54,26 @@
   /* THE GRID. One measure, one gutter, one spine, everywhere. */
   --page: 76rem;
   --sc-gutter: clamp(1.25rem, 5vw, 4.5rem);
+  --spine: max(var(--sc-gutter), calc((100vw - var(--page)) / 2 + var(--sc-gutter)));
   --hair: color-mix(in oklab, var(--sc-ink) 16%, transparent);
   --hair-dark: color-mix(in oklab, var(--yca-cream) 15%, transparent);
   --label: var(--sc-t-xs);
 }
 
+html { scroll-padding-top: 2.5rem; }
+
 /* Anton is single-weight and all-caps by design. */
 .sc-display { font-weight: 400; letter-spacing: 0.005em; text-transform: uppercase; }
 
 body { background: var(--sc-canvas); }
+
+/* a print explainer has no progress bar; the folio says where you are */
+[data-sc-progress] { display: none; }
+
+/* the grain earns its keep on the two dark scenes; keep its layer at one
+   viewport, not four */
+.sc-grain { contain: strict; }
+.sc-grain::before { inset: 0; }
 
 .sr {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -78,6 +96,10 @@ body { background: var(--sc-canvas); }
 .body {
   font-size: var(--sc-t-base); line-height: 1.6;
   color: var(--sc-ink-soft); max-width: 52ch; margin: 0; text-wrap: pretty;
+}
+.eyebrow {
+  font-size: var(--label); letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase; color: var(--sc-ink-soft);
 }
 
 /* Dark scenes: repaint the roles AND restate color on the subtree. */
@@ -103,28 +125,47 @@ body { background: var(--sc-canvas); }
   text-transform: uppercase; color: var(--sc-ink-soft);
 }
 
-/* ------------------------------------------------------------------ folio */
+/* the hazard tick: the page's one non-typographic mark. Blinking on the
+   first screen, steady on the last. Always the same size, always parked on
+   the grid's top-right corner. */
+.hazard {
+  position: absolute; top: clamp(1.4rem, 4vh, 2.6rem); right: var(--sc-gutter);
+  width: 0.7rem; height: 0.7rem; border-radius: 50%;
+  background: var(--yca-orange-lift);
+  animation: hazard 1.4s steps(1) infinite;
+  z-index: 2;
+}
+@keyframes hazard { 0% { opacity: 1; } 50% { opacity: 0.12; } }
+
+/* ------------------------------------------------------------------ folio
+   A printed running head: a full-width band on the ground of the chapter
+   under it, folio text on the spine. Content scrolls under a clean edge. */
 .folio {
-  position: fixed; top: clamp(0.7rem, 2vh, 1.3rem); left: var(--sc-gutter);
+  position: fixed; top: 0; left: 0; right: 0;
   z-index: var(--sc-z-chrome);
-  display: flex; gap: 0.6em; align-items: baseline;
-  padding: 0.5em 0.8em; margin-left: -0.8em;
-  background: var(--sc-canvas); border-radius: 2px;
+  height: 2.25rem;
+  display: flex; align-items: center; gap: 0.6em;
+  padding-inline: var(--spine);
+  background: var(--folio-bg, var(--sc-canvas));
+  border-bottom: 1px solid var(--hair);
   font-size: var(--label); letter-spacing: var(--sc-track-wide);
   text-transform: uppercase; color: var(--sc-ink-soft);
-  opacity: 0; transform: translateY(-4px);
+  opacity: 0; transform: translateY(-100%);
   transition: opacity var(--sc-d-slow) var(--sc-ease-out),
-              transform var(--sc-d-slow) var(--sc-ease-out);
+              transform var(--sc-d-slow) var(--sc-ease-out),
+              background-color var(--sc-d-slow) var(--sc-ease-out);
   pointer-events: none;
 }
 .folio.is-on { opacity: 1; transform: none; }
 .folio__no { color: var(--yca-orange-deep); font-weight: 700; }
-.folio.is-darkside { color: var(--yca-cream-soft); background: var(--yca-dark); }
+.folio.is-darkside { color: var(--yca-cream-soft); --hair: var(--hair-dark); }
 .folio.is-darkside .folio__no { color: var(--yca-orange-lift); }
 
 /* ------------------------------------------------------------- act 1 open
    Two columns on one grid: the log in the right column, the headline on the
-   spine. The backdrop is a quiet ground, not a composition element. */
+   spine. Everything arrives as a cut on the hazard's clock: one log line per
+   half-blink, the headline on the first full blink, the sub with the last
+   line. The backdrop is a quiet ground, not a composition element. */
 .open { position: relative; background: var(--yca-dark); }
 .open__grid {
   position: relative; min-height: 100svh; overflow: clip;
@@ -139,13 +180,17 @@ body { background: var(--sc-canvas); }
 }
 .open__bg {
   position: absolute; inset: 0; z-index: 0;
-  width: 100%; height: 100%; object-fit: cover; opacity: 0.5;
+  width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%;
 }
+/* the scrim sits under the headline column and along the foot, so a real
+   night photo stays a scene on the right and a ground on the left */
 .open__grid::before {
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, var(--yca-dark) 12%, rgb(19 17 16 / 0.82) 60%, rgb(19 17 16 / 0.72) 100%);
+  background:
+    linear-gradient(to right, var(--yca-dark) 0 28%, transparent 62%),
+    linear-gradient(to top, var(--yca-dark) 12%, rgb(19 17 16 / 0.55) 45%, rgb(19 17 16 / 0.35) 100%);
 }
-.open__kicker, .log, .open__head, .hazard { position: relative; z-index: 2; }
+.open__kicker, .log, .open__head { position: relative; z-index: 2; }
 
 .open__kicker {
   grid-area: kicker; margin: 0;
@@ -161,14 +206,17 @@ body { background: var(--sc-canvas); }
   padding: var(--sc-3) 0;
   border-bottom: 1px solid var(--hair-dark);
   font-size: var(--sc-t-sm); color: var(--yca-cream-soft);
-  opacity: 0; transform: translateY(6px);
-  animation: logIn 600ms var(--sc-ease-out) forwards;
-  animation-delay: calc(320ms + var(--i) * 420ms);
+  opacity: 0;
+  animation: cutIn 1ms steps(1) forwards;
+  animation-delay: calc(var(--i) * 500ms);
 }
 .log__line--hot { color: var(--yca-orange-lift); }
-@keyframes logIn { to { opacity: 1; transform: none; } }
+@keyframes cutIn { to { opacity: 1; } }
 
-.open__head { grid-area: head; align-self: end; }
+.open__head {
+  grid-area: head; align-self: end;
+  opacity: 0; animation: cutIn 1ms steps(1) forwards; animation-delay: 1000ms;
+}
 .open__h {
   font-size: var(--sc-t-4xl); color: var(--yca-cream);
   max-width: 12ch; margin: 0;
@@ -179,43 +227,39 @@ body { background: var(--sc-canvas); }
   max-width: 22rem;
   font-size: var(--label); letter-spacing: var(--sc-track-wide);
   text-transform: uppercase; color: var(--yca-orange-lift);
+  opacity: 0; animation: cutIn 1ms steps(1) forwards; animation-delay: 2500ms;
 }
-
-/* the hazard tick, parked on the grid's top-right corner */
-.hazard {
-  position: absolute; top: clamp(1.4rem, 4vh, 2.6rem); right: var(--sc-gutter);
-  width: 0.7rem; height: 0.7rem; border-radius: 50%;
-  background: var(--yca-orange-lift);
-  animation: hazard 1.4s steps(1) infinite;
-}
-@keyframes hazard { 0% { opacity: 1; } 50% { opacity: 0.12; } }
 
 /* ------------------------------------------------------------- act 2 wall
-   A dense index, not a word cloud. One row per term, flush left, hairline
-   between, gloss in its own right-hand column. */
+   A dense index, not a word cloud. Same two columns the glossary uses, so
+   the right column goes from "how it sounds" here to "what it means" there.
+   Rows land as cuts, faster and faster; the heard-fragment lands one tick
+   after its term. At the end the whole wall drops to a whisper so the last
+   frame is one cream line on the spine, and the cut to paper is a cut. */
 .wall { background: var(--yca-dark); display: grid; align-items: center; }
 .wall__grid {
   width: 100%; max-width: var(--page); margin-inline: auto;
   padding: clamp(3rem, 9vh, 5.5rem) var(--sc-gutter);
   display: grid; gap: clamp(1rem, 3vh, 2rem);
+  --qz: clamp(0, (var(--sc-p, 0) - 0.86) * 12.5, 1);
 }
 .wall__note {
   margin: 0; max-width: 34ch;
   font-size: var(--label); letter-spacing: var(--sc-track-wide);
   text-transform: uppercase; color: var(--yca-cream-soft);
   padding-bottom: var(--sc-2); border-bottom: 1px solid var(--hair-dark);
-  --q: clamp(0, (var(--sc-p, 1) + 0.06) * 26, 1); opacity: var(--q);
+  --q: clamp(0, (var(--sc-p, 1) + 0.06) * 26, 1);
+  opacity: min(var(--q), calc(1 - 0.82 * var(--qz)));
 }
 .wl { margin: 0; padding: 0; list-style: none; }
 .wl__row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 15rem);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
   align-items: baseline; column-gap: clamp(1rem, 4vw, 3rem);
   padding-block: clamp(0.2rem, 0.9vh, 0.5rem);
   border-bottom: 1px solid var(--hair-dark);
-  --q: clamp(0, (var(--sc-p, 1) - var(--w0, 0)) * 26, 1);
-  opacity: var(--q);
-  transform: translateY(calc(6px - 6px * var(--q)));
+  --q: clamp(0, (var(--sc-p, 1) - var(--w0, 0)) * 200, 1);
+  opacity: min(var(--q), calc(1 - 0.82 * var(--qz)));
 }
 .wl__term {
   font-family: var(--sc-font-display); text-transform: uppercase;
@@ -224,32 +268,39 @@ body { background: var(--sc-canvas); }
 }
 .wl__gloss {
   font-size: var(--sc-t-sm); color: var(--yca-cream-soft);
-  text-align: right; text-wrap: balance; font-style: normal;
+  text-align: left; text-wrap: balance;
+  --q: clamp(0, (var(--sc-p, 1) - var(--w0, 0)) * 200, 1);
+  opacity: var(--q);
 }
 .wall__close {
   margin: 0; padding-top: var(--sc-3);
   font-size: var(--sc-t-lg); font-weight: 700; color: var(--yca-cream);
-  --q: clamp(0, (var(--sc-p, 1) - 0.86) * 20, 1);
-  opacity: var(--q); transform: translateY(calc(6px - 6px * var(--q)));
+  --q: clamp(0, (var(--sc-p, 1) - 0.72) * 200, 1);
+  opacity: var(--q);
 }
 
-/* --------------------------------------------------------------- act 3 me */
-.me { padding-block: clamp(4rem, 8vw, 6.5rem); }
+/* --------------------------------------------------------------- act 3 me
+   Hard cut to paper. The act owns a screen so the first frame after the
+   wall is one ink line on cream at the same spine. The headline shares the
+   portrait's top edge; the mark and the scope sit on its bottom edge. */
+.me { min-height: 100svh; display: grid; align-content: center; padding-block: clamp(4rem, 8vw, 6.5rem); }
 .me__grid {
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(2rem, 5vw, 4rem); align-items: center;
+  gap: clamp(2rem, 5vw, 4rem); align-items: stretch;
 }
 .me__media { max-width: none; }
+.me__media img { aspect-ratio: 3 / 4; object-fit: cover; }
+.me__copy { display: flex; flex-direction: column; }
 .me__h { font-size: var(--sc-t-3xl); margin: 0 0 var(--sc-5); }
 .me__copy > * + * { margin-top: var(--sc-4); }
-.me__mark {
-  margin-top: var(--sc-7) !important; padding-top: var(--sc-4);
+.me__copy > .me__mark {
+  margin-top: auto; padding-top: var(--sc-4);
   border-top: 1px solid var(--hair);
   display: grid; gap: var(--sc-1);
 }
 .me__markname {
   font-family: var(--sc-font-display); text-transform: uppercase;
-  font-size: var(--sc-t-xl); letter-spacing: 0.01em; color: var(--sc-accent);
+  font-size: var(--sc-t-xl); letter-spacing: 0.01em; color: var(--sc-ink);
 }
 .me__marknote { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
 .me__scope {
@@ -271,63 +322,96 @@ body { background: var(--sc-canvas); }
 .chaphead__note { margin: 0; }
 
 /* -------------------------------------------------- the decoder (signature)
-   Term chars scatter as the plain sentence gathers, then the term settles
-   back as a small label. Driven entirely from --sc-p by CSS. Scoped to
-   .is-split (set by app.js), never to a layout class: the peak and every
-   glossary row must run the same mechanic. */
+   Driven entirely from --sc-p by CSS; app.js writes the windows and the
+   measured vectors once. Scoped to .is-split (set by app.js), never to a
+   layout class: the peak and every glossary row run the same mechanic.
+
+   .ch          a term letter. Falls straight down (--dx 0, --dy 1.4em) at
+                full ink, gone as it crosses the rule.
+   .ch--carry   a term letter the sentence keeps. Travels a measured line
+                (--dx/--dy px) shrinking to the sentence's size (--ds), solid
+                until the last 15%, then hands off in place to its .tg.
+   .wd          a sentence word: rises 0.6em onto its baseline, reading order.
+   .wd--host    a word that receives letters: it does not move; its .tn
+                letters fade on the word's window, its .tg letters appear on
+                their carry letter's window.
+   --r0 (rows)  the term re-prints at origin: --back snaps the transform
+                home while the letter is still invisible, --qr fades it in. */
+.is-split .ch {
+  display: inline-block; transform-origin: 0 0;
+  --q: clamp(0, (var(--sc-p, 0) - var(--w0, 9)) * var(--iw, 1), 1);
+  --qr: clamp(0, (var(--sc-p, 0) - var(--r0, 9)) * 16, 1);
+  --back: clamp(0, (var(--sc-p, 0) - var(--r0, 9)) * 1000, 1);
+  --go: calc(var(--q) * (1 - var(--back)));
+  opacity: max(clamp(0, (1 - var(--q)) * var(--ink, 3.33), 1), var(--qr));
+  transform: translate(calc(var(--go) * var(--dx, 0px)), calc(var(--go) * var(--dy, 1.4em)))
+             scale(calc(1 - var(--go) * (1 - var(--ds, 1))));
+}
+.is-split .ch--carry { --ink: 25; }
+.chw { display: inline-block; white-space: nowrap; }
+.is-split .wd {
+  display: inline-block; white-space: pre;
+  --q: clamp(0, (var(--sc-p, 0) - var(--w0, 9)) * var(--iw, 1), 1);
+  opacity: clamp(0, (var(--q) - 0.4) * 1.67, 1);
+  transform: translateY(calc((1 - var(--q)) * 0.6em));
+}
+.is-split .wd--host { opacity: 1; transform: none; }
+.is-split .tn {
+  --q: clamp(0, (var(--sc-p, 0) - var(--w0, 9)) * var(--iw, 1), 1);
+  opacity: clamp(0, (var(--q) - 0.4) * 1.67, 1);
+}
+.is-split .tg {
+  --q: clamp(0, (var(--sc-p, 0) - var(--w0, 9)) * var(--iw, 1), 1);
+  opacity: clamp(0, (var(--q) - 0.96) * 25, 1);
+}
+.is-measuring .ch, .is-measuring .wd, .is-measuring .tn, .is-measuring .tg {
+  transform: none !important; opacity: 1 !important;
+}
 .dc__term { margin: 0; position: relative; }
 .dc__plain { margin: 0; }
-.chw { display: inline-block; white-space: nowrap; }
-.is-split .dc__term .ch {
-  display: inline-block;
-  --q: clamp(0, (var(--sc-p, 0) - var(--w0)) * var(--iw), 1);
-  opacity: calc(1 - var(--q));
-  transform: translate(calc(var(--q) * var(--dx)), calc(var(--q) * var(--dy)))
-             rotate(calc(var(--q) * var(--dr)));
-}
-.is-split .dc__plain .wd {
-  display: inline-block; white-space: pre;
-  --q: clamp(0, (var(--sc-p, 0) - var(--w0)) * var(--iw), 1);
-  opacity: var(--q);
-  transform: translate(calc((1 - var(--q)) * var(--dx)), calc((1 - var(--q)) * var(--dy)));
-}
 .dc__label {
-  position: absolute; left: 0; top: 0;
+  position: absolute; left: 0; bottom: 0.15em;
   font-size: var(--label); letter-spacing: var(--sc-track-wide);
   color: var(--sc-ink-soft);
-  --q: clamp(0, (var(--sc-p, 0) - var(--w0)) * var(--iw), 1);
+  --q: clamp(0, (var(--sc-p, 0) - var(--w0, 9)) * var(--iw, 1), 1);
   opacity: var(--q);
 }
 
-/* the peak: spine-aligned, largest type on the page */
+/* the peak: spine-aligned, the largest type on the page. Capped by letter
+   count (--n from app.js): Anton caps average ~0.55em per letter, so a
+   12-letter Spanish term still sits inside the measure. */
 .peak { background: var(--sc-canvas); display: grid; align-items: center; }
 .dc--peak { display: grid; }
 .dc--peak .dc__term {
-  /* capped by letter count (--n from app.js): Anton caps average ~0.55em per
-     letter, so a 12-letter Spanish term still sits inside the measure */
-  font-size: min(clamp(2.8rem, 9vw, 8rem), calc((100vw - 2 * var(--sc-gutter)) / var(--n, 10) * 1.8));
+  font-size: min(clamp(3rem, 11.5vw, 12rem), calc((100vw - 2 * var(--sc-gutter)) / var(--n, 10) * 1.8));
+  line-height: 1;
   color: var(--sc-ink);
   min-height: 1.1em;
 }
-/* the ghost label lands at the foot of the space the word left, so the
-   settled peak reads as a caption sitting on the rule above its sentence */
-.dc--peak .dc__label { top: auto; bottom: 0.15em; }
 .dc--peak .dc__plain {
+  position: relative;
   margin-top: clamp(1.5rem, 5vh, 3rem);
   padding-top: clamp(1.5rem, 5vh, 3rem);
-  border-top: 1px solid var(--hair);
-  font-size: var(--sc-t-xl); line-height: 1.34;
+  font-size: var(--sc-t-2xl); line-height: 1.24;
   letter-spacing: var(--sc-track-snug);
-  color: var(--sc-ink); max-width: 26ch;
+  color: var(--sc-ink); max-width: 30ch;
+}
+/* the rule under the term draws left to right as the last letter lands */
+.dc--peak .dc__plain::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: var(--hair); transform-origin: 0 50%;
+  --q: clamp(0, (var(--sc-p, 0) - 0.62) * 12.5, 1);
+  transform: scaleX(var(--q));
 }
 
-/* glossary: the same two-column index as the wall, on paper */
+/* glossary: the same two columns as the wall, on paper */
 .gloss { padding-block: 0 clamp(4rem, 8vw, 6.5rem); }
 .gl {
   display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
   gap: clamp(1rem, 4vw, 3rem); align-items: baseline;
   padding-block: clamp(1.4rem, 4vh, 2.4rem);
   border-top: 1px solid var(--hair);
+  scroll-margin-block-end: 12vh;
 }
 .gl__k { display: grid; gap: var(--sc-1); align-content: start; }
 .gl .dc__term {
@@ -343,13 +427,27 @@ body { background: var(--sc-canvas); }
   max-width: 42ch;
 }
 
-/* --------------------------------------------------------- act 6 timeline */
-[data-sc-act="pan"] .sc-stage, .tl { background: var(--sc-surface); }
+/* --------------------------------------------------------- act 6 timeline
+   One road: a continuous hairline across the whole rail with the hazard
+   disc riding it, so you can see where you are. Cards always at full ink. */
+#ch-process, [data-sc-act="pan"] .sc-stage, .tl { background: var(--sc-surface); }
 .tl { display: grid; align-items: center; }
 .tl__rail {
+  display: flex; position: relative;
   gap: clamp(1.5rem, 3.5vw, 3rem);
-  padding-inline: max(var(--sc-gutter), calc((100vw - var(--page)) / 2 + var(--sc-gutter)));
+  padding-inline: var(--spine);
+  padding-top: var(--sc-5);
   align-items: stretch;
+}
+.tl__rail::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--hair);
+}
+.tl__rail::after {
+  content: ""; position: absolute; top: -0.35rem;
+  left: calc(var(--sc-p, 0) * 100%); margin-left: -0.35rem;
+  width: 0.7rem; height: 0.7rem; border-radius: 50%;
+  background: var(--sc-accent);
 }
 .tl__h { font-size: var(--sc-t-2xl); margin: 0 0 var(--sc-4); }
 .tl__lead {
@@ -359,30 +457,43 @@ body { background: var(--sc-canvas); }
 .tl__stage {
   flex: 0 0 auto; width: clamp(15rem, 21vw, 19rem);
   display: grid; gap: var(--sc-3); align-content: start;
-  padding-top: var(--sc-3); border-top: 1px solid var(--hair);
-  --q: clamp(0, (var(--sc-p, 1) - var(--s0, 0)) * 6, 1);
-  opacity: max(0.5, var(--q));
-  transform: translateY(calc(12px - 12px * var(--q)));
 }
 .tl__no {
   font-size: var(--label); letter-spacing: var(--sc-track-wide);
   color: var(--sc-accent); font-weight: 700;
 }
+.tl__stage .fig img { aspect-ratio: 4 / 5; object-fit: cover; }
 .tl__stage h3 { font-size: var(--sc-t-xl); margin: 0; }
 .tl__stage p { margin: 0; font-size: var(--sc-t-sm); color: var(--sc-ink); }
 .tl__stall {
   color: var(--sc-ink-soft) !important;
   padding-top: var(--sc-2); border-top: 1px solid var(--hair);
 }
+.tl__stall-k {
+  display: block; margin-bottom: var(--sc-1);
+  font-size: var(--label); letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase; color: var(--yca-orange-deep);
+}
 
-/* ------------------------------------------------------------ act 7 myths */
-.myths { padding-block: clamp(3rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6.5rem); }
+/* ------------------------------------------------------------ act 7 myths
+   Heard versus true, a two-column table with a header row. The act owns a
+   screen so every pair resolves before the dark close enters. */
+.myths {
+  min-height: 120svh; display: grid; align-content: center;
+  padding-block: clamp(3rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6.5rem);
+}
 .myth {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1rem, 4vw, 3rem); align-items: start;
   padding-block: clamp(1.4rem, 4vh, 2.4rem);
   border-top: 1px solid var(--hair);
 }
+.myth--head {
+  padding-block: var(--sc-2);
+  font-size: var(--label); letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase; color: var(--sc-ink-soft);
+}
+.myth__eyebrow { display: none; }
 .myth__heard {
   position: relative; margin: 0;
   font-size: var(--sc-t-lg); line-height: 1.34;
@@ -401,13 +512,22 @@ body { background: var(--sc-canvas); }
   font-weight: 500; color: var(--sc-ink); max-width: 30ch;
 }
 
-/* ------------------------------------------------------------ act 8 close */
+/* ------------------------------------------------------------ act 8 close
+   Colophon. The hazard light that blinked on the first screen is steady on
+   the last. One line, one name, one number, then two quiet ways to keep it. */
+#close { background: var(--yca-dark); }
 .close {
+  /* no position here: the engine's sticky stage is the containing block */
   background: var(--yca-dark); color: var(--yca-cream);
   --sc-canvas: var(--yca-dark); --sc-ink: var(--yca-cream);
   --sc-ink-soft: var(--yca-cream-soft); --sc-accent: var(--yca-orange-lift);
   --hair: var(--hair-dark);
   display: grid; align-content: center;
+}
+.close .hazard {
+  right: var(--spine);
+  animation: none;
+  opacity: clamp(0, (var(--sc-p, 0) - 0.2) * 3.3, 1);
 }
 .close__inner { display: grid; gap: var(--sc-4); }
 .close__pre {
@@ -430,37 +550,45 @@ body { background: var(--sc-canvas); }
   text-underline-offset: 0.12em; width: fit-content;
 }
 .close__tel:hover { color: var(--yca-cream); }
-.close__share { margin: var(--sc-5) 0 0; }
-.close__sharebtn {
+.close__tel:active { translate: 0 1px; }
+.close__more {
+  margin: var(--sc-5) 0 0; padding-top: var(--sc-3);
+  border-top: 1px solid var(--hair-dark);
+  display: flex; gap: var(--sc-5); flex-wrap: wrap; max-width: 30rem;
+}
+.close__link {
   appearance: none; background: none; border: 0; padding: 0; cursor: pointer;
-  text-align: left;
+  text-align: left; text-decoration: none;
   font: inherit; font-size: var(--label); letter-spacing: var(--sc-track-wide);
   text-transform: uppercase; color: var(--yca-cream-soft);
-  border-bottom: 1px solid var(--hair-dark); padding-bottom: 0.3em;
-  transition: color var(--sc-d-fast) var(--sc-ease-out), border-color var(--sc-d-fast) var(--sc-ease-out);
+  transition: color var(--sc-d-fast) var(--sc-ease-out);
 }
-.close__sharebtn:hover, .close__sharebtn:focus-visible { color: var(--yca-cream); border-color: var(--yca-cream); outline: none; }
-.close__sharebtn:focus-visible { outline: 2px solid var(--yca-orange-lift); outline-offset: 4px; }
-.close__tel:active { translate: 0 1px; }
+.close__link:hover { color: var(--yca-cream); }
+.close__link:focus-visible { outline: 2px solid var(--yca-orange-lift); outline-offset: 4px; }
 .foot {
   position: absolute; inset: auto 0 0 0;
-  padding-bottom: clamp(1rem, 3vh, 2rem);
+  padding-bottom: max(clamp(1rem, 3vh, 2rem), env(safe-area-inset-bottom));
 }
 .foot__grid {
   display: flex; justify-content: space-between; align-items: start; gap: var(--sc-4); flex-wrap: wrap;
   padding-top: var(--sc-3); border-top: 1px solid var(--hair-dark);
   font-size: var(--label); color: var(--yca-cream-soft);
 }
-.foot__note { margin: 0; max-width: 46ch; line-height: 1.5; text-transform: none; letter-spacing: 0; }
+.foot__note { margin: 0; max-width: 46ch; line-height: 1.5; }
 
-/* --------------------------------------------------------- reduced motion */
+/* --------------------------------------------------------- reduced motion
+   Everything present and settled, and the pins give back their scroll so a
+   reduced-motion reader is not walked through screens where nothing moves. */
 @media (prefers-reduced-motion: reduce) {
-  .hazard { animation: none; opacity: 0.6; }
-  .log__line { animation: none; opacity: 1; transform: none; }
-  .wl__row, .wall__note, .wall__close { opacity: 1 !important; transform: none !important; }
-  .is-split .ch, .is-split .wd { opacity: 1 !important; transform: none !important; }
+  .sc-act--pinned { height: auto !important; }
+  .sc-act--pinned .sc-stage { position: relative; height: auto; min-height: 100svh; }
+  .hazard, .close .hazard { animation: none; opacity: 0.7; }
+  .log__line, .open__head, .open__sub { animation: none; opacity: 1; }
+  .wl__row, .wl__gloss, .wall__note, .wall__close { opacity: 1 !important; transform: none !important; }
+  .is-split .ch, .is-split .wd, .is-split .tn, .is-split .tg { opacity: 1 !important; transform: none !important; }
   .dc__label { opacity: 0 !important; }
-  .tl__stage { opacity: 1 !important; transform: none !important; }
+  .dc--peak .dc__plain::before { transform: none; }
+  .tl__rail::after { display: none; }
 }
 
 /* ----------------------------------------------------------------- mobile */
@@ -471,24 +599,60 @@ body { background: var(--sc-canvas); }
     grid-template-areas: "kicker" "log" "head";
     row-gap: clamp(1.5rem, 4vh, 2.5rem);
   }
-  .open__h { font-size: var(--sc-t-2xl); max-width: none; }
+  .open__grid::before {
+    background: linear-gradient(to top, var(--yca-dark) 18%, rgb(19 17 16 / 0.7) 55%, rgb(19 17 16 / 0.45) 100%);
+  }
+  /* the opener is the loudest type on the phone; the jargon stays a step
+     below it until the peak */
+  .open__h { font-size: var(--sc-t-3xl); max-width: 8ch; }
   .log__line { padding: var(--sc-2) 0; }
-  .me__grid { grid-template-columns: minmax(0, 1fr); }
-  .me__media { max-width: 20rem; }
-  .me__h { font-size: var(--sc-t-2xl); }
-  .gl { grid-template-columns: minmax(0, 1fr); gap: var(--sc-2); }
-  .gl .dc__plain { max-width: none; }
-  .myth { grid-template-columns: minmax(0, 1fr); gap: var(--sc-3); }
-  .dc--peak .dc__term { font-size: min(clamp(2.2rem, 13vw, 3.2rem), calc((100vw - 2 * var(--sc-gutter)) / var(--n, 10) * 1.8)); }
-  .dc--peak .dc__plain { font-size: var(--sc-t-lg); max-width: none; }
-  .tl__lead { width: min(80vw, 20rem); }
-  .tl__stage { width: min(72vw, 17rem); }
+
   /* nine rows plus their heard-fragments still fit one 844px screen at
      these sizes; the wall is meant to be the densest screen on the page */
   .wl__row { grid-template-columns: minmax(0, 1fr); row-gap: 0.1rem; padding-block: 0.35rem; }
-  .wl__term { font-size: clamp(1.3rem, 3.6vh, 2.2rem); }
-  .wl__gloss { text-align: left; font-size: var(--label); }
+  .wl__term { font-size: min(3.6vh, 2.1rem); }
+  .wl__gloss { font-size: var(--label); }
+
+  .me__grid { grid-template-columns: minmax(0, 1fr); }
+  .me__media { max-width: 20rem; }
+  .me__h { font-size: var(--sc-t-2xl); }
   .me__scope { grid-template-columns: minmax(0, 1fr); }
+
+  .dc--peak .dc__term { font-size: min(clamp(2.2rem, 13vw, 3.2rem), calc((100vw - 2 * var(--sc-gutter)) / var(--n, 10) * 1.8)); }
+  .dc--peak .dc__plain { font-size: var(--sc-t-lg); max-width: none; }
+  .chaphead { padding-bottom: var(--sc-3); }
+  .gl { grid-template-columns: minmax(0, 1fr); gap: var(--sc-2); }
+  .gl .dc__plain { max-width: none; }
+
+  /* the timeline is a column on the spine: a vertical hairline connects the
+     five numbers, so the rail is a literal timeline under a vertical thumb */
+  .tl { padding-block: clamp(3rem, 8vw, 5rem); }
+  .tl__rail {
+    flex-direction: column;
+    padding-inline: var(--sc-gutter);
+    padding-left: calc(var(--sc-gutter) + 2.75rem);
+    padding-top: 0;
+    gap: clamp(2rem, 6vh, 3rem);
+  }
+  .tl__rail::before { top: 0; bottom: 0; left: calc(var(--sc-gutter) + 0.6rem); right: auto; width: 1px; height: auto; }
+  .tl__rail::after { display: none; }
+  .tl__lead, .tl__stage { width: 100%; }
+  .tl__stage { position: relative; }
+  .tl__no {
+    position: absolute; left: -2.75rem; top: 0; width: 1.25rem; text-align: center;
+    background: var(--sc-surface); padding-block: 0.15rem;
+  }
+  .tl__stage .fig img { aspect-ratio: 3 / 2; }
+
+  .myth { grid-template-columns: minmax(0, 1fr); gap: var(--sc-3); }
+  .myth--head { display: none; }
+  .myth__eyebrow {
+    display: block; margin-bottom: var(--sc-1);
+    font-size: var(--label); letter-spacing: var(--sc-track-wide);
+    text-transform: uppercase; color: var(--sc-ink-soft);
+  }
+  .myth__heard .myth__eyebrow { color: var(--yca-orange-deep); }
+
   .close__line { font-size: var(--sc-t-xl); max-width: none; }
   .close__tel { font-size: clamp(2rem, 11vw, 3.2rem); }
 }
