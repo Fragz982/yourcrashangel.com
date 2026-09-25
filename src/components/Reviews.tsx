@@ -43,34 +43,38 @@ function Stars({ count }: { count: number }) {
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="bg-surface py-24 md:py-32">
+    <section id="reviews" className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <ScrollReveal>
           <p className="eyebrow text-accent-orange">Real people, real stories</p>
-          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+          <h2 className="mt-3 display text-4xl text-foreground sm:text-5xl md:text-6xl">
             Don&apos;t take my word for it.
           </h2>
-          <p className="mt-4 max-w-xl font-body text-base text-muted">
+          <p className="mt-4 max-w-xl font-body text-base leading-relaxed text-muted md:text-lg">
             Straight from Google: reviews of the LA shop where I write
             estimates every day — the same work you see in the gallery above.
           </p>
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
           {REVIEWS.map((review, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-background p-8">
-                <Stars count={review.rating} />
-                <blockquote className="mt-4 flex-1 font-body text-base leading-relaxed text-muted italic">
+            <ScrollReveal key={i} delay={i * 0.1} className="h-full">
+              <figure className="flex h-full flex-col rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-card)] sm:p-7 md:p-8">
+                <div className="inline-flex self-start rounded-full bg-accent-soft px-3 py-1.5">
+                  <Stars count={review.rating} />
+                </div>
+                <blockquote className="mt-5 flex-1 font-body text-[1.05rem] leading-relaxed text-foreground md:text-[1.075rem]">
                   &ldquo;{review.text}&rdquo;
                 </blockquote>
-                <p className="mt-6 font-display text-sm font-semibold text-foreground">
-                  — {review.name}
-                </p>
-                <p className="mt-1 font-body text-xs text-muted">
-                  via {review.source}
-                </p>
-              </div>
+                <figcaption className="mt-6 flex items-center justify-between gap-3 border-t border-border pt-5">
+                  <p className="font-display text-[0.95rem] font-bold tracking-[-0.01em] text-foreground">
+                    — {review.name}
+                  </p>
+                  <p className="inline-flex items-center rounded-full px-2.5 py-1 font-body text-xs font-semibold text-muted shadow-[inset_0_0_0_1px_var(--color-border)]">
+                    via {review.source}
+                  </p>
+                </figcaption>
+              </figure>
             </ScrollReveal>
           ))}
         </div>

@@ -10,11 +10,12 @@ interface ScrollRevealProps {
   direction?: "up" | "down" | "left" | "right" | "none";
 }
 
+// A short, calm travel (was 40px): the app look moves things a little, not a lot.
 const offsets: Record<string, string> = {
-  up: "translateY(40px)",
-  down: "translateY(-40px)",
-  left: "translateX(40px)",
-  right: "translateX(-40px)",
+  up: "translateY(24px)",
+  down: "translateY(-24px)",
+  left: "translateX(24px)",
+  right: "translateX(-24px)",
   none: "none",
 };
 
@@ -59,7 +60,10 @@ export default function ScrollReveal({
         opacity: inView ? 1 : 0,
         transform: inView ? "none" : offsets[direction],
         transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
-        willChange: "opacity, transform",
+        // Only hint the GPU layer while waiting to reveal. A permanent
+        // will-change keeps revealed text and photos on their own layer,
+        // which can rasterize them soft on high-DPI screens.
+        willChange: inView ? "auto" : "opacity, transform",
       }}
     >
       {children}

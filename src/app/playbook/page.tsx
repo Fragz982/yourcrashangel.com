@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MessageIcon } from "../../components/Icons";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import { MessageIcon, FlagIcon } from "../../components/Icons";
 
 export const metadata: Metadata = {
   title: "The Insurance Playbook | yourcrashangel",
@@ -125,24 +127,33 @@ const TIMELINE = [
   },
 ];
 
+// One pill language for the whole site (matches the navbar and the flight):
+// the orange primary and the white hairline secondary, 48px tall.
+const primaryBtn =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent-orange px-6 text-[0.95rem] font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97]";
+const secondaryBtn =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-surface px-6 text-[0.95rem] font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,transform] hover:bg-surface-light active:scale-[0.97]";
+
 export default function PlaybookPage() {
   return (
-    <div id="main" className="min-h-screen bg-background">
-      <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
+    <>
+      <Navbar />
+      <main id="main" className="min-h-screen bg-background">
+      <div className="mx-auto max-w-3xl px-5 pt-28 pb-16 md:px-8 md:pt-36 md:pb-24">
         <Link
           href="/"
-          className="inline-block eyebrow text-accent-orange transition-colors hover:text-accent-lime"
+          className="-ml-1 inline-flex min-h-11 items-center rounded-full px-1 eyebrow text-accent-orange transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
         </Link>
 
-        <p className="mt-10 eyebrow text-accent-orange">Know their moves</p>
-        <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+        <p className="mt-6 eyebrow text-accent-orange">Know their moves</p>
+        <h1 className="mt-4 display text-4xl text-foreground sm:text-6xl md:text-7xl">
           They have a playbook.
           <br />
           <span className="text-accent-lime">Now you have theirs.</span>
         </h1>
-        <p className="mt-4 font-body text-lg leading-relaxed text-muted">
+        <p className="mt-6 text-lg leading-relaxed text-muted md:text-xl">
           Insurance companies handle thousands of claims a day. You&apos;ll handle
           maybe a few in your life. That gap is where the money moves. These are
           the plays I watch them run on people every single week — what they say,
@@ -150,24 +161,25 @@ export default function PlaybookPage() {
         </p>
 
         {/* Triage — meet the reader where they are tonight */}
-        <div className="mt-8 rounded-2xl border-2 border-accent-orange bg-surface p-5">
+        <div className="mt-10 rounded-[var(--radius-card)] bg-accent-soft p-6 shadow-[inset_0_0_0_1px_rgb(180_66_26/0.16)] md:p-7">
           <p className="eyebrow text-accent-orange">In a hurry?</p>
-          <p className="mt-2 font-body text-base leading-relaxed text-foreground">
-            <strong>Insurer calling you tomorrow?</strong> Read Play #2 (the
+          <p className="mt-3 text-base leading-relaxed text-foreground md:text-[1.05rem]">
+            <strong>Insurer calling you tomorrow?</strong>{" "}
+            Read Play #2 (the
             recorded statement) — two minutes, and it&apos;s the one that
             protects you on the phone.{" "}
             <strong>Already got a low offer?</strong> Play #3, then the full
             counter-punch guide at{" "}
             <Link
               href="/lowball"
-              className="font-semibold text-accent-orange underline underline-offset-4"
+              className="font-bold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 transition-colors hover:text-accent-lime hover:decoration-accent-lime"
             >
               /lowball
             </Link>
             . <strong>Crash just happened and you&apos;re lost?</strong>{" "}
             <Link
               href="/start"
-              className="font-semibold text-accent-orange underline underline-offset-4"
+              className="font-bold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 transition-colors hover:text-accent-lime hover:decoration-accent-lime"
             >
               Start here
             </Link>{" "}
@@ -176,76 +188,82 @@ export default function PlaybookPage() {
         </div>
 
         {/* Tactics */}
-        <div className="mt-16 space-y-10">
+        <div className="mt-14 space-y-6 md:mt-16 md:space-y-8">
           {TACTICS.map((tactic, i) => (
             <article
               key={tactic.name}
-              className="rounded-2xl border border-border bg-surface p-7 md:p-9"
+              className="rounded-[var(--radius-card)] bg-surface p-5 shadow-[var(--shadow-card)] sm:p-8 md:p-10"
             >
-              <div className="flex items-baseline gap-4">
-                <span className="display text-4xl text-muted">
+              <div className="flex items-center gap-4">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent-soft text-lg font-extrabold tabular-nums tracking-[-0.02em] text-accent-orange">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">
+                <h2 className="text-2xl font-extrabold leading-tight tracking-[-0.03em] text-foreground md:text-3xl">
                   {tactic.name}
                 </h2>
               </div>
 
-              <blockquote className="mt-6 border-l-2 border-accent-orange pl-4 font-body text-base italic leading-relaxed text-foreground/90">
+              <blockquote className="mt-6 rounded-[var(--radius-inner)] bg-surface-light px-4 py-3.5 sm:px-5 sm:py-4 text-base italic leading-relaxed text-foreground md:text-[1.05rem]">
                 &ldquo;{tactic.whatTheySay}&rdquo;
               </blockquote>
 
-              <p className="mt-6 eyebrow text-[0.7rem] text-muted">
+              <p className="mt-7 eyebrow text-muted">
                 What&apos;s really happening
               </p>
-              <p className="mt-2 font-body text-base leading-relaxed text-muted">
+              <p className="mt-2 text-base leading-relaxed text-muted md:text-[1.05rem]">
                 {tactic.whatsReallyHappening}
               </p>
 
-              <p className="mt-6 eyebrow text-[0.7rem] text-accent-lime">
-                Your move
-              </p>
-              <p className="mt-2 font-body text-base leading-relaxed text-foreground/90">
-                {tactic.yourMove}
-              </p>
+              <div className="mt-6 rounded-[var(--radius-inner)] bg-accent-soft p-4 sm:p-5">
+                <p className="eyebrow text-accent-lime">
+                  Your move
+                </p>
+                <p className="mt-2 text-base leading-relaxed text-foreground md:text-[1.05rem]">
+                  {tactic.yourMove}
+                </p>
+              </div>
             </article>
           ))}
         </div>
 
         {/* Timeline */}
-        <h2 className="mt-24 display text-4xl text-foreground sm:text-5xl md:text-6xl">
+        <h2 className="mt-20 display text-4xl text-foreground sm:text-5xl md:mt-24 md:text-6xl">
           What a claim is{" "}
           <span className="text-accent-lime">supposed to look like.</span>
         </h2>
-        <p className="mt-4 font-body text-lg leading-relaxed text-muted">
+        <p className="mt-5 text-lg leading-relaxed text-muted">
           Half the stress is not knowing what&apos;s normal. Here&apos;s the
           honest week-by-week — and what stalling looks like at every stage.
         </p>
 
-        <div className="mt-12 space-y-0">
+        <div className="mt-10 rounded-[var(--radius-card)] bg-surface p-5 shadow-[var(--shadow-card)] sm:p-8 md:p-10">
           {TIMELINE.map((step, i) => (
-            <div key={step.phase} className="relative flex gap-6 pb-12">
+            <div
+              key={step.phase}
+              className={`relative flex gap-4 sm:gap-5 md:gap-6 ${i < TIMELINE.length - 1 ? "pb-10" : ""}`}
+            >
               {/* line + dot */}
               <div className="flex flex-col items-center">
-                <span className="mt-1 h-3 w-3 shrink-0 rounded-full bg-accent-orange" />
+                <span className="mt-1.5 h-3.5 w-3.5 shrink-0 rounded-full bg-accent-orange ring-4 ring-accent-soft" />
                 {i < TIMELINE.length - 1 && (
-                  <span className="mt-2 w-px flex-1 bg-border" aria-hidden="true" />
+                  <span className="mt-3 w-px flex-1 bg-border" aria-hidden="true" />
                 )}
               </div>
-              <div className="flex-1 pb-2">
-                <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="font-display text-xl font-bold text-foreground">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                  <h3 className="text-xl font-extrabold tracking-[-0.02em] text-foreground">
                     {step.phase}
                   </h3>
                   <span className="spec-chip">{step.window}</span>
                 </div>
-                <p className="mt-3 font-body text-base leading-relaxed text-muted">
+                <p className="mt-3 text-base leading-relaxed text-muted">
                   {step.whatsNormal}
                 </p>
-                <p className="mt-3 font-body text-sm leading-relaxed text-foreground/80">
-                  <strong className="eyebrow text-[0.7rem] text-accent-orange">
-                    🚩 Red flag:{" "}
-                  </strong>
+                <p className="mt-4 rounded-[var(--radius-inner)] bg-accent-soft px-4 py-3 text-sm leading-relaxed text-foreground">
+                  <strong className="eyebrow inline-flex items-center gap-1.5 text-accent-orange">
+                    <FlagIcon className="h-3.5 w-3.5" />
+                    Red flag:
+                  </strong>{" "}
                   {step.redFlag}
                 </p>
               </div>
@@ -254,35 +272,36 @@ export default function PlaybookPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 rounded-2xl border border-border bg-surface p-8">
-          <h2 className="font-display text-2xl font-bold text-foreground">
+        <div className="mt-16 rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-lift)] sm:p-8 md:p-10">
+          <h2 className="text-2xl font-extrabold tracking-[-0.03em] text-foreground md:text-3xl">
             See one of these plays happening to you?
           </h2>
-          <p className="mt-3 font-body text-base text-muted">
+          <p className="mt-3 text-base leading-relaxed text-muted md:text-lg">
             Text me what they said, or a photo of the estimate or offer.
             I&apos;ll tell you which play it is and what to say back. Free, no
             strings attached.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a
               href="sms:+12132792992"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105"
+              className={primaryBtn}
             >
               <MessageIcon className="h-4 w-4" />
               Text: (213) 279-2992
             </a>
             <Link
               href="/decoder"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-border px-6 py-3 font-display text-sm font-semibold text-foreground transition-colors hover:border-foreground/40"
+              className={secondaryBtn}
             >
               Next: learn their language →
             </Link>
           </div>
         </div>
 
-        <div className="mt-12 rounded-xl bg-surface p-6">
-          <p className="font-body text-xs leading-relaxed text-muted">
-            <strong className="text-muted">Disclaimer:</strong> This page is for
+        <div className="mt-10 rounded-[var(--radius-card)] bg-surface p-6 shadow-[inset_0_0_0_1px_var(--color-border)]">
+          <p className="text-xs leading-relaxed text-muted">
+            <strong className="text-foreground">Disclaimer:</strong>{" "}
+            This page is for
             educational and informational purposes only. It is not legal,
             insurance, financial, or professional advice, and it doesn&apos;t
             describe any specific company. Every accident and claim is
@@ -291,17 +310,19 @@ export default function PlaybookPage() {
           </p>
         </div>
 
-        <p className="mt-8 text-center font-display text-sm text-muted">
+        <p className="mt-8 text-center text-sm text-muted">
           Made by{" "}
           <Link
             href="/"
-            className="font-semibold text-accent-orange transition-colors hover:text-accent-lime"
+            className="font-bold text-accent-orange transition-colors hover:text-accent-lime"
           >
             @yourcrashangel
           </Link>{" "}
           — The Accident Translator
         </p>
       </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 }

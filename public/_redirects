@@ -1,0 +1,4 @@
+# /home was the scroll-page prototype; it is now the top of the homepage.
+/home    /    301!
+/home/   /    301!
+/home/*  /    301!

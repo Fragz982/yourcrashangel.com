@@ -96,24 +96,24 @@ export default function VinScanner({ onDetected, onClose }: Props) {
       role="dialog"
       aria-modal="true"
       aria-label="Scan your VIN barcode"
-      className="fixed inset-0 z-[60] flex flex-col bg-black"
+      className="fixed inset-0 z-[60] flex flex-col bg-shop pb-[env(safe-area-inset-bottom)]"
     >
       {/* header */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/80">
+      <div className="flex items-center justify-between px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 sm:px-6">
+        <span className="eyebrow pl-1 text-white/85">
           Scan your VIN
         </span>
         <button
           onClick={onClose}
           aria-label="Close scanner"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-[background-color,transform] hover:bg-white/20 active:scale-[0.95]"
         >
           <XIcon className="h-5 w-5" />
         </button>
       </div>
 
-      {/* camera area */}
-      <div className="relative flex-1 overflow-hidden">
+      {/* camera area: a rounded window on the espresso sheet */}
+      <div className="relative mx-3 flex-1 overflow-hidden rounded-[var(--radius-card)] bg-foreground sm:mx-6">
         <video
           ref={videoRef}
           autoPlay
@@ -124,33 +124,34 @@ export default function VinScanner({ onDetected, onClose }: Props) {
 
         {status === "scanning" && (
           <>
-            {/* framing guide */}
+            {/* framing guide: the outside dims so the barcode window reads */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="h-28 w-[80%] max-w-sm rounded-xl border-2 border-white/80" />
+              <div className="h-28 w-[80%] max-w-sm rounded-[var(--radius-inner)] border-2 border-white/90 shadow-[0_0_0_9999px_rgb(0_0_0/0.38)]" />
             </div>
-            <p className="absolute bottom-8 left-1/2 w-[88%] max-w-sm -translate-x-1/2 text-center font-body text-sm leading-relaxed text-white/90">
-              Point at the <strong>barcode</strong> on your driver&apos;s door-jamb
+            <p className="absolute bottom-6 left-1/2 w-[88%] max-w-sm -translate-x-1/2 rounded-[var(--radius-inner)] bg-black/65 px-4 py-3 text-center text-sm leading-relaxed text-white backdrop-blur-sm">
+              Point at the <strong>barcode</strong>{" "}
+              on your driver&apos;s door-jamb
               sticker, your registration, or your insurance card.
             </p>
           </>
         )}
 
         {status === "starting" && (
-          <p className="absolute inset-0 flex items-center justify-center font-body text-sm text-white/80">
+          <p className="absolute inset-0 flex items-center justify-center text-sm font-medium text-white/85">
             Starting camera…
           </p>
         )}
 
         {(status === "denied" || status === "error") && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-8 text-center">
-            <p className="font-body text-base leading-relaxed text-white/90">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 px-8 text-center">
+            <p className="max-w-sm text-base leading-relaxed text-white/90">
               {status === "denied"
                 ? "Camera access is blocked. Turn it on in your browser settings — or just type your VIN instead."
                 : "Couldn't start the camera. No worries — type your VIN instead."}
             </p>
             <button
               onClick={onClose}
-              className="rounded-full bg-accent-orange px-6 py-3 font-display text-sm font-semibold text-background"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-accent-orange px-7 text-[0.95rem] font-bold text-white transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97]"
             >
               Type my VIN instead
             </button>
@@ -159,15 +160,17 @@ export default function VinScanner({ onDetected, onClose }: Props) {
       </div>
 
       {/* footer */}
-      {status === "scanning" && (
-        <div className="flex justify-center px-5 py-5">
+      {status === "scanning" ? (
+        <div className="flex justify-center px-5 py-4">
           <button
             onClick={onClose}
-            className="font-display text-sm font-semibold text-white/80"
+            className="inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold text-white/85 transition-colors hover:bg-white/10 hover:text-white"
           >
             Can&apos;t scan? Type it instead
           </button>
         </div>
+      ) : (
+        <div className="h-3 sm:h-6" aria-hidden="true" />
       )}
     </div>
   );

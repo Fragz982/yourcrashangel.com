@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import FlightHero from "../components/FlightHero";
 import FirstFiveMinutes from "../components/FirstFiveMinutes";
 import Scenarios from "../components/Scenarios";
 import EstimateCTA from "../components/EstimateCTA";
@@ -66,7 +66,10 @@ export default function Home() {
       />
       <Navbar />
       <main id="main">
-        <Hero />
+        {/* The drone flight: the old hero's words ride on its first screen. */}
+        <FlightHero />
+        {/* Every section after it rises over the flight like a sheet. */}
+        <div className="after-flight">
         <FirstFiveMinutes />
         <Scenarios />
         <EstimateCTA />
@@ -78,8 +81,9 @@ export default function Home() {
         <QuizIntake />
         <FAQ />
         <FinalCTA />
+        <Footer />
+        </div>
       </main>
-      <Footer />
     </>
   );
 }

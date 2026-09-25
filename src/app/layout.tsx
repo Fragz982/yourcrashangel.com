@@ -1,38 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter, Anton, JetBrains_Mono } from "next/font/google";
+import { Outfit } from "next/font/google";
 import BottomBarGate from "../components/BottomBarGate";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Outfit: the one face for the whole site, the same as Angel's EstimateGuard
+// and ReviewEngine apps. Heavy and tight for display, regular for reading.
+// It is also the hero LCP text, so preload it.
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-// Anton — the heavy condensed display face behind the headlines. It's the
-// hero LCP text, so preload it. Single weight, designed for uppercase.
-const anton = Anton({
-  variable: "--font-anton",
-  subsets: ["latin"],
-  display: "swap",
-  weight: "400",
+  weight: ["400", "500", "600", "700", "800"],
   preload: true,
-});
-
-// JetBrains Mono — technical/spec voice: eyebrows, chips, stats, claim data.
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -78,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f2e9",
+  themeColor: "#eeebe6",
   viewportFit: "cover",
 };
 
@@ -90,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${anton.variable} ${jetbrainsMono.variable}`}
+      className={outfit.variable}
     >
       <body>
         <a href="#main" className="skip-link">

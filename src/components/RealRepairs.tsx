@@ -109,43 +109,50 @@ export default function RealRepairs() {
   if (JOBS.length === 0) return null;
 
   return (
-    <section id="real-repairs" className="bg-surface py-24 md:py-32">
+    <section id="real-repairs" className="bg-background py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <ScrollReveal>
           <p className="eyebrow text-accent-orange">Real work</p>
-          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+          <h2 className="mt-4 display text-4xl text-foreground sm:text-5xl md:text-6xl">
             Real cars.
             <br />
             <span className="text-accent-lime">Real repairs.</span>
           </h2>
-          <p className="mt-4 max-w-xl font-body text-lg text-muted">
+          <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-muted">
             Jobs I personally estimated at the shop where I work — from the
             moment they rolled in to the day they drove off. No stock photos.
           </p>
         </ScrollReveal>
 
-        <div className="mt-14 flex flex-col gap-12">
+        <div className="mt-10 flex flex-col gap-5 md:mt-14 md:gap-6">
           {JOBS.map((job, i) => (
             <ScrollReveal key={job.id} delay={i * 0.05}>
-              <div className="rounded-3xl border border-border bg-background p-6 md:p-8">
+              <div className="rounded-[var(--radius-card)] bg-surface p-5 shadow-[var(--shadow-card)] md:p-7">
                 <div className="flex flex-wrap items-baseline justify-between gap-3">
                   <h3 className="display text-2xl text-foreground md:text-3xl">
                     {job.vehicle}
                   </h3>
                   {job.bill && (
-                    <span className="spec-chip border-accent-lime/40 text-accent-lime">
+                    <span className="inline-flex items-center rounded-full bg-accent-soft px-3 py-1.5 font-display text-xs font-bold leading-none text-accent-lime">
                       Final bill {job.bill}
                     </span>
                   )}
                 </div>
-                <p className="mt-2 max-w-2xl font-body text-base text-muted">
+                <p className="mt-2 max-w-2xl font-body text-base leading-relaxed text-muted">
                   {job.note}
                 </p>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {/* Phone: "came in" and "in progress" side by side, and the
+                    finished car full width underneath, so the payoff is the
+                    biggest photo and nothing hides off-screen.
+                    Wider screens: the three stages in a row. */}
+                <div className="mt-5 grid grid-cols-2 gap-x-2.5 gap-y-4 sm:grid-cols-3 sm:gap-3 md:mt-6 md:gap-4">
                   {STAGES.map((stage) => (
-                    <figure key={stage.key} className="overflow-hidden rounded-2xl">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
+                    <figure
+                      key={stage.key}
+                      className={stage.key === "after" ? "col-span-2 sm:col-span-1" : undefined}
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-inner)] bg-surface-light">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={job.images[stage.key]}
@@ -155,7 +162,17 @@ export default function RealRepairs() {
                           decoding="async"
                         />
                       </div>
-                      <figcaption className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
+                      <figcaption
+                        className={`mt-2.5 flex items-center gap-2 font-display text-xs font-bold uppercase tracking-[0.12em] ${
+                          stage.key === "after" ? "text-accent-orange" : "text-muted"
+                        }`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={`h-1.5 w-1.5 rounded-full ${
+                            stage.key === "after" ? "bg-accent-orange" : "bg-muted/40"
+                          }`}
+                        />
                         {stage.label}
                       </figcaption>
                     </figure>

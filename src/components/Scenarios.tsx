@@ -2,7 +2,22 @@
 
 import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
-import { MessageIcon } from "./Icons";
+import type { ComponentType } from "react";
+import { MessageIcon, ImpactIcon, RunIcon, ScaleIcon, BanIcon, ClockIcon, DollarIcon } from "./Icons";
+
+// Each scenario keeps its emoji in the data; it renders as a site SVG icon.
+const SVG_FOR: Record<string, ComponentType<{ className?: string }>> = {
+  "💥": ImpactIcon,
+  "🏃": RunIcon,
+  "⚖️": ScaleIcon,
+  "🚫": BanIcon,
+  "⏳": ClockIcon,
+  "💸": DollarIcon,
+};
+function ScenarioIcon({ icon, className }: { icon: string; className?: string }) {
+  const Svg = SVG_FOR[icon];
+  return Svg ? <Svg className={className ?? "h-5 w-5"} /> : <>{icon}</>;
+}
 
 const SCENARIOS = [
   {
@@ -179,69 +194,71 @@ export default function Scenarios() {
   };
 
   return (
-    <section id="scenarios" className="bg-background py-24 md:py-32">
+    <section id="scenarios" className="bg-background py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <ScrollReveal>
           <p className="eyebrow text-accent-orange">Pick your situation</p>
-          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+          <h2 className="mt-4 display text-4xl text-foreground sm:text-5xl md:text-6xl">
             What happened
             <br />
             <span className="text-accent-lime">to you?</span>
           </h2>
-          <p className="mt-4 max-w-xl font-body text-lg text-muted">
+          <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-muted">
             Every crash plays out differently. Tap yours and I&apos;ll tell you
             exactly what to do in the next 24 hours.
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-surface">
-            <div className="grid md:grid-cols-[minmax(240px,1fr)_2fr]">
+          <div className="mt-10 overflow-hidden rounded-[var(--radius-card)] bg-surface shadow-[var(--shadow-card)] md:mt-14">
+            <div className="grid md:grid-cols-[minmax(260px,1fr)_2fr]">
               {/* Scenario picker */}
-              <div className="flex flex-col gap-2 border-b border-border p-4 md:border-b-0 md:border-r md:p-6">
-                {SCENARIOS.map((s) => {
-                  const isActive = s.id === activeId;
-                  return (
-                    <button
-                      key={s.id}
-                      onClick={() => {
-                        setActiveId(s.id);
-                        setCopied(false);
-                      }}
-                      aria-pressed={isActive}
-                      className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left font-display text-sm font-semibold transition-colors md:text-base ${
-                        isActive
-                          ? "bg-accent-orange text-background"
-                          : "text-muted hover:bg-background hover:text-foreground"
-                      }`}
-                    >
-                      <span className="text-xl" aria-hidden="true">
-                        {s.icon}
-                      </span>
-                      {s.title}
-                    </button>
-                  );
-                })}
+              <div className="p-3 md:p-4">
+                <div className="flex flex-col gap-2 rounded-[var(--radius-inner)] bg-surface-light p-2.5 md:h-full md:gap-1 md:p-2">
+                  {SCENARIOS.map((s) => {
+                    const isActive = s.id === activeId;
+                    return (
+                      <button
+                        key={s.id}
+                        onClick={() => {
+                          setActiveId(s.id);
+                          setCopied(false);
+                        }}
+                        aria-pressed={isActive}
+                        className={`flex min-h-11 items-center gap-2.5 rounded-full px-4 py-2 text-left font-display text-sm font-semibold transition-[background-color,color,box-shadow,transform] duration-150 active:scale-[0.97] md:min-h-12 md:gap-3 md:rounded-[var(--radius-inner)] md:text-base ${
+                          isActive
+                            ? "bg-accent-orange text-white shadow-[var(--shadow-card)]"
+                            : "bg-surface text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] hover:bg-background md:bg-transparent md:shadow-none md:hover:bg-surface md:hover:shadow-[var(--shadow-card)]"
+                        }`}
+                      >
+                        <span className="text-lg leading-none md:text-xl" aria-hidden="true">
+                          <ScenarioIcon icon={s.icon} />
+                        </span>
+                        {s.title}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Detail panel */}
-              <div className="p-6 md:p-10" aria-live="polite">
+              <div className="px-5 pb-6 pt-4 md:py-10 md:pl-6 md:pr-10" aria-live="polite">
                 <div key={active.id} className="animate-fade-rise">
-                    <p className="font-body text-base italic leading-relaxed text-muted">
+                    <p className="font-display text-lg font-medium leading-snug tracking-tight text-foreground md:text-xl">
                       &ldquo;{active.hook}&rdquo;
                     </p>
 
-                    <ol className="mt-8 space-y-5">
+                    <ol className="mt-7 space-y-5 md:mt-8">
                       {active.steps.map((step, i) => (
                         <li key={i} className="flex gap-4">
-                          <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-background font-display text-sm font-bold text-accent-lime">
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft font-display text-sm font-bold text-accent-lime">
                             {i + 1}
                           </span>
-                          <div>
-                            <p className="font-display text-base font-semibold text-foreground md:text-lg">
+                          <div className="pt-1">
+                            <p className="font-display text-base font-bold leading-snug tracking-tight text-foreground md:text-lg">
                               {step.do}
                             </p>
-                            <p className="mt-1 font-body text-sm leading-relaxed text-muted">
+                            <p className="mt-1.5 font-body text-[15px] leading-relaxed text-muted">
                               {step.why}
                             </p>
                           </div>
@@ -249,24 +266,24 @@ export default function Scenarios() {
                       ))}
                     </ol>
 
-                    <div className="mt-8 rounded-2xl border border-border bg-background p-5">
-                      <p className="font-display text-xs font-semibold uppercase tracking-widest text-muted">
+                    <div className="mt-8 rounded-[var(--radius-inner)] bg-surface-light p-4 md:p-6">
+                      <p className="eyebrow text-accent-lime">
                         Send me this — I&apos;ll take it from there
                       </p>
-                      <p className="mt-3 font-body text-sm leading-relaxed text-foreground">
+                      <p className="mt-3 rounded-[18px] rounded-bl-md bg-surface px-4 py-3 font-body text-[15px] leading-relaxed text-foreground shadow-[var(--shadow-card)]">
                         &ldquo;{active.textPrompt}&rdquo;
                       </p>
                       <div className="mt-4 flex flex-wrap gap-3">
                         <a
                           href={`sms:+12132792992?body=${encodeURIComponent(active.textPrompt)}`}
-                          className="inline-flex items-center gap-2 rounded-full bg-accent-orange px-5 py-2.5 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent-orange px-5 font-display text-sm font-bold text-white transition-[transform,background-color] duration-150 hover:bg-accent-lime active:scale-[0.97] md:min-h-12 md:px-6 md:text-base"
                         >
                           <MessageIcon className="h-4 w-4" />
                           Text me this
                         </a>
                         <button
                           onClick={copyText}
-                          className="inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 font-display text-sm font-semibold text-foreground transition-colors hover:border-foreground/40"
+                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-surface px-5 font-display text-sm font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[transform,background-color] duration-150 hover:bg-background active:scale-[0.97] md:min-h-12 md:px-6 md:text-base"
                         >
                           {copied ? "Copied ✓" : "Copy text"}
                         </button>
@@ -279,11 +296,11 @@ export default function Scenarios() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.25}>
-          <p className="mt-8 text-center font-body text-sm text-muted">
+          <p className="mt-8 text-center font-body text-sm text-muted md:text-base">
             Want to know every move they&apos;ll make before they make it?{" "}
             <a
               href="/playbook"
-              className="font-semibold text-accent-orange transition-colors hover:text-accent-lime"
+              className="font-semibold text-accent-orange underline-offset-4 transition-colors hover:text-accent-lime hover:underline"
             >
               Read the Playbook →
             </a>

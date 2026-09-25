@@ -4,12 +4,12 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function About() {
   return (
-    <section id="about" className="bg-background py-24 md:py-32">
+    <section id="about" className="overflow-x-clip bg-background py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+        <div className="grid items-center gap-8 overflow-hidden rounded-[var(--radius-card)] bg-surface p-3 shadow-[var(--shadow-card)] sm:p-4 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-4 lg:gap-8">
           <ScrollReveal direction="left">
-            <figure className="mx-auto w-full max-w-md">
-              <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface">
+            <figure className="w-full">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] bg-surface-light md:aspect-square">
                 {/* Real work, not a stock face — a front-end rebuild Angel
                     estimated, mid-teardown. Swap for his headshot when ready. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -21,18 +21,18 @@ export default function About() {
                   decoding="async"
                 />
               </div>
-              <figcaption className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
+              <figcaption className="mt-3 px-2 font-body text-[0.8rem] font-medium leading-snug text-muted">
                 One of mine — the Jetta from the gallery, mid-rebuild
               </figcaption>
             </figure>
           </ScrollReveal>
 
-          <ScrollReveal direction="right">
+          <ScrollReveal direction="right" className="px-3 pb-5 sm:px-5 md:py-8 md:pl-4 md:pr-10 lg:pr-14">
             <p className="eyebrow text-accent-orange">Why trust me?</p>
-            <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl">
+            <h2 className="mt-3 display text-5xl text-foreground md:text-6xl">
               I&apos;m Angel.
             </h2>
-            <div className="mt-6 space-y-4 font-body text-base leading-relaxed text-muted md:text-lg">
+            <div className="mt-6 space-y-4 font-body text-base leading-relaxed text-muted md:text-[1.075rem]">
               <p>
                 I write collision estimates for a living. I see what shops
                 charge, what insurers approve, and where people get screwed in
@@ -55,7 +55,7 @@ export default function About() {
             <div className="mt-8">
               <a
                 href="#get-help"
-                className="inline-flex items-center rounded-full bg-accent-orange px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+                className="inline-flex h-12 items-center rounded-full bg-accent-orange px-6 font-display text-base font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97]"
               >
                 Tell me what happened →
               </a>

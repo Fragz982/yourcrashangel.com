@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckIcon } from "../../components/Icons";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  MessageIcon,
+  PhoneIcon,
+} from "../../components/Icons";
 
 export const metadata: Metadata = {
   title: "What To Do After A Crash — Free Checklist | yourcrashangel",
@@ -83,40 +90,56 @@ const CHECKLIST_ITEMS = [
   },
 ];
 
+// One card, one button language for the whole site (EstimateGuard / flight).
+const card =
+  "rounded-[var(--radius-card)] bg-surface shadow-[var(--shadow-card)]";
+const btnPrimary =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent-orange px-6 text-base font-bold tracking-[-0.01em] text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,scale] duration-150 hover:bg-accent-lime active:scale-[0.97]";
+const btnSecondary =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-surface px-6 text-base font-bold tracking-[-0.01em] text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,scale] duration-150 hover:bg-surface-light active:scale-[0.97]";
+const nextCard = `${card} group relative flex flex-col p-6 pr-16 transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] md:p-7 md:pr-16`;
+const nextArrow =
+  "absolute top-6 right-6 grid h-9 w-9 place-items-center rounded-full bg-surface-light text-foreground transition-colors group-hover:bg-accent-orange group-hover:text-white md:top-7";
+
 export default function ChecklistPage() {
   return (
+    <>
+    <Navbar />
     <div id="main" className="min-h-screen bg-background">
-      <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-3xl px-5 pb-10 pt-28 md:px-8 md:pb-16 md:pt-32">
         <Link
           href="/"
-          className="inline-block eyebrow text-accent-orange transition-colors hover:text-accent-lime"
+          className="eyebrow inline-flex h-11 items-center rounded-full bg-surface px-4 text-accent-orange shadow-[inset_0_0_0_1px_var(--color-border)] transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
         </Link>
 
-        <h1 className="mt-8 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+        <h1 className="mt-10 display text-5xl text-foreground sm:text-6xl md:text-7xl">
           What To Do
           <br />
-          <span className="text-accent-lime">After A Crash</span>
+          <span className="text-accent-orange">After A Crash</span>
         </h1>
-        <p className="mt-4 font-body text-lg text-muted">
+        <p className="mt-5 max-w-2xl font-body text-lg leading-relaxed text-muted md:text-xl">
           Free checklist from a real collision estimator. Screenshot this,
           bookmark it, or save it for when you need it. Hopefully you never do.
         </p>
 
-        <div className="mt-12 space-y-10">
+        <div className="mt-10 flex flex-col gap-4 md:mt-12 md:gap-5">
           {CHECKLIST_ITEMS.map((section) => (
-            <div key={section.category}>
+            <div key={section.category} className={`${card} p-6 md:p-8`}>
               <h2 className="display text-2xl text-accent-orange md:text-3xl">
                 {section.category}
               </h2>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-3 divide-y divide-border">
                 {section.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border border-border bg-surface">
-                      <CheckIcon className="h-3 w-3 text-accent-lime" />
+                  <li
+                    key={i}
+                    className="flex items-start gap-3.5 py-3.5 last:pb-0"
+                  >
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-orange">
+                      <CheckIcon className="h-3.5 w-3.5" />
                     </span>
-                    <span className="font-body text-base leading-relaxed text-muted">
+                    <span className="font-body text-base leading-relaxed text-foreground/80">
                       {item}
                     </span>
                   </li>
@@ -126,64 +149,56 @@ export default function ChecklistPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-border bg-surface p-8">
-          <h2 className="font-display text-2xl font-bold text-foreground">
+        <div className="mt-12 rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-lift)] sm:p-8 md:p-10">
+          <h2 className="display text-3xl text-foreground md:text-4xl">
             Need help reading your estimate?
           </h2>
-          <p className="mt-3 font-body text-base text-muted">
+          <p className="mt-3 max-w-xl font-body text-lg leading-relaxed text-muted">
             Text me a photo of the damage or your estimate. I&apos;ll break it
             down in plain English. Free, no strings attached.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="sms:+12132792992"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105"
-            >
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <a href="sms:+12132792992" className={btnPrimary}>
+              <MessageIcon className="h-4 w-4" />
               Text: (213) 279-2992
             </a>
-            <a
-              href="tel:+12132792992"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-border px-6 py-3 font-display text-sm font-semibold text-foreground transition-colors hover:border-foreground/40"
-            >
+            <a href="tel:+12132792992" className={btnSecondary}>
+              <PhoneIcon className="h-4 w-4" />
               Call: (213) 279-2992
             </a>
           </div>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/playbook"
-            className="group rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent-orange/30"
-          >
-            <p className="font-display text-xs font-semibold uppercase tracking-widest text-accent-orange">
-              Next up
-            </p>
-            <p className="mt-2 font-display text-lg font-bold text-foreground">
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 md:gap-5">
+          <Link href="/playbook" className={nextCard}>
+            <span aria-hidden="true" className={nextArrow}>
+              <ChevronDownIcon className="h-4 w-4 -rotate-90" />
+            </span>
+            <p className="eyebrow text-accent-orange">Next up</p>
+            <p className="mt-3 font-display text-xl font-bold tracking-[-0.02em] text-foreground">
               The Insurance Playbook
             </p>
-            <p className="mt-1 font-body text-sm text-muted">
+            <p className="mt-1.5 font-body text-[0.95rem] leading-relaxed text-muted">
               The 6 moves they&apos;ll run on you — and the counter for each.
             </p>
           </Link>
-          <Link
-            href="/decoder"
-            className="group rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent-orange/30"
-          >
-            <p className="font-display text-xs font-semibold uppercase tracking-widest text-accent-lime">
-              Also useful
-            </p>
-            <p className="mt-2 font-display text-lg font-bold text-foreground">
+          <Link href="/decoder" className={nextCard}>
+            <span aria-hidden="true" className={nextArrow}>
+              <ChevronDownIcon className="h-4 w-4 -rotate-90" />
+            </span>
+            <p className="eyebrow text-accent-lime">Also useful</p>
+            <p className="mt-3 font-display text-xl font-bold tracking-[-0.02em] text-foreground">
               The Jargon Decoder
             </p>
-            <p className="mt-1 font-body text-sm text-muted">
+            <p className="mt-1.5 font-body text-[0.95rem] leading-relaxed text-muted">
               24 adjuster words translated into plain English.
             </p>
           </Link>
         </div>
 
-        <div className="mt-12 rounded-xl bg-background p-6">
+        <div className="mt-12 border-t border-border pt-6">
           <p className="font-body text-xs leading-relaxed text-muted">
-            <strong className="text-muted">Disclaimer:</strong> This checklist
+            <strong className="text-foreground">Disclaimer:</strong> This checklist
             is for educational and informational purposes only. It is not legal,
             insurance, financial, or professional advice. Every accident and
             claim is different. For advice specific to your situation, consult a
@@ -203,5 +218,7 @@ export default function ChecklistPage() {
         </p>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

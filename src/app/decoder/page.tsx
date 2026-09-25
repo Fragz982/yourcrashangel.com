@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { MessageIcon } from "../../components/Icons";
 
 export const metadata: Metadata = {
@@ -180,87 +182,103 @@ const TERMS = [
   },
 ];
 
+// One pill language for the whole site (matches the navbar and the flight):
+// the orange primary and the white hairline secondary, 48px tall.
+const primaryBtn =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent-orange px-6 text-[0.95rem] font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97]";
+const secondaryBtn =
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-surface px-6 text-[0.95rem] font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,transform] hover:bg-surface-light active:scale-[0.97]";
+
 export default function DecoderPage() {
   return (
-    <div id="main" className="min-h-screen bg-background">
-      <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
+    <>
+      <Navbar />
+      <main id="main" className="min-h-screen bg-background">
+      <div className="mx-auto max-w-5xl px-5 pt-28 pb-16 md:px-8 md:pt-36 md:pb-24">
         <Link
           href="/"
-          className="inline-block eyebrow text-accent-orange transition-colors hover:text-accent-lime"
+          className="-ml-1 inline-flex min-h-11 items-center rounded-full px-1 eyebrow text-accent-orange transition-colors hover:text-accent-lime"
         >
           ← Back to yourcrashangel
         </Link>
 
-        <p className="mt-10 eyebrow text-accent-orange">Their language, translated</p>
+        <p className="mt-6 eyebrow text-accent-orange">Their language, translated</p>
         <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
           Speak adjuster.
           <br />
           <span className="text-accent-lime">Fluently.</span>
         </h1>
-        <p className="mt-4 font-body text-lg leading-relaxed text-muted">
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
           Adjusters and shops talk in code — and every confusing word is a place
           money can quietly move away from you. Here are the 24 terms
           you&apos;ll actually hear, in the order you&apos;ll hear them, in
           plain English.
         </p>
 
-        <div className="mt-14 divide-y divide-border">
+        <div className="mt-12 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-5">
           {TERMS.map((entry, i) => (
-            <article key={entry.term} className="py-8">
-              <div className="flex items-baseline gap-4">
+            <article
+              key={entry.term}
+              className="flex flex-col rounded-[var(--radius-card)] bg-surface p-5 shadow-[var(--shadow-card)] sm:p-6 md:p-7"
+            >
+              <div className="flex items-start gap-3">
                 <span
-                  className="font-mono text-sm text-muted"
+                  className="mt-0.5 grid h-8 min-w-8 shrink-0 place-items-center rounded-full bg-accent-soft px-2 text-[0.8rem] font-extrabold tabular-nums text-accent-orange"
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">
+                <h2 className="text-xl font-extrabold leading-snug tracking-[-0.02em] text-foreground md:text-[1.35rem]">
                   {entry.term}
                 </h2>
               </div>
-              <p className="mt-3 font-body text-base leading-relaxed text-muted">
+              <p className="mt-3 text-base leading-relaxed text-muted">
                 {entry.plainEnglish}
               </p>
-              <p className="mt-3 font-body text-sm leading-relaxed text-foreground/85">
-                <strong className="eyebrow text-[0.7rem] text-accent-lime">
-                  Why it matters:{" "}
-                </strong>
-                {entry.whyItMatters}
-              </p>
+              <div className="mt-auto pt-4">
+                <p className="rounded-[var(--radius-inner)] bg-surface-light p-4 text-sm leading-relaxed text-foreground">
+                  <strong className="eyebrow text-accent-lime">
+                    Why it matters:{" "}
+                  </strong>
+                  {entry.whyItMatters}
+                </p>
+              </div>
             </article>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-8 rounded-2xl border border-border bg-surface p-8">
-          <h2 className="font-display text-2xl font-bold text-foreground">
-            Heard a word that&apos;s not on here?
-          </h2>
-          <p className="mt-3 font-body text-base text-muted">
-            Text me exactly what they said — screenshot, voicemail, estimate
-            line, whatever. I&apos;ll translate it and tell you if it&apos;s a
-            problem. Free, no strings attached.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-12 rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-lift)] sm:p-8 md:flex md:items-center md:justify-between md:gap-10 md:p-10">
+          <div className="max-w-xl">
+            <h2 className="text-2xl font-extrabold tracking-[-0.03em] text-foreground md:text-3xl">
+              Heard a word that&apos;s not on here?
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-muted md:text-lg">
+              Text me exactly what they said — screenshot, voicemail, estimate
+              line, whatever. I&apos;ll translate it and tell you if it&apos;s a
+              problem. Free, no strings attached.
+            </p>
+          </div>
+          <div className="mt-7 flex shrink-0 flex-col gap-3 sm:flex-row md:mt-0 md:flex-col">
             <a
               href="sms:+12132792992"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105"
+              className={primaryBtn}
             >
               <MessageIcon className="h-4 w-4" />
               Text: (213) 279-2992
             </a>
             <Link
               href="/playbook"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-border px-6 py-3 font-display text-sm font-semibold text-foreground transition-colors hover:border-foreground/40"
+              className={secondaryBtn}
             >
               Next: see their playbook →
             </Link>
           </div>
         </div>
 
-        <div className="mt-12 rounded-xl bg-surface p-6">
-          <p className="font-body text-xs leading-relaxed text-muted">
-            <strong className="text-muted">Disclaimer:</strong> This page is for
+        <div className="mt-10 rounded-[var(--radius-card)] bg-surface p-6 shadow-[inset_0_0_0_1px_var(--color-border)]">
+          <p className="text-xs leading-relaxed text-muted">
+            <strong className="text-foreground">Disclaimer:</strong> This page is for
             educational and informational purposes only. It is not legal,
             insurance, financial, or professional advice. Every accident and
             claim is different. For advice specific to your situation, consult a
@@ -268,17 +286,19 @@ export default function DecoderPage() {
           </p>
         </div>
 
-        <p className="mt-8 text-center font-display text-sm text-muted">
+        <p className="mt-8 text-center text-sm text-muted">
           Made by{" "}
           <Link
             href="/"
-            className="font-semibold text-accent-orange transition-colors hover:text-accent-lime"
+            className="font-bold text-accent-orange transition-colors hover:text-accent-lime"
           >
             @yourcrashangel
           </Link>{" "}
           — The Accident Translator
         </p>
       </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -98,6 +98,16 @@ interface Vehicle {
   body: string;
 }
 
+// One pill language for the whole site (matches the navbar and the flight):
+// full width on a phone, content width from sm up.
+const primaryBtn =
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent-orange px-7 text-base font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97] sm:w-auto";
+const secondaryBtn =
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-surface px-7 text-base font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,transform] hover:bg-surface-light active:scale-[0.97] sm:w-auto";
+// Text fields: 14px insets with a hairline; the global focus outline marks focus.
+const fieldCls =
+  "h-12 w-full min-w-0 rounded-[var(--radius-inner)] bg-surface px-4 text-[0.95rem] text-foreground outline-none shadow-[inset_0_0_0_1px_var(--color-border)] placeholder:text-muted sm:flex-1";
+
 export default function EstimateTool() {
   const [step, setStep] = useState(1);
 
@@ -246,7 +256,7 @@ export default function EstimateTool() {
   const cat = classifyBody(vehicle?.body);
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="rounded-[var(--radius-card)] bg-surface p-5 shadow-[var(--shadow-lift)] sm:p-8 md:p-10">
       {/* Stepper */}
       <div className="mb-8 flex items-center gap-2" aria-hidden="true">
         {[1, 2, 3].map((n) => (
@@ -266,7 +276,7 @@ export default function EstimateTool() {
           <h2 className="mt-3 display text-4xl text-foreground sm:text-5xl">
             What got hit?
           </h2>
-          <p className="mt-4 font-body text-base leading-relaxed text-muted">
+          <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">
             Type or paste your VIN — it&apos;s on your dashboard by the
             windshield, the driver&apos;s door jamb, or your insurance card. I&apos;ll
             pull up your exact vehicle.
@@ -283,15 +293,19 @@ export default function EstimateTool() {
             maxLength={17}
             autoComplete="off"
             spellCheck={false}
-            className="mt-6 w-full rounded-2xl border border-border bg-surface px-5 py-4 font-mono text-lg tracking-wider text-foreground outline-none placeholder:text-muted/60 focus:border-accent-orange"
+            className={`mt-6 h-16 w-full rounded-[var(--radius-inner)] bg-surface-light px-5 text-lg font-semibold tabular-nums tracking-[0.1em] text-foreground outline-none transition-[background-color,box-shadow] placeholder:font-normal placeholder:tracking-normal placeholder:text-muted focus:bg-surface sm:text-xl ${
+              vinError
+                ? "shadow-[inset_0_0_0_1.5px_var(--color-accent-orange)]"
+                : "shadow-[inset_0_0_0_1px_var(--color-border)]"
+            }`}
           />
           {vinError && (
-            <p className="mt-3 font-body text-sm text-accent-orange">{vinError}</p>
+            <p className="mt-3 rounded-[var(--radius-inner)] bg-accent-soft px-4 py-3 text-sm font-medium leading-relaxed text-accent-lime">{vinError}</p>
           )}
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <button
               onClick={() => setScanning(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-7 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+              className={primaryBtn}
             >
               <CameraIcon className="h-5 w-5" />
               Scan my VIN
@@ -299,7 +313,7 @@ export default function EstimateTool() {
             <button
               onClick={() => decodeVin()}
               disabled={decoding}
-              className="inline-flex items-center justify-center rounded-full border-2 border-border px-7 py-3.5 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/30 disabled:opacity-60"
+              className={`${secondaryBtn} disabled:opacity-60`}
             >
               {decoding ? "Looking it up…" : "Pull up my car"}
             </button>
@@ -309,11 +323,11 @@ export default function EstimateTool() {
               setVehicle(null);
               setStep(2);
             }}
-            className="mt-4 inline-flex w-full items-center justify-center rounded-full border-2 border-border px-7 py-3.5 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/30 sm:w-auto"
+            className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-surface-light px-4 py-2.5 text-center text-sm leading-snug font-bold text-foreground transition-[background-color,transform] hover:bg-border active:scale-[0.97] sm:w-auto sm:px-6 sm:text-[0.95rem]"
           >
             Skip the VIN — just show the damage →
           </button>
-          <p className="mt-2 font-body text-xs text-muted">
+          <p className="mt-3 text-xs leading-relaxed text-muted">
             No VIN needed for a ballpark. It only makes the numbers a bit more
             exact.
           </p>
@@ -325,16 +339,16 @@ export default function EstimateTool() {
         <div>
           <p className="eyebrow text-accent-orange">Step 2 — The damage</p>
           {vehicle ? (
-            <div className="mt-3 flex items-center gap-4 rounded-2xl border border-border bg-surface p-4">
+            <div className="mt-4 flex items-center gap-4 rounded-[var(--radius-inner)] bg-surface-light p-4 shadow-[inset_0_0_0_1px_var(--color-border)]">
               <div className="w-24 shrink-0">
                 <BodyIllustration cat={cat} />
               </div>
-              <div>
-                <p className="display text-xl text-foreground">
+              <div className="min-w-0">
+                <p className="text-xl font-extrabold leading-tight tracking-[-0.02em] text-foreground">
                   {vehicle.year} {vehicle.make} {vehicle.model}
                 </p>
                 {vehicle.trim && (
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted">
+                  <p className="mt-1 text-sm font-medium text-muted">
                     {vehicle.trim}
                     {vehicle.body ? ` · ${vehicle.body}` : ""}
                   </p>
@@ -347,8 +361,8 @@ export default function EstimateTool() {
             </h2>
           )}
 
-          <p className="mt-8 font-display text-base font-semibold text-foreground">
-            Where&apos;s the damage? <span className="text-muted">(tap all that apply)</span>
+          <p className="mt-8 text-base font-bold text-foreground md:text-lg">
+            Where&apos;s the damage? <span className="font-medium text-muted">(tap all that apply)</span>
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {AREAS.map((a) => {
@@ -358,10 +372,10 @@ export default function EstimateTool() {
                   key={a.id}
                   onClick={() => toggleArea(a.id)}
                   aria-pressed={on}
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2 font-display text-sm font-semibold transition-colors ${
+                  className={`inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-sm font-bold transition-[background-color,box-shadow,color,transform] active:scale-[0.97] ${
                     on
-                      ? "border-accent-orange bg-accent-orange text-background"
-                      : "border-border bg-surface text-foreground hover:border-foreground/30"
+                      ? "bg-accent-orange text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_6px_16px_-8px_rgb(33_26_20/0.35)]"
+                      : "bg-surface-light text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] hover:bg-surface"
                   }`}
                 >
                   {on && <CheckIcon className="h-3.5 w-3.5" />}
@@ -371,10 +385,10 @@ export default function EstimateTool() {
             })}
           </div>
 
-          <p className="mt-8 font-display text-base font-semibold text-foreground">
+          <p className="mt-8 text-base font-bold text-foreground md:text-lg">
             How bad is it?
           </p>
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
             {SEVERITIES.map((s) => {
               const on = severity === s.id;
               return (
@@ -382,16 +396,16 @@ export default function EstimateTool() {
                   key={s.id}
                   onClick={() => setSeverity(s.id)}
                   aria-pressed={on}
-                  className={`rounded-2xl border p-4 text-left transition-colors ${
+                  className={`rounded-[var(--radius-inner)] p-4 text-left transition-[background-color,box-shadow] ${
                     on
-                      ? "border-accent-orange bg-accent-orange/10"
-                      : "border-border bg-surface hover:border-foreground/30"
+                      ? "bg-accent-soft shadow-[inset_0_0_0_2px_var(--color-accent-orange)]"
+                      : "bg-surface-light shadow-[inset_0_0_0_1px_var(--color-border)] hover:bg-surface"
                   }`}
                 >
-                  <span className="font-display text-base font-semibold text-foreground">
+                  <span className="text-base font-bold text-foreground">
                     {s.label}
                   </span>
-                  <span className="mt-0.5 block font-body text-sm text-muted">
+                  <span className="mt-0.5 block text-sm text-muted">
                     {s.hint}
                   </span>
                 </button>
@@ -399,10 +413,10 @@ export default function EstimateTool() {
             })}
           </div>
 
-          <p className="mt-8 font-display text-base font-semibold text-foreground">
+          <p className="mt-8 text-base font-bold text-foreground md:text-lg">
             Does it still drive safely?
           </p>
-          <div className="mt-3 flex gap-2">
+          <div className="mt-3 flex gap-2.5">
             {[
               { v: true, label: "Yes, it drives" },
               { v: false, label: "No / not sure" },
@@ -413,10 +427,10 @@ export default function EstimateTool() {
                   key={o.label}
                   onClick={() => setDrivable(o.v)}
                   aria-pressed={on}
-                  className={`flex-1 rounded-2xl border px-4 py-3 font-display text-sm font-semibold transition-colors ${
+                  className={`h-12 flex-1 rounded-full px-4 text-sm font-bold transition-[background-color,box-shadow,color,transform] active:scale-[0.97] ${
                     on
-                      ? "border-accent-orange bg-accent-orange text-background"
-                      : "border-border bg-surface text-foreground hover:border-foreground/30"
+                      ? "bg-accent-orange text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_6px_16px_-8px_rgb(33_26_20/0.35)]"
+                      : "bg-surface-light text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] hover:bg-surface"
                   }`}
                 >
                   {o.label}
@@ -425,11 +439,11 @@ export default function EstimateTool() {
             })}
           </div>
 
-          <p className="mt-8 font-display text-base font-semibold text-foreground">
+          <p className="mt-8 text-base font-bold text-foreground md:text-lg">
             Add photos of the damage{" "}
-            <span className="text-muted">(optional — for your text to me)</span>
+            <span className="font-medium text-muted">(optional — for your text to me)</span>
           </p>
-          <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border bg-surface px-5 py-5 font-display text-sm font-semibold text-muted transition-colors hover:border-accent-orange/40 hover:text-foreground">
+          <label className="mt-3 flex min-h-20 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-inner)] border-2 border-dashed border-border bg-surface-light px-5 py-5 text-sm font-bold text-muted transition-colors focus-within:border-accent-orange focus-within:text-foreground hover:border-accent-orange/50 hover:text-foreground">
             <CameraIcon className="h-5 w-5" />
             {photoCount > 0 ? `${photoCount} photo${photoCount > 1 ? "s" : ""} added` : "Take or choose photos"}
             {/* No `capture` attr: forcing the in-browser camera means photos
@@ -440,7 +454,7 @@ export default function EstimateTool() {
               type="file"
               accept="image/*"
               multiple
-              className="hidden"
+              className="sr-only"
               onChange={(e) => onPhotos(e.target.files)}
             />
           </label>
@@ -452,7 +466,7 @@ export default function EstimateTool() {
                   key={i}
                   src={u}
                   alt={`Damage photo ${i + 1}`}
-                  className="h-16 w-16 rounded-lg border border-border object-cover"
+                  className="h-16 w-16 rounded-[10px] object-cover ring-1 ring-border"
                 />
               ))}
             </div>
@@ -466,7 +480,7 @@ export default function EstimateTool() {
                 runAiEstimate();
               }}
               disabled={!areas.length || !severity}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-orange px-7 py-3.5 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
+              className={`${primaryBtn} disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-accent-orange disabled:active:scale-100`}
             >
               {!areas.length || !severity
                 ? "Pick the damage first ↑"
@@ -474,7 +488,7 @@ export default function EstimateTool() {
             </button>
             <button
               onClick={() => setStep(1)}
-              className="inline-flex items-center justify-center rounded-full border-2 border-border px-7 py-3.5 font-display text-base font-semibold text-foreground transition-colors hover:border-foreground/30"
+              className={secondaryBtn}
             >
               Back
             </button>
@@ -487,22 +501,22 @@ export default function EstimateTool() {
         <div aria-live="polite">
           <p className="eyebrow text-accent-orange">Step 3 — Your ballpark</p>
 
-          <div className="mt-4 rounded-3xl border border-border bg-surface p-7 text-center">
-            <p className="font-display text-sm font-semibold uppercase tracking-wider text-muted">
+          <div className="mt-4 rounded-[var(--radius-card)] bg-surface-light px-4 py-8 text-center shadow-[inset_0_0_0_1px_var(--color-border)] sm:p-10">
+            <p className="text-sm font-bold uppercase tracking-[0.08em] text-muted">
               {aiResult ? "AI read from your photos" : "Rough visual range"}
               {vehicle ? ` · ${vehicle.year} ${vehicle.make} ${vehicle.model}` : ""}
             </p>
             {aiLoading ? (
-              <p className="mt-3 font-body text-lg text-muted">
+              <p className="mt-4 text-lg font-semibold text-muted">
                 Reading your photos…
               </p>
             ) : (
-              <p className="mt-2 display text-5xl text-foreground sm:text-6xl">
+              <p className="mt-3 display text-[2.6rem] tabular-nums text-foreground sm:text-6xl md:text-7xl">
                 {money((aiResult ?? ballpark).lo)}–{money((aiResult ?? ballpark).hi)}
               </p>
             )}
             {!aiLoading && (
-              <p className="mt-3 font-body text-xs text-muted">
+              <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
                 In line with typical 2025 collision repair costs. Your real
                 number depends on an in-person teardown.
               </p>
@@ -510,11 +524,11 @@ export default function EstimateTool() {
           </div>
 
           {/* The non-negotiable framing */}
-          <div className="mt-5 rounded-2xl border-2 border-accent-orange/40 bg-accent-orange/5 p-5">
-            <p className="font-display text-base font-bold text-foreground">
+          <div className="mt-5 rounded-[var(--radius-inner)] bg-accent-soft p-5 shadow-[inset_0_0_0_1px_rgb(180_66_26/0.22)] sm:p-6">
+            <p className="text-base font-extrabold tracking-[-0.01em] text-foreground">
               Read this before you do anything.
             </p>
-            <p className="mt-2 font-body text-sm leading-relaxed text-foreground/90">
+            <p className="mt-2 text-sm leading-relaxed text-foreground">
               This is a <strong>visual ballpark only</strong> — guessed from the
               outside. It is <strong>not a quote</strong>. The real number only goes{" "}
               <strong>UP</strong> from here: once a shop pulls the panels off, they
@@ -524,8 +538,8 @@ export default function EstimateTool() {
           </div>
 
           {/* Insurance steer */}
-          <div className="mt-5 rounded-2xl border border-border bg-surface p-6">
-            <p className="font-display text-lg font-bold text-foreground">
+          <div className="mt-5 rounded-[var(--radius-inner)] bg-surface p-5 shadow-[inset_0_0_0_1px_var(--color-border)] sm:p-6">
+            <p className="text-lg font-extrabold tracking-[-0.02em] text-foreground">
               The smart move: file it through insurance.
             </p>
             <ul className="mt-4 space-y-3">
@@ -537,25 +551,27 @@ export default function EstimateTool() {
                 "Go through a shop's insurer program and you usually get a lifetime repair warranty.",
               ].map((b, i) => (
                 <li key={i} className="flex gap-3">
-                  <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-accent-lime" />
-                  <span className="font-body text-sm leading-relaxed text-muted">
+                  <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-soft">
+                    <CheckIcon className="h-3 w-3 text-accent-orange" />
+                  </span>
+                  <span className="text-sm leading-relaxed text-muted">
                     {b}
                   </span>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 font-body text-sm leading-relaxed text-foreground/90">
+            <p className="mt-4 text-sm leading-relaxed text-foreground">
               Pay cash out of pocket and every hidden-damage surprise is yours alone,
               with no safety net. That&apos;s exactly how people get buried.
             </p>
           </div>
 
           {/* Handoff */}
-          <div className="mt-5 rounded-2xl border border-border bg-background p-6">
-            <p className="font-display text-base font-bold text-foreground">
+          <div className="mt-5 rounded-[var(--radius-inner)] bg-surface-light p-5 shadow-[inset_0_0_0_1px_var(--color-border)] sm:p-6">
+            <p className="text-lg font-extrabold tracking-[-0.02em] text-foreground">
               Want the real read? Send it to me.
             </p>
-            <p className="mt-2 font-body text-sm text-muted">
+            <p className="mt-2 text-sm leading-relaxed text-muted">
               I&apos;ll text you back what it actually looks like and what to say to
               your insurer. Free.{" "}
               {photoCount > 0
@@ -564,7 +580,7 @@ export default function EstimateTool() {
             </p>
             <a
               href={`sms:+12132792992?body=${encodeURIComponent(smsBody)}`}
-              className="mt-5 inline-flex items-center gap-2.5 rounded-full bg-accent-orange px-7 py-4 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+              className={`mt-5 ${primaryBtn}`}
             >
               <MessageIcon className="h-5 w-5" />
               Text Angel the details
@@ -577,20 +593,20 @@ export default function EstimateTool() {
               name="crash-help"
               method="POST"
               action="/thanks"
-              className="mt-5 border-t border-border pt-4"
+              className="mt-6 border-t border-border pt-5"
             >
               <input type="hidden" name="form-name" value="crash-help" />
               <input type="hidden" name="message" value={`[From estimate tool] ${smsBody}`} />
-              <p className="font-body text-sm text-muted">
+              <p className="text-sm leading-relaxed text-muted">
                 Can&apos;t text right now? Leave your number — your ballpark
                 details ride along automatically:
               </p>
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-3 flex flex-col gap-2.5 sm:flex-row">
                 <input
                   name="name"
                   placeholder="First name"
                   autoComplete="given-name"
-                  className="flex-1 rounded-xl border border-border bg-surface px-4 py-3 font-body text-sm text-foreground outline-none placeholder:text-muted/60 focus:border-accent-orange"
+                  className={fieldCls}
                 />
                 <input
                   required
@@ -598,11 +614,11 @@ export default function EstimateTool() {
                   name="phone"
                   placeholder="Phone"
                   autoComplete="tel"
-                  className="flex-1 rounded-xl border border-border bg-surface px-4 py-3 font-body text-sm text-foreground outline-none placeholder:text-muted/60 focus:border-accent-orange"
+                  className={fieldCls}
                 />
                 <button
                   type="submit"
-                  className="rounded-xl bg-foreground px-6 py-3 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+                  className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-accent-orange px-6 text-sm font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97]"
                 >
                   Have Angel text me
                 </button>
@@ -610,10 +626,10 @@ export default function EstimateTool() {
             </form>
           </div>
 
-          <div className="mt-6 flex items-center justify-between">
+          <div className="mt-5 flex items-center justify-between">
             <button
               onClick={() => setStep(2)}
-              className="font-display text-sm font-semibold text-muted transition-colors hover:text-foreground"
+              className="-ml-3 inline-flex min-h-11 items-center rounded-full px-3 text-sm font-bold text-muted transition-colors hover:bg-surface-light hover:text-foreground"
             >
               ← Adjust the damage
             </button>
@@ -628,13 +644,13 @@ export default function EstimateTool() {
                 setPhotoUrls([]);
                 setPhotoCount(0);
               }}
-              className="font-display text-sm font-semibold text-muted transition-colors hover:text-foreground"
+              className="-mr-3 inline-flex min-h-11 items-center rounded-full px-3 text-sm font-bold text-muted transition-colors hover:bg-surface-light hover:text-foreground"
             >
               Start over
             </button>
           </div>
 
-          <p className="mt-8 rounded-xl bg-surface p-5 font-body text-xs leading-relaxed text-muted">
+          <p className="mt-6 rounded-[var(--radius-inner)] bg-surface p-5 text-xs leading-relaxed text-muted shadow-[inset_0_0_0_1px_var(--color-border)]">
             This rough range is for general information only — not a quote, appraisal,
             or guarantee, and not legal, insurance, or financial advice. Actual repair
             cost depends on a full in-person inspection. Nothing you enter here is

@@ -1,11 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { MessageIcon } from "./Icons";
 
 // Referral loop: the person who just got helped is the best distribution
 // channel there is. One tap forwards the site to the next crash victim.
 const SHARE_TEXT =
   "If you just got in an accident — this helped me. Free straight answers from a real LA collision estimator (what to say to insurance, what repairs should cost, total-loss math): https://yourcrashangel.com";
+
+// Secondary pill: white with a hairline, the same as every other quiet button.
+const secondary =
+  "inline-flex h-11 items-center rounded-full bg-surface px-5 text-sm font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,transform] hover:bg-surface-light active:scale-[0.97]";
 
 export default function ShareBlock() {
   const [copied, setCopied] = useState(false);
@@ -22,32 +27,33 @@ export default function ShareBlock() {
   };
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6">
-      <p className="font-display text-lg font-bold text-foreground">
+    <div className="rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-card)] md:p-7">
+      <p className="text-xl font-extrabold tracking-[-0.02em] text-foreground">
         Know someone who just crashed?
       </p>
-      <p className="mt-1 font-body text-sm text-muted">
+      <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted">
         The first 48 hours are when people sign the wrong things. Send them
         this before they do.
       </p>
-      <div className="mt-4 flex flex-wrap gap-3">
+      <div className="mt-5 flex flex-wrap gap-2.5">
         <a
           href={`sms:?body=${encodeURIComponent(SHARE_TEXT)}`}
-          className="inline-flex items-center rounded-full bg-accent-orange px-5 py-2.5 font-display text-sm font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-accent-orange px-5 text-sm font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97]"
         >
+          <MessageIcon className="h-4 w-4" />
           Text it to them
         </a>
         <a
           href={`https://wa.me/?text=${encodeURIComponent(SHARE_TEXT)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center rounded-full border-2 border-border px-5 py-2.5 font-display text-sm font-semibold text-foreground transition-colors hover:border-foreground/30"
+          className={secondary}
         >
           WhatsApp
         </a>
         <button
           onClick={copy}
-          className="inline-flex items-center rounded-full border-2 border-border px-5 py-2.5 font-display text-sm font-semibold text-foreground transition-colors hover:border-foreground/30"
+          className={secondary}
         >
           {copied ? "Copied ✓" : "Copy the message"}
         </button>

@@ -37,20 +37,26 @@ const FACTS = [
   },
 ];
 
+// One pill language for the whole site (matches the navbar and the flight).
+const primaryBtn =
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent-orange px-8 text-base font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97] sm:w-auto";
+const secondaryBtn =
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-surface px-8 text-base font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,transform] hover:bg-surface-light active:scale-[0.97] sm:w-auto";
+
 export default function Totaled() {
   return (
     <>
       <Navbar />
       <main id="main" className="bg-background">
-        <section className="pt-32 pb-16 md:pt-40">
-          <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <section className="pt-28 pb-12 md:pt-36 md:pb-14">
+          <div className="mx-auto max-w-3xl px-5 md:px-8">
             <p className="eyebrow text-accent-orange">Total loss, translated</p>
-            <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+            <h1 className="mt-4 display text-[2.6rem] text-foreground sm:text-6xl md:text-7xl">
               &ldquo;Totaled&rdquo; is math,
               <br />
               <span className="text-accent-lime">not a verdict.</span>
             </h1>
-            <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-muted">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
               &ldquo;Total loss&rdquo; doesn&apos;t mean your car is destroyed —
               it means an equation tipped. Here&apos;s the equation, in your
               hands for once.
@@ -58,22 +64,22 @@ export default function Totaled() {
           </div>
         </section>
 
-        <section className="pb-16">
+        <section className="pb-12 md:pb-16">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
             <TotalLossCalculator />
           </div>
         </section>
 
-        <section className="pb-16">
+        <section className="pb-12 md:pb-16">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 md:gap-5">
               {FACTS.map((f) => (
                 <div
                   key={f.q}
-                  className="rounded-3xl border border-border bg-surface-light p-6 md:p-8"
+                  className="rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-card)] md:p-8"
                 >
-                  <h2 className="display text-2xl text-foreground">{f.q}</h2>
-                  <p className="mt-3 font-body text-base leading-relaxed text-muted">
+                  <h2 className="text-xl font-extrabold leading-snug tracking-[-0.025em] text-balance text-foreground md:text-2xl">{f.q}</h2>
+                  <p className="mt-3 text-base leading-relaxed text-muted">
                     {f.a}
                   </p>
                 </div>
@@ -82,27 +88,27 @@ export default function Totaled() {
           </div>
         </section>
 
-        <section className="pb-24">
+        <section className="pb-20 md:pb-24">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <div className="rounded-3xl border border-border bg-surface p-8 text-center md:p-10">
-              <h2 className="display text-3xl text-foreground sm:text-4xl">
+            <div className="rounded-[var(--radius-card)] bg-surface p-7 text-center shadow-[var(--shadow-card)] md:p-12">
+              <h2 className="display text-3xl text-foreground sm:text-4xl md:text-5xl">
                 Staring at a total-loss letter?
               </h2>
-              <p className="mx-auto mt-3 max-w-md font-body text-base text-muted">
+              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-pretty text-muted md:text-lg">
                 Send it to me. I read these for a living and I&apos;ll tell you
                 — free — whether the math looks right and what I&apos;d do
                 next.
               </p>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link
                   href="/#get-help"
-                  className="rounded-full bg-accent-orange px-7 py-4 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+                  className={primaryBtn}
                 >
                   Get a free read
                 </Link>
                 <Link
                   href="/estimate"
-                  className="rounded-full border border-border bg-background px-7 py-4 font-display text-base font-semibold text-foreground transition-transform hover:scale-105 active:scale-95"
+                  className={secondaryBtn}
                 >
                   Ballpark my repair
                 </Link>

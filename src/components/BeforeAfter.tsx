@@ -40,23 +40,26 @@ export default function BeforeAfter() {
   );
 
   return (
-    <section id="before-after" className="bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+    <section id="before-after" className="bg-background py-20 md:py-28">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 md:px-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-14">
         <ScrollReveal>
           <p className="eyebrow text-accent-orange">The difference</p>
-          <h2 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+          <h2 className="mt-4 display text-4xl text-foreground sm:text-5xl md:text-6xl">
             Before &amp; After.
           </h2>
-          <p className="mt-4 max-w-xl font-body text-lg text-muted">
+          <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-muted lg:max-w-md">
             A real car, from a real job — same corner, before and after. Clean
             panel gaps, proper paint blend, like the hit never happened.
           </p>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.2} className="mt-12">
+        <ScrollReveal delay={0.15}>
+          {/* The photo sits in a white frame, like a card in his apps. 4:3 is
+              the photos' own shape, so nothing gets cropped or stretched. */}
+          <div className="rounded-[var(--radius-card)] bg-surface p-2 shadow-[var(--shadow-lift)] sm:p-2.5">
           <div
             ref={containerRef}
-            className="relative aspect-[16/10] w-full max-w-4xl cursor-col-resize touch-pan-y overflow-hidden rounded-2xl border border-border sm:aspect-[16/9]"
+            className="relative aspect-[4/3] w-full cursor-col-resize touch-pan-y select-none overflow-hidden rounded-[var(--radius-inner)] bg-surface-light"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -84,7 +87,7 @@ export default function BeforeAfter() {
               <img
                 src="/work/after.jpg"
                 alt="Gray Kia Forte fully repaired — straight panels and factory-fresh paint"
-                className="h-full w-full object-cover"
+                className="pointer-events-none h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
               />
@@ -99,7 +102,7 @@ export default function BeforeAfter() {
               <img
                 src="/work/before.jpg"
                 alt="Gray Kia Forte with driver-side and rear collision damage, as it arrived"
-                className="h-full w-full object-cover"
+                className="pointer-events-none h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
               />
@@ -107,10 +110,10 @@ export default function BeforeAfter() {
 
             {/* Slider handle */}
             <div
-              className="absolute top-0 bottom-0 z-10 w-0.5 bg-foreground"
+              className="absolute top-0 bottom-0 z-10 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_0_1px_rgb(29_26_23/0.14)]"
               style={{ left: `${position}%` }}
             >
-              <div className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-foreground bg-background shadow-lg">
+              <div className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-foreground shadow-[var(--shadow-lift)] ring-1 ring-black/5">
                 <svg
                   className="h-4 w-4 text-foreground"
                   viewBox="0 0 24 24"
@@ -125,17 +128,18 @@ export default function BeforeAfter() {
             </div>
 
             {/* Labels */}
-            <span className="spec-chip absolute bottom-4 left-4 bg-background/80 text-foreground backdrop-blur-sm">
+            <span className="absolute bottom-3 left-3 z-20 rounded-full bg-white/90 px-3 py-1.5 font-display text-xs font-bold text-foreground shadow-[var(--shadow-card)] backdrop-blur-sm sm:bottom-4 sm:left-4">
               Before
             </span>
-            <span className="spec-chip absolute bottom-4 right-4 bg-background/80 text-foreground backdrop-blur-sm">
+            <span className="absolute bottom-3 right-3 z-20 rounded-full bg-white/90 px-3 py-1.5 font-display text-xs font-bold text-foreground shadow-[var(--shadow-card)] backdrop-blur-sm sm:bottom-4 sm:right-4">
               After
             </span>
           </div>
 
-          <p className="mt-4 text-center font-body text-sm text-muted">
+          <p className="py-3 text-center font-body text-sm font-medium text-muted sm:py-3.5">
             ← Drag to compare →
           </p>
+          </div>
         </ScrollReveal>
       </div>
     </section>

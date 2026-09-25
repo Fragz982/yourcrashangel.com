@@ -33,46 +33,56 @@ const SECTIONS = [
   },
 ];
 
+const inlineLink =
+  "font-semibold text-accent-orange underline decoration-accent-orange/35 underline-offset-4 transition-colors hover:text-accent-lime hover:decoration-accent-lime";
+
 export default function Privacy() {
   return (
     <>
       <Navbar />
       <main id="main" className="bg-background">
-        <section className="pt-32 pb-20 md:pt-40">
-          <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <p className="eyebrow text-accent-orange">The fine print, unfine</p>
-            <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl">
+        <section className="pt-32 pb-20 md:pt-44 md:pb-28">
+          <div className="mx-auto max-w-4xl px-5 md:px-8">
+            <p className="eyebrow flex items-center gap-3 text-accent-orange">
+              <span
+                aria-hidden="true"
+                className="h-px w-8 shrink-0 bg-accent-orange"
+              />
+              The fine print, unfine
+            </p>
+            <h1 className="mt-5 display text-5xl text-foreground sm:text-6xl md:text-7xl">
               Privacy,
               <br />
-              <span className="text-accent-lime">plain English.</span>
+              <span className="text-accent-orange">plain English.</span>
             </h1>
-            <p className="mt-5 max-w-xl font-body text-lg text-muted">
+            <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-muted md:text-xl">
               Short version: what you send me goes to me, gets used to help
               you, and goes nowhere else. Longer version below.
             </p>
 
-            <div className="mt-10 flex flex-col gap-6">
+            {/* One white sheet, one row per question: heading left, answer right on desktop. */}
+            <div className="mt-10 rounded-[var(--radius-card)] bg-surface px-6 shadow-[var(--shadow-card)] sm:px-8 md:mt-14 md:px-10">
               {SECTIONS.map((s) => (
                 <div
                   key={s.h}
-                  className="rounded-2xl border border-border bg-surface-light p-6"
+                  className="grid gap-2 border-b border-border py-7 last:border-b-0 md:grid-cols-[15rem_1fr] md:gap-10 md:py-9"
                 >
-                  <h2 className="display text-xl text-foreground">{s.h}</h2>
-                  <p className="mt-2 font-body text-base leading-relaxed text-muted">
+                  <h2 className="display text-2xl text-foreground md:text-[1.6rem]">{s.h}</h2>
+                  <p className="font-body text-base leading-relaxed text-muted md:text-[1.05rem]">
                     {s.p}
                   </p>
                 </div>
               ))}
             </div>
 
-            <p className="mt-8 font-body text-xs text-muted">
+            <p className="mt-8 max-w-2xl font-body text-sm leading-relaxed text-muted">
               Effective July 2026. If this policy changes, the changes show up
               on this page. Questions:{" "}
-              <a href="sms:+12132792992" className="text-accent-orange">
+              <a href="sms:+12132792992" className={inlineLink}>
                 (213) 279-2992
               </a>{" "}
               or the{" "}
-              <Link href="/#get-help" className="text-accent-orange">
+              <Link href="/#get-help" className={inlineLink}>
                 contact form
               </Link>
               .

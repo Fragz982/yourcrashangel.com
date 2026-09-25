@@ -44,20 +44,26 @@ const STEPS = [
   },
 ];
 
+// One pill language for the whole site (matches the navbar and the flight).
+const primaryBtn =
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent-orange px-8 text-base font-bold text-white shadow-[0_1px_2px_rgb(33_26_20/0.10),0_8px_20px_-10px_rgb(33_26_20/0.35)] transition-[background-color,transform] hover:bg-accent-lime active:scale-[0.97] sm:w-auto";
+const secondaryBtn =
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-surface px-8 text-base font-bold text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] transition-[background-color,transform] hover:bg-surface-light active:scale-[0.97] sm:w-auto";
+
 export default function Lowball() {
   return (
     <>
       <Navbar />
       <main id="main" className="bg-background">
-        <section className="pt-32 pb-14 md:pt-40">
-          <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <section className="pt-28 pb-12 md:pt-36 md:pb-14">
+          <div className="mx-auto max-w-3xl px-5 md:px-8">
             <p className="eyebrow text-accent-orange">Lowball offers, translated</p>
-            <h1 className="mt-4 display text-5xl text-foreground sm:text-6xl md:text-7xl">
+            <h1 className="mt-4 display text-[2.6rem] text-foreground sm:text-6xl md:text-7xl">
               The first offer is an
               <br />
               <span className="text-accent-lime">opening bid.</span>
             </h1>
-            <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-muted">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
               Not a verdict, not an insult — an opening bid, built from
               comparables a vendor picked. Which means it moves the same way
               any bid moves: with better evidence, delivered calmly, in
@@ -66,41 +72,41 @@ export default function Lowball() {
           </div>
         </section>
 
-        <section className="pb-14">
+        <section className="pb-12 md:pb-14">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <div className="flex flex-col gap-4">
+            <ol className="flex flex-col gap-4">
               {STEPS.map((s, i) => (
-                <div
+                <li
                   key={s.t}
-                  className="flex gap-4 rounded-2xl border border-border bg-surface-light p-5"
+                  className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3.5 gap-y-3 rounded-[var(--radius-card)] bg-surface p-5 shadow-[var(--shadow-card)] sm:gap-x-5 sm:p-7"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-orange font-display text-sm font-bold text-background">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent-orange text-base font-extrabold text-white tabular-nums sm:h-10 sm:w-10">
                     {i + 1}
                   </span>
-                  <div>
-                    <p className="font-display text-lg font-semibold text-foreground">
-                      {s.t}
-                    </p>
-                    <p className="mt-1 font-body text-base leading-relaxed text-muted">
-                      {s.d}
-                    </p>
-                  </div>
-                </div>
+                  <p className="text-lg font-extrabold leading-snug tracking-[-0.02em] text-foreground md:text-xl">
+                    {s.t}
+                  </p>
+                  {/* Phone: the body runs the full card width under the
+                      number; from sm up it hangs under the title. */}
+                  <p className="col-span-2 text-base leading-relaxed text-muted sm:col-span-1 sm:col-start-2">
+                    {s.d}
+                  </p>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         {/* Copy-paste counter email */}
-        <section className="pb-14">
+        <section className="pb-12 md:pb-14">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <div className="rounded-3xl border-2 border-foreground bg-surface p-6 md:p-8">
+            <div className="rounded-[var(--radius-card)] bg-surface p-6 shadow-[var(--shadow-lift)] md:p-9">
               <p className="eyebrow text-accent-orange">Steal this email</p>
-              <h2 className="mt-2 display text-3xl text-foreground">
+              <h2 className="mt-3 display text-3xl text-foreground sm:text-4xl">
                 The counter, word for word.
               </h2>
-              <div className="mt-4 rounded-xl border border-border bg-background p-5 font-body text-sm leading-relaxed text-foreground">
-                <p>Subject: Claim #[your claim number] — valuation response</p>
+              <div className="mt-6 rounded-[var(--radius-inner)] bg-surface-light p-5 text-[0.95rem] leading-relaxed text-foreground shadow-[inset_0_0_0_1px_var(--color-border)] md:p-6">
+                <p className="font-bold">Subject: Claim #[your claim number] — valuation response</p>
                 <br />
                 <p>Hi [adjuster name],</p>
                 <br />
@@ -126,7 +132,7 @@ export default function Lowball() {
                 <br />
                 <p>Thanks,<br />[Name] · [Phone]</p>
               </div>
-              <p className="mt-4 font-body text-sm text-muted">
+              <p className="mt-5 text-sm leading-relaxed text-muted">
                 Calm, factual, documented. That email tends to get taken
                 seriously because it reads like someone who isn&apos;t going
                 away.
@@ -136,32 +142,32 @@ export default function Lowball() {
         </section>
 
         {/* CTA */}
-        <section className="pb-24">
+        <section className="pb-20 md:pb-24">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <div className="rounded-3xl border border-border bg-surface p-8 text-center md:p-10">
-              <h2 className="display text-3xl text-foreground sm:text-4xl">
+            <div className="rounded-[var(--radius-card)] bg-surface p-7 text-center shadow-[var(--shadow-card)] md:p-12">
+              <h2 className="display text-3xl text-foreground sm:text-4xl md:text-5xl">
                 Want a second set of eyes first?
               </h2>
-              <p className="mx-auto mt-3 max-w-md font-body text-base text-muted">
+              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-pretty text-muted md:text-lg">
                 Text me the offer letter or valuation report — I see these
                 reports every week at the shop, and I&apos;ll tell you, free,
                 whether the math looks fair and which comps don&apos;t hold up.
               </p>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <a
                   href="sms:+12132792992"
-                  className="rounded-full bg-accent-orange px-7 py-4 font-display text-base font-semibold text-background transition-transform hover:scale-105 active:scale-95"
+                  className={primaryBtn}
                 >
                   Text me the offer — free read
                 </a>
                 <Link
                   href="/totaled"
-                  className="rounded-full border border-border bg-background px-7 py-4 font-display text-base font-semibold text-foreground transition-transform hover:scale-105 active:scale-95"
+                  className={secondaryBtn}
                 >
                   Run the total-loss math
                 </Link>
               </div>
-              <p className="mt-5 font-body text-xs text-muted">
+              <p className="mx-auto mt-6 max-w-lg text-xs leading-relaxed text-muted">
                 Educational info, not legal or insurance advice — and your
                 negotiating stays yours: I&apos;ll tell you what I see, you
                 make the calls. Check your own policy&apos;s exact terms.

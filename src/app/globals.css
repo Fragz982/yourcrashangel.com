@@ -1,56 +1,78 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Guardian-angel palette: warm, light, calm — relief, not drama.
-     Accent + muted tuned to clear WCAG AA (4.5:1) on both bg and surface. */
-  --color-background: #f7f2e9;
-  --color-foreground: #211a14;
-  --color-accent-orange: #c0350f;
-  --color-accent-lime: #436e22;
-  --color-muted: #6e6253;
-  --color-surface: #ece1cd;
-  --color-surface-light: #f1e8d8;
-  --color-border: #ddd0bb;
-  --font-display: var(--font-space-grotesk);
-  --font-body: var(--font-inter);
-  --font-heading: var(--font-anton);
-  --font-mono: var(--font-jetbrains);
+  /* 2026-09-24 · one look for the whole site: the language of Angel's
+     EstimateGuard / ReviewEngine apps (white rounded cards on a warm light
+     ground, pill buttons, Outfit) and the /home drone flight. Token NAMES are
+     unchanged so every page re-skins at once; the values are new.
+     No yellow cast: the ground is a warm neutral grey, not cream.
+     Every text color clears WCAG AA (4.5:1) on both the ground and white. */
+  --color-background: #eeebe6;   /* page ground */
+  --color-foreground: #1d1a17;   /* ink */
+  --color-accent-orange: #b4421a;/* the one accent: 4.7:1 on ground, 5.6:1 on white */
+  --color-accent-lime: #8f2f10;  /* emphasis, now the accent's dark stop (was lime) */
+  --color-muted: #66615b;        /* secondary text */
+  --color-surface: #ffffff;      /* a card */
+  --color-surface-light: #f4f2ee;/* a soft inset inside a card */
+  --color-border: #e3dfd9;       /* a card edge, when one is needed */
+  --color-shop: #443c35;         /* the one dark panel: warm espresso, never black */
+  --color-accent-soft: #fdf2ee;  /* accent tint behind small accent text */
+  --font-display: var(--font-outfit);
+  --font-body: var(--font-outfit);
+  --font-heading: var(--font-outfit);
+  --font-mono: var(--font-outfit);
+  /* card language */
+  --radius-card: 22px;
+  --radius-inner: 14px;
+  --shadow-card: 0 1px 2px rgb(33 26 20 / 0.04), 0 8px 24px -12px rgb(33 26 20 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(33 26 20 / 0.05), 0 18px 40px -18px rgb(33 26 20 / 0.24);
 }
 
-/* ---- Revamp design-system helpers (Gunther-inspired) ---- */
+/* ---- Design-system helpers (EstimateGuard language) ---- */
 
-/* Eyebrow: technical/mono kicker above every section headline. */
+/* In the components layer so utility classes can still override them. */
+@layer components {
+/* Eyebrow: tracked micro-label that opens a section. Quiet, like his apps. */
 .eyebrow {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-/* Spec chip: mono pill for credentials / trust facts. */
+/* Spec chip: a small white pill for credentials / trust facts. */
 .spec-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: var(--font-mono), monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  border: 1px solid var(--color-border);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-foreground);
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1px var(--color-border);
   border-radius: 9999px;
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.85rem;
 }
 
-/* Big condensed display headline (Anton). Pair with size utilities. */
+/* Display headline: heavy, tight, sentence case (was condensed caps). */
 .display {
-  font-family: var(--font-heading), sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  line-height: 0.92;
-  letter-spacing: 0.005em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+/* A white card on the ground: the site's unit of structure. */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
 }
 
 html {
@@ -66,7 +88,6 @@ html {
 :focus-visible {
   outline: 2px solid var(--color-accent-orange);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* Skip link — first focusable element, hidden until focused. */
@@ -106,13 +127,14 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: #c0350f;
-  color: #f7f2e9;
+  background: #443c35;
+  color: #f7f5f2;
 }
 
 @keyframes hero-fade-in {
