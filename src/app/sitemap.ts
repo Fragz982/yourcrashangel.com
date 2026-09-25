@@ -52,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://yourcrashangel.com/decoder",
-      lastModified: LAST_MODIFIED,
+      lastModified: "2026-09-25",
       changeFrequency: "monthly",
       priority: 0.8,
     },

@@ -191,7 +191,7 @@ export default function ChecklistPage() {
               The Jargon Decoder
             </p>
             <p className="mt-1.5 font-body text-[0.95rem] leading-relaxed text-muted">
-              24 adjuster words translated into plain English.
+              25 adjuster words translated into plain English.
             </p>
           </Link>
         </div>

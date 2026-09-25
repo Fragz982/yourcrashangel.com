@@ -2,3 +2,9 @@
 /home    /    301!
 /home/   /    301!
 /home/*  /    301!
+
+# /translator was an early scroll-page test. Its words, stages and myths now
+# live on the Jargon Decoder page.
+/translator    /decoder    301!
+/translator/   /decoder    301!
+/translator/*  /decoder    301!

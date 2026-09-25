@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronDownIcon, MessageIcon, PhoneIcon } from "./Icons";
+import { ChevronDownIcon, ContactIcon, MessageIcon, PhoneIcon } from "./Icons";
 
 // Resource links: on a phone, an app-style list (48px rows, hairlines, a
 // chevron); from sm up, a quiet grid of plain links.
@@ -54,6 +54,18 @@ export default function Footer() {
                     >
                       <PhoneIcon className="h-4 w-4 text-accent-orange" />
                       Call: (213) 279-2992
+                    </a>
+                  </li>
+                  <li>
+                    {/* A contact card, so the number is already in their
+                        phone the next time something happens. */}
+                    <a
+                      href="/angel.vcf"
+                      download="Angel - Your Crash Angel.vcf"
+                      className={contactPill}
+                    >
+                      <ContactIcon className="h-4 w-4 text-accent-orange" />
+                      Save my number
                     </a>
                   </li>
                 </ul>

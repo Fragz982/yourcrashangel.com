@@ -281,7 +281,7 @@ export default function FlightHero() {
             <p className="finale__more">
               <a href="#first-5">What to do right now</a>
               <a href="/playbook">The playbook</a>
-              <a href="/translator/">Insurance words, translated</a>
+              <a href="/decoder">Insurance words, translated</a>
             </p>
           </section>
         </div>
