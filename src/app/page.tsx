@@ -3,7 +3,6 @@ import FlightHero from "../components/FlightHero";
 import FirstFiveMinutes from "../components/FirstFiveMinutes";
 import Scenarios from "../components/Scenarios";
 import EstimateCTA from "../components/EstimateCTA";
-import BeforeAfter from "../components/BeforeAfter";
 import RealRepairs from "../components/RealRepairs";
 import RepairJourney from "../components/RepairJourney";
 import Reviews from "../components/Reviews";
@@ -73,7 +72,6 @@ export default function Home() {
         <FirstFiveMinutes />
         <Scenarios />
         <EstimateCTA />
-        <BeforeAfter />
         <RealRepairs />
         <RepairJourney />
         <Reviews />
