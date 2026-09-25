@@ -1,177 +1,143 @@
-/* yca-home · the page writes your text.
-   The engine drives the acts. This file owns the right-hand panel: it
-   composes the message from the visitor's own answers, types it in, keeps
-   the sms: link current, and collapses the split at the close by reading
-   the close act's --sc-p (the engine writes it inline every frame). */
+/* yca-home v2 · the repair tracker.
+   The engine flies the drone and publishes where it is (--sc-seg, --sc-segp on
+   <html>, and a sc:waypoint event). This file turns that into a delivery-app
+   order tracker, lets a tap on a stage fly there, and keeps the "Text me"
+   links carrying the visitor's situation. */
 (function () {
   "use strict";
   var TEL = "+12132792992";
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var phone = matchMedia("(max-width: 860px)");
-
-  // Every string the message can contain, once, for the Spanish build.
-  var LINES = {
-    hi: "Hi Angel.",
-    hit: "I just got hit.",
-    ask: "Can you tell me what to do next?"
-  };
-  var HINTS = {
-    start: "This writes itself as you answer. Edit anything.",
-    edited: "Your words now. Send it when you're ready.",
-    copied: "Copied. Text it to (213) 279-2992.",
-    ready: "That's your text. One tap sends it."
-  };
-
-  var msg = document.getElementById("msg");
-  var sendBtn = document.getElementById("sendBtn");
-  var copyBtn = document.getElementById("copyBtn");
-  var hint = document.getElementById("hint");
-  if (!msg || !sendBtn) return;
-
-  var state = { hit: false, ask: false, sit: "", drive: "", fault: "", ins: "" };
-  var rendered = "";      // what the page last wrote into the textarea
-  var userEdited = false; // the visitor typed; from then on we only append
-  var typing = null;
-
-  function compose() {
-    var lines = [state.hit ? LINES.hi + " " + LINES.hit : LINES.hi];
-    if (state.sit) lines.push(state.sit);
-    if (state.drive) lines.push(state.drive);
-    if (state.fault) lines.push(state.fault);
-    if (state.ins) lines.push(state.ins);
-    if (state.ask) lines.push(LINES.ask);
-    return lines.join("\n");
-  }
-
-  function syncLink() {
-    var body = encodeURIComponent(msg.value.trim());
-    // "?&body=" is the form both iOS and Android accept
-    sendBtn.setAttribute("href", "sms:" + TEL + "?&body=" + body);
-  }
-
-  // Type the difference in, a few characters per frame. If the visitor has
-  // edited the text, new lines are appended rather than rewriting their words.
-  function render() {
-    var target = compose();
-    if (target === rendered) return;
-    var from = msg.value;
-    var next;
-    if (!userEdited) {
-      // rewrite from the common prefix
-      var i = 0; while (i < from.length && i < target.length && from[i] === target[i]) i++;
-      next = { keep: target.slice(0, i), add: target.slice(i), replaceAll: true };
-    } else {
-      // append only the lines that are new since the last render
-      var addLines = target.split("\n").filter(function (l) { return rendered.indexOf(l) === -1; });
-      if (!addLines.length) { rendered = target; return; }
-      next = { keep: from.replace(/\s+$/, ""), add: "\n" + addLines.join("\n"), replaceAll: false };
-    }
-    rendered = target;
-    if (typing) cancelAnimationFrame(typing);
-    if (reduce) { msg.value = next.keep + next.add; syncLink(); return; }
-    msg.value = next.keep;
-    var k = 0, add = next.add;
-    (function step() {
-      k = Math.min(add.length, k + 2);
-      msg.value = next.keep + add.slice(0, k);
-      syncLink();
-      if (k < add.length) typing = requestAnimationFrame(step);
-      else typing = null;
-    })();
-  }
-
-  // ---- inputs ------------------------------------------------------------
-  Array.prototype.forEach.call(document.querySelectorAll("input[type=radio]"), function (r) {
-    r.addEventListener("change", function () {
-      if (!r.checked) return;
-      state[r.name] = r.value;
-      render();
-    });
-  });
-  msg.addEventListener("input", function () {
-    if (typing) return; // our own typing fires input too
-    userEdited = true;
-    hint.textContent = HINTS.edited;
-    syncLink();
-  });
-  copyBtn.addEventListener("click", function () {
-    if (!navigator.clipboard) return;
-    navigator.clipboard.writeText(msg.value.trim()).then(function () {
-      var was = copyBtn.textContent;
-      copyBtn.textContent = "Copied";
-      hint.textContent = HINTS.copied;
-      setTimeout(function () { copyBtn.textContent = was; }, 2200);
-    }).catch(function () {});
-  });
-
-  // ---- scroll-stamped lines ---------------------------------------------
-  // "Hi Angel." types on load; "I just got hit." when the steps arrive;
-  // the closing question when the collapse begins.
-  hint.textContent = HINTS.start;
-  setTimeout(render, reduce ? 0 : 700);
-  var steps = document.getElementById("first-five");
-  if (steps) {
-    new IntersectionObserver(function (es, io) {
-      es.forEach(function (e) { if (e.isIntersecting) { state.hit = true; render(); io.disconnect(); } });
-    }, { threshold: 0.25 }).observe(steps);
-  }
-
-  // ---- the collapse -----------------------------------------------------
-  // The close act's --sc-p drives the panel from half the screen to all of it.
-  var close = document.getElementById("send");
   var root = document.documentElement;
-  var ticking = false, live = false;
-  function ease(t) { return t * t * (3 - 2 * t); }
-  function tick() {
+  var flight = document.querySelector('[data-sc-mode="worldflight"]');
+  var tracker = document.querySelector(".tracker");
+  if (!flight || !tracker) return;
+  var finale = document.querySelector(".finale");
+  var hideMQ = matchMedia("(max-width: 760px), (max-height: 700px)");
+
+  // Everything below is keyed to L, the position along the flight in legs
+  // (leg index + progress inside it, 0..7). Every leg spends its first ~40%
+  // finishing the previous room, so labels switch where the new room is
+  // actually on screen, not where the leg begins.
+  // Strings, once, for the Spanish build.
+  var NOW = [
+    [0,    "Scroll to ride along"],
+    [0.6,  "Check-in: photos and the first estimate"],
+    [1.45, "Body: straightening, welding, sanding"],
+    [2.2,  "Body: suspension off, new parts on"],
+    [3.45, "Paint: masked, primed, bagged and taped"],
+    [4.45, "Paint: in the booth"],
+    [5.4,  "Detail: polished, parts back on"],
+    [6.35, "Ready: washed and waiting for you"]
+  ];
+  var TEXT_BASE = "Hi Angel, I was in a crash.";
+  var TEXT_ASK = "What should I do next?";
+  // L at which each tracker stage begins (Check-in, Body, Paint, Detail, Ready).
+  var STAGE_AT = [0.6, 1.45, 3.45, 5.4, 6.35];
+  // Where a tap on each stage flies to, in L.
+  var JUMP = [1.1, 1.8, 4.75, 5.8, 6.95];
+
+  var legs = flight.querySelectorAll("[data-sc-segment]");
+  var weights = Array.prototype.map.call(legs, function (s) { return parseFloat(s.getAttribute("data-sc-w")) || 1.3; });
+  var starts = []; weights.reduce(function (run, w) { starts.push(run); return run + w; }, 0);
+
+  var items = tracker.querySelectorAll(".tracker__stages li");
+  var nowEl = document.getElementById("now");
+  var lastLabel = "", lastStage = -1, ticking = false;
+
+  function update() {
     ticking = false;
-    var p = parseFloat(close.style.getPropertyValue("--sc-p")) || 0;
-    var q = ease(Math.min(1, Math.max(0, p / 0.85)));
-    root.style.setProperty("--collapse", q.toFixed(4));
-    if (p > 0.1 && !state.ask) { state.ask = true; render(); hint.textContent = HINTS.ready; }
-    document.body.classList.toggle("is-ready", p > 0.6);
-  }
-  function onScroll() { if (live && !ticking) { ticking = true; requestAnimationFrame(tick); } }
-  if (close) {
-    new IntersectionObserver(function (es) {
-      es.forEach(function (e) { live = e.isIntersecting; if (live) onScroll(); else { root.style.setProperty("--collapse", "0"); document.body.classList.remove("is-ready"); } });
-    }, { rootMargin: "20% 0px 20% 0px" }).observe(close);
-    addEventListener("scroll", onScroll, { passive: true });
-  }
+    var k = parseInt(root.style.getPropertyValue("--sc-seg"), 10);
+    var p = parseFloat(root.style.getPropertyValue("--sc-segp"));
+    if (isNaN(k)) k = 0;
+    if (isNaN(p)) p = 0;
+    var L = Math.max(0, Math.min(legs.length, k + p));
 
-  // ---- the beats list: where you are on the argument ---------------------
-  var beats = document.querySelectorAll("[data-beat]");
-  var items = {};
-  Array.prototype.forEach.call(document.querySelectorAll(".beats a"), function (a) { items[a.getAttribute("href").slice(1)] = a.parentNode; });
-  new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      var li = items[e.target.id]; if (!li) return;
-      if (e.isIntersecting) {
-        Object.keys(items).forEach(function (k) { items[k].classList.remove("is-on"); });
-        li.classList.add("is-on");
-      }
-    });
-  }, { rootMargin: "-45% 0px -45% 0px" }).observe;
-  var beatIO = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      var li = items[e.target.id]; if (!li) return;
-      if (e.isIntersecting) {
-        Object.keys(items).forEach(function (k) { items[k].classList.remove("is-on"); });
-        li.classList.add("is-on");
-      }
-    });
-  }, { rootMargin: "-45% 0px -45% 0px" });
-  Array.prototype.forEach.call(beats, function (b) { beatIO.observe(b); });
+    // fill: 0 at the first stage, 1 at the last, linear between stage starts
+    var pos = 0;
+    for (var i = 0; i < STAGE_AT.length - 1; i++) {
+      if (L >= STAGE_AT[i]) pos = i + Math.min(1, (L - STAGE_AT[i]) / (STAGE_AT[i + 1] - STAGE_AT[i]));
+    }
+    if (L >= STAGE_AT[STAGE_AT.length - 1]) pos = STAGE_AT.length - 1;
+    tracker.style.setProperty("--fill", (pos / (STAGE_AT.length - 1)).toFixed(4));
 
-  // the beats list scrolls instantly: the page sets smooth scrolling, and a
-  // glide through eleven screens would play every act at speed
-  Array.prototype.forEach.call(document.querySelectorAll(".beats a"), function (a) {
-    a.addEventListener("click", function (ev) {
-      var el = document.getElementById(a.getAttribute("href").slice(1));
-      if (!el) return;
-      ev.preventDefault();
-      el.scrollIntoView({ block: "start", behavior: "instant" });
+    var stage = -1;
+    STAGE_AT.forEach(function (at, i) { if (L >= at) stage = i; });
+    if (stage !== lastStage) {
+      Array.prototype.forEach.call(items, function (li, i) {
+        li.classList.toggle("is-done", i < stage);
+        li.classList.toggle("is-now", i === stage);
+        var b = li.querySelector("button");
+        if (i === stage) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      });
+      lastStage = stage;
+    }
+    var label = NOW[0][1];
+    NOW.forEach(function (n) { if (L >= n[0]) label = n[1]; });
+    if (label !== lastLabel) { nowEl.textContent = label; lastLabel = label; }
+
+    // The last leg hands the screen to the finale card; the tracker steps aside.
+    document.body.classList.toggle("is-finale", L > 6.42);
+    document.body.classList.toggle("is-flying", L > 0.62);
+    document.body.classList.toggle("is-late", L > 6.5);
+    // the hero shade fades out with the headline
+    var hq = Math.max(0, Math.min(1, (L - 0.2) / 0.42));
+    root.style.setProperty("--hero-q", (1 - hq * hq * (3 - 2 * hq)).toFixed(3));
+    // controls that can't be seen can't be focused
+    if (finale) finale.inert = L < 6.46;
+    tracker.inert = L > 6.42 && hideMQ.matches;
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  addEventListener("scroll", onScroll, { passive: true });
+  flight.addEventListener("sc:waypoint", onScroll);
+
+  // Tap a stage: fly there. A smooth scroll plays the drone forward (or back)
+  // at speed, which is the point: it reads as fast-forwarding the repair.
+  Array.prototype.forEach.call(tracker.querySelectorAll("button[data-stage]"), function (b) {
+    b.addEventListener("click", function () {
+      var L = JUMP[+b.getAttribute("data-stage")];
+      var leg = Math.min(legs.length - 1, Math.floor(L));
+      var top = flight.getBoundingClientRect().top + scrollY;
+      var t = starts[leg] + weights[leg] * (L - leg);
+      scrollTo({ top: Math.round(top + t * innerHeight), behavior: ScrollCraft.reduce ? "auto" : "smooth" });
     });
   });
 
-  syncLink();
+  // ---- "Text me" carries their situation -------------------------------
+  var picked = "";
+  function syncSms() {
+    var body = encodeURIComponent(TEXT_BASE + (picked ? " " + picked : "") + " " + TEXT_ASK);
+    Array.prototype.forEach.call(document.querySelectorAll("[data-sms]"), function (a) {
+      a.setAttribute("href", "sms:" + TEL + "?&body=" + body);
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-sit]"), function (c, _, all) {
+    c.addEventListener("click", function () {
+      var on = c.getAttribute("aria-pressed") !== "true";
+      Array.prototype.forEach.call(all, function (o) { o.setAttribute("aria-pressed", "false"); });
+      c.setAttribute("aria-pressed", on ? "true" : "false");
+      picked = on ? c.getAttribute("data-sit") : "";
+      syncSms();
+    });
+  });
+  syncSms();
+
+  // On a laptop an sms: link often does nothing, so show the number itself.
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    var cta = document.querySelector(".pill--cta");
+    if (cta) cta.textContent = "Text (213) 279-2992";
+  }
+
+  // The engine sizes the scroll track at mount and ignores height-only resizes
+  // on phones (the address bar hiding) while still using the new screen height,
+  // so the track would end before the finale. Re-size it here. In a flight the
+  // film position is scrollY / screen height, so this never jumps the picture.
+  var sc = ScrollCraft.instances[ScrollCraft.instances.length - 1], lastH = innerHeight;
+  function relayout() { if (sc && sc.layout) sc.layout(); onScroll(); }
+  addEventListener("resize", function () {
+    if (innerHeight === lastH) return;
+    lastH = innerHeight;
+    relayout();
+  }, { passive: true });
+  addEventListener("load", relayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+  update();
 })();
